@@ -21,6 +21,9 @@ vim.g.loaded_netrwPlugin = 1
 
 -- empty setup using defaults
 require('nvim-tree').setup({
+    update_focused_file = {
+        enable = true,
+    },
     on_attach = my_on_attach
 })
 
