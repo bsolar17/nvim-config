@@ -15,7 +15,7 @@ return require('packer').startup(function(use)
         config = function()
             require('telescope').setup {
                 defaults = {
-                    path_display={'smart'} 
+                    path_display={'smart'}
                 },
                 extensions = {
                     fzf = {
@@ -45,6 +45,7 @@ return require('packer').startup(function(use)
             ts_update()
         end,
     }
+
     use('mbbill/undotree')
 
     use {
@@ -53,5 +54,20 @@ return require('packer').startup(function(use)
             'nvim-tree/nvim-web-devicons',
         },
     }
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v3.x',
+        requires = {
+            {'williamboman/mason.nvim'},
+            {'williamboman/mason-lspconfig.nvim'},
+
+            -- LSP Support
+            {'neovim/nvim-lspconfig'},
+            -- Autocompletion
+            {'hrsh7th/nvim-cmp'},
+            {'hrsh7th/cmp-nvim-lsp'},
+            {'L3MON4D3/LuaSnip'},
+        }
+    } 
 end)
 
