@@ -7,19 +7,29 @@ return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
     use {
         'nvim-telescope/telescope.nvim', branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} },
         config = function()
-            require('telescope').setup{
+            require('telescope').setup {
                 defaults = {
                     path_display={'smart'} 
-                }
+                },
+                extensions = {
+                    fzf = {
+                        fuzzy = true,
+                        override_generic_sorter = true,
+                        override_file_sorter = true,
+                        case_mode = "smart_case",
+                    }
+                },
             }
         end
     }
 
-    use{
+    use {
         'catppuccin/nvim',
         as = 'catppuccin',
         config = function()
