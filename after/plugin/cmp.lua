@@ -17,31 +17,56 @@ cmp.setup({
         { name = 'calc'},                               -- source for math calculation
     },
     mapping = {
-        ['<Tab>'] = cmp.mapping.confirm({select = false}),
+        ["<CR>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                local entry = cmp.get_selected_entry()
+                if not entry then
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                else
+                    cmp.confirm()
+                end
+            else
+                fallback()
+            end
+        end, {"i","s","c",}),
+        ["<Up>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+            else
+                fallback()
+            end
+        end, {"i","s","c",}),
+        ["<Down>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            else
+                fallback()
+            end
+        end, {"i","s","c",}),
     },
     preselect = 'item',
     completion = {
-        completeopt = 'menu,menuone,noinsert'
+        completeopt = 'menu,menuone,noinsert',
     },
-    --window = {
-        --    completion = cmp.config.window.bordered(),
-        --    documentation = cmp.config.window.bordered(),
-        --},
-        formatting = {
-            fields = {'menu', 'abbr', 'kind'},
-            format = function(entry, item)
-                local menu_icon ={
-                    nvim_lsp = 'λ',
-                    vsnip = '⋗',
-                    buffer = 'Ω',
-                    path = '',
-                }
-                item.menu = menu_icon[entry.source.name]
-                return item
-            end,
-        },
-        experimental = {
-            ghost_text = true
-        }
-    })
+    formatting = {
+        fields = {'menu', 'abbr', 'kind'},
+        format = function(entry, item)
+            local menu_icon ={
+                nvim_lsp = 'λ',
+                vsnip = '⋗',
+                buffer = 'Ω',
+                path = '',
+            }
+            item.menu = menu_icon[entry.source.name]
+            return item
+        end,
+    },
+    experimental = {
+        ghost_text = true
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+})
 
