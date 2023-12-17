@@ -1,5 +1,3 @@
-require('mine.set')
 require('mine.remap')
-require('mine.packer')
-require('mine.nvim-tree')
-require('mine.neovide')
+require('mine.set')
+require('mine.lazy')
