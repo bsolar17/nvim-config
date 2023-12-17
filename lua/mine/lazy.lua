@@ -17,27 +17,31 @@ require("lazy").setup({
         lazy = false,
         priority = 1000,
         name = 'catppuccin',
-        config = function()
-            require('catppuccin').setup({ transparent_background = true })
+        opts = {
+            transparent_background = true
+        },
+        config = function(_, opts)
+            require('catppuccin').setup(opts)
             vim.cmd('colorscheme catppuccin-mocha')
         end
     },
     {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
-        config = function()
-            require 'nvim-treesitter.configs'.setup {
-                ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query' },
-                sync_install = false,
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = false,
-                },
-                indent = {
-                    enabled = true,
-                },
-            }
+        opts = {
+            ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query' },
+            sync_install = false,
+            auto_install = true,
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = false,
+            },
+            indent = {
+                enabled = true,
+            },
+        },
+        config = function(_, opts)
+            require('nvim-treesitter.configs').setup(opts)
             if vim.fn.has('win32') == 1 then
                 local install = require('nvim-treesitter.install')
                 install.prefer_git = false
@@ -51,20 +55,21 @@ require("lazy").setup({
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
         dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            require('telescope').setup {
-                defaults = {
-                    path_display = { 'smart' }
-                },
-                extensions = {
-                    fzf = {
-                        fuzzy = true,
-                        override_generic_sorter = true,
-                        override_file_sorter = true,
-                        case_mode = "smart_case",
-                    }
-                },
-            }
+        opts = {
+            defaults = {
+                path_display = { 'smart' }
+            },
+            extensions = {
+                fzf = {
+                    fuzzy = true,
+                    override_generic_sorter = true,
+                    override_file_sorter = true,
+                    case_mode = "smart_case",
+                }
+            },
+        },
+        config = function(_, opts)
+            require('telescope').setup(opts)
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
             vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
@@ -89,27 +94,23 @@ require("lazy").setup({
         config = function()
             vim.keymap.set('n', '<leader>e', vim.cmd.NvimTreeToggle)
             local function my_on_attach(bufnr)
-                local api = require 'nvim-tree.api'
+                local api = require('nvim-tree.api')
 
                 local function opts(desc)
                     return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
                 end
 
-                -- default mappings
                 api.config.mappings.default_on_attach(bufnr)
 
-                -- custom mappings
                 vim.keymap.del('n', 'd', opts(''))
                 vim.keymap.del('n', 'D', opts(''))
                 vim.keymap.del('n', 'bd', opts(''))
                 vim.keymap.del('n', 'bt', opts(''))
             end
 
-            -- disable netrw at the very start of your init.lua
             vim.g.loaded_netrw = 1
             vim.g.loaded_netrwPlugin = 1
 
-            -- empty setup using defaults
             require('nvim-tree').setup({
                 update_focused_file = {
                     enable = true,
@@ -266,7 +267,6 @@ require("lazy").setup({
     },
     {
         'windwp/nvim-autopairs',
-        config = function() require('nvim-autopairs').setup {} end
     },
     {
         'ThePrimeagen/harpoon',
@@ -286,16 +286,14 @@ require("lazy").setup({
     },
     {
         'lewis6991/gitsigns.nvim',
-        config = function()
-            require("gitsigns").setup {
-                signs = {
-                    add = { text = '+' },
-                    change = { text = '~' },
-                    changedelete = { text = '-' },
-                },
-                numhl = true,
-                attach_to_untracked = false,
-            }
-        end
+        opts = {
+            signs = {
+                add = { text = '+' },
+                change = { text = '~' },
+                changedelete = { text = '-' },
+            },
+            numhl = true,
+            attach_to_untracked = false,
+        }
     },
 })
