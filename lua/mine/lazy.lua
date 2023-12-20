@@ -92,7 +92,7 @@ require("lazy").setup({
             'nvim-tree/nvim-web-devicons',
         },
         config = function()
-            vim.keymap.set('n', '<leader>e', vim.cmd.NvimTreeToggle)
+            vim.keymap.set('n', '<leader>t', vim.cmd.NvimTreeToggle)
             local function my_on_attach(bufnr)
                 local api = require('nvim-tree.api')
 
