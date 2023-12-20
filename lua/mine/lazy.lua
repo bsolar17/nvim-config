@@ -309,4 +309,10 @@ require("lazy").setup({
             attach_to_untracked = false,
         }
     },
+    {
+        'ethanholz/nvim-lastplace',
+        config = function()
+            require('nvim-lastplace').setup{}
+        end
+    },
 })
