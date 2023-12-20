@@ -288,7 +288,7 @@ require("lazy").setup({
             local harpoon = require('harpoon')
             harpoon:setup()
             vim.keymap.set("n", "<Leader>ha", function() harpoon:list():append() end)
-            vim.keymap.set("n", "<Leader>hd", function() harpoon:list():remove() end)
+            vim.keymap.set("n", "<Leader>hc", function() harpoon:list():clear() end)
             vim.keymap.set("n", "<Leader>hm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
             vim.keymap.set("n", "<Leader>1", function() harpoon:list():select(1) end)
             vim.keymap.set("n", "<Leader>2", function() harpoon:list():select(2) end)
