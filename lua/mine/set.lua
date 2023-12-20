@@ -19,7 +19,6 @@ vim.opt.backupdir = home .. '/.nvim/backup'
 vim.opt.undofile = true
 vim.opt.backupcopy = 'yes'
 
-vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
