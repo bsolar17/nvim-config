@@ -161,7 +161,10 @@ require("lazy").setup({
         end
     },
     {
-        'tpope/vim-commentary',
+        'terrortylor/nvim-comment',
+        config = function()
+
+        end
     },
     {
         'hrsh7th/nvim-cmp',
@@ -267,6 +270,13 @@ require("lazy").setup({
     },
     {
         'windwp/nvim-autopairs',
+        config = function()
+            require('nvim_comment').setup({
+                line_mapping = "<C-_><C-_>",
+                operator_mapping = "<C-_>",
+                comment_chunk_text_object = "i<C-_>",
+            })
+        end
     },
     {
         'ThePrimeagen/harpoon',
