@@ -190,21 +190,20 @@ require("lazy").setup({
                             local entry = cmp.get_selected_entry()
                             if not entry then
                                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                            else
-                                cmp.confirm()
                             end
+                            cmp.confirm()
                         else
                             fallback()
                         end
                     end, { "i", "s", "c", }),
-                    ["<Up>"] = cmp.mapping(function(fallback)
+                    ["<M-Up>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
                         else
                             fallback()
                         end
                     end, { "i", "s", "c", }),
-                    ["<Down>"] = cmp.mapping(function(fallback)
+                    ["<M-Down>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
                         else
@@ -214,7 +213,7 @@ require("lazy").setup({
                 },
                 preselect = 'item',
                 completion = {
-                    completeopt = 'menu,menuone,noinsert',
+                    completeopt = 'menu,menuone,noinsert,preview,noselect',
                 },
                 formatting = {
                     fields = { 'menu', 'abbr', 'kind' },
