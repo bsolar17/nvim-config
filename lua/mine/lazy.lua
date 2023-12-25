@@ -11,4 +11,13 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup('plugins')
+local opts = {
+    checker = {
+        enabled = false,
+        notify = true,
+        frequency = 86400,
+        check_pinned = true,
+    }
+}
+
+require("lazy").setup('plugins', opts)
