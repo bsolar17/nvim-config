@@ -1,1 +1,1 @@
-require('mine')
+require('my-setup')
