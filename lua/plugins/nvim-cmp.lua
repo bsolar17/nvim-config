@@ -32,14 +32,14 @@ return {
                             fallback()
                         end
                     end, { "i", "s", "c", }),
-                    ["<A-Up>"] = cmp.mapping(function(fallback)
+                    ["<S-Up>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
                         else
                             fallback()
                         end
                     end, { "i", "s", "c", }),
-                    ["<A-Down>"] = cmp.mapping(function(fallback)
+                    ["<S-Down>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
                         else
