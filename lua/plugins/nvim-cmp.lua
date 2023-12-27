@@ -32,6 +32,18 @@ return {
                             fallback()
                         end
                     end, { "i", "s", "c", }),
+                    ["<CR>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            local entry = cmp.get_selected_entry()
+                            if not entry then
+                                fallback()
+                            else
+                                cmp.confirm()
+                            end
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s", "c", }),
                     ["<S-Up>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
