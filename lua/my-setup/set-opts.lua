@@ -13,6 +13,9 @@ vim.opt.scrolloff = 8
 
 vim.opt.smartindent = true
 vim.opt.breakindent = true
+vim.opt.showbreak = ''
+vim.opt.breakindentopt = 'sbr'
+vim.opt.cpoptions:append('n')
 
 vim.opt.undodir = home .. '/.nvim/undo'
 vim.opt.directory = home .. '/.nvim/swap'
