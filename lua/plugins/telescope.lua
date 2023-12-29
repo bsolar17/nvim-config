@@ -28,9 +28,9 @@ return {
             require('telescope').load_extension('fzf')
             local builtin = require('telescope.builtin')
             vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find Files" })
-            vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = "Git Files" })
-            vim.keymap.set('n', '<leader>fs', builtin.git_status, { desc = "Git Status" })
-            vim.keymap.set('n', '<leader>fr', builtin.live_grep, { desc = "Live Grep" })
+            vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = "Find Git Files" })
+            vim.keymap.set('n', '<leader>fm', builtin.git_status, { desc = "Find Git Modified" })
+            vim.keymap.set('n', '<leader>fr', builtin.live_grep, { desc = "Find with Live Grep" })
         end
     },
 }
