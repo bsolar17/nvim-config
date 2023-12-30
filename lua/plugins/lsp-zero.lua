@@ -25,9 +25,7 @@ return {
             vim.keymap.set({ 'n', 'x' }, '<Leader>cf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>',
                 { desc = 'Format' })
             -- vim.keymap.set('n', '<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', { desc = 'Code Action' })
-            vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', { desc = 'Open Float' })
-            vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', { desc = 'Goto Prev' })
-            vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', { desc = 'Goto Next' })
+            vim.keymap.set('n', '<Leader>cw', '<cmd>lua vim.diagnostic.open_float()<cr>', { desc = 'Diagnostics Float' })
         end)
         require('mason').setup({})
         require('mason-lspconfig').setup({
