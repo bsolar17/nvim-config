@@ -13,8 +13,7 @@ return {
     },
     config = function()
         local lsp_zero = require('lsp-zero')
-        lsp_zero.on_attach(function(client, bufnr)
-            lsp_zero.default_keymaps({ buffer = bufnr })
+        lsp_zero.on_attach(function()
             vim.keymap.set('n', '<Leader>ch', '<cmd>lua vim.lsp.buf.hover()<cr>', { desc = 'Hover' })
             vim.keymap.set('n', '<Leader>cd', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = 'Definition' })
             vim.keymap.set('n', '<Leader>c=', '<cmd>lua vim.lsp.buf.declaration()<cr>', { desc = 'Declaration' })
@@ -25,7 +24,7 @@ return {
             vim.keymap.set('n', '<Leader>cn', '<cmd>lua vim.lsp.buf.rename()<cr>', { desc = 'Rename' })
             vim.keymap.set({ 'n', 'x' }, '<Leader>cf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>',
                 { desc = 'Format' })
-            vim.keymap.set('n', '<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', { desc = 'Code Action' })
+            -- vim.keymap.set('n', '<Leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', { desc = 'Code Action' })
             vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', { desc = 'Open Float' })
             vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>', { desc = 'Goto Prev' })
             vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>', { desc = 'Goto Next' })
