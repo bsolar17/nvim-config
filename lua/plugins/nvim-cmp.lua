@@ -59,7 +59,7 @@ return {
                         end
                     end, { "i", "s", "c", }),
                 },
-                preselect = 'item',
+                preselect = cmp.PreselectMode.None,
                 completion = {
                     completeopt = 'menu,menuone,noinsert,preview,noselect',
                 },
