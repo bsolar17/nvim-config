@@ -1,6 +1,8 @@
 local home = os.getenv('HOME')
 
 vim.opt.nu = true
+vim.opt.relativenumber = true
+
 vim.opt.laststatus = 0
 vim.opt.title = true
 
