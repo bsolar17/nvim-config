@@ -11,6 +11,9 @@ return {
                 c = {
                     name = "code",
                 },
+                d = {
+                    name = "debug",
+                },
                 f = {
                     name = "find",
                 },
