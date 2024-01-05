@@ -18,6 +18,9 @@ return {
             vim.keymap.del('n', 'D', opts(''))
             vim.keymap.del('n', 'bd', opts(''))
             vim.keymap.del('n', 'bt', opts(''))
+
+            vim.keymap.set('n', '<S-Right>', '<cmd>NvimTreeResize +10<CR>', {desc = "Widen nvim-tree" })
+            vim.keymap.set('n', '<S-Left>', '<cmd>NvimTreeResize -10<CR>', {desc = "Narrow nvim-tree" })
         end
 
         vim.g.loaded_netrw = 1
@@ -26,6 +29,9 @@ return {
         require('nvim-tree').setup({
             update_focused_file = {
                 enable = true,
+            },
+            view = {
+                width = 50,
             },
             on_attach = my_on_attach
         })
