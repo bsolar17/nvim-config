@@ -30,6 +30,7 @@ return {
             vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Files" })
             vim.keymap.set('n', '<leader>fg', builtin.git_files, { desc = "Git Files" })
             vim.keymap.set('n', '<leader>fm', builtin.git_status, { desc = "Git Modified" })
+            vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = "Old Files" })
             vim.keymap.set('n', '<leader>fr', builtin.live_grep, { desc = "Grep" })
         end
     },
