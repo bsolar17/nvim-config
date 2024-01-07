@@ -28,6 +28,9 @@ return {
                 open_file = {
                     quit_on_open = true,
                 },
+                change_dir = {
+                    global = true,
+                },
             },
             on_attach = my_on_attach
         })
