@@ -12,7 +12,7 @@ return {
         },
         opts = {
             defaults = {
-                path_display = { "truncate" }
+                path_display = { truncate = 1 },
             },
             extensions = {
                 fzf = {
