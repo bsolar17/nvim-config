@@ -13,6 +13,7 @@ return {
         opts = {
             defaults = {
                 path_display = { truncate = 1 },
+                dynamic_preview_title = true,
             },
             extensions = {
                 fzf = {
