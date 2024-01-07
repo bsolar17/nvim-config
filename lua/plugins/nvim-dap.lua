@@ -1,6 +1,6 @@
 return {
     {
-        'mfussenegger/nvim-dap',
+        "mfussenegger/nvim-dap",
         config = function()
             vim.keymap.set("n", "<Leader>du", "<cmd>lua require('dapui').toggle()<CR>", { desc = "DAP-UI" })
             vim.keymap.set("n", "<Leader>d5", "<cmd>lua require('dap').toggle_breakpoint()<CR>",
@@ -24,7 +24,7 @@ return {
         end
     },
     {
-        'rcarriga/nvim-dap-ui',
+        "rcarriga/nvim-dap-ui",
         dependencies = { "mfussenegger/nvim-dap" },
         config = function()
             local dap, dapui = require("dap"), require("dapui")

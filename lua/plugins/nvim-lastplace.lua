@@ -1,6 +1,6 @@
 return {
-    'ethanholz/nvim-lastplace',
+    "ethanholz/nvim-lastplace",
     config = function()
-        require('nvim-lastplace').setup {}
+        require("nvim-lastplace").setup {}
     end
 }

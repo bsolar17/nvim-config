@@ -1,1 +1,1 @@
-vim.api.nvim_command('filetype indent off')
+vim.api.nvim_command("filetype indent off")

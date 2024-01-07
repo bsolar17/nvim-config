@@ -1,5 +1,5 @@
 return {
-    'mfussenegger/nvim-jdtls',
+    "mfussenegger/nvim-jdtls",
     config = function()
         vim.keymap.set(
             "n",
