@@ -15,6 +15,32 @@ return {
                 path_display = { "smart" },
                 dynamic_preview_title = true,
             },
+            pickers = {
+                lsp_definitions = {
+                    include_current_line = true,
+                    show_line = false,
+                },
+                lsp_implementations = {
+                    include_current_line = true,
+                    show_line = false,
+                },
+                lsp_type_definitions = {
+                    include_current_line = true,
+                    show_line = false,
+                },
+                lsp_references = {
+                    include_current_line = true,
+                    show_line = false,
+                },
+                lsp_incoming_calls = {
+                    include_current_line = true,
+                    show_line = false,
+                },
+                lsp_outgoing_calls = {
+                    include_current_line = true,
+                    show_line = false,
+                },
+            },
             extensions = {
                 fzf = {
                     fuzzy = true,
