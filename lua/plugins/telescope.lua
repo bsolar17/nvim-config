@@ -12,7 +12,7 @@ return {
         },
         opts = {
             defaults = {
-                path_display = { truncate = 1 },
+                path_display = { "smart" },
                 dynamic_preview_title = true,
             },
             extensions = {
