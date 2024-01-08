@@ -10,6 +10,7 @@ return {
         { "hrsh7th/nvim-cmp" },
         { "hrsh7th/cmp-nvim-lsp" },
         { "L3MON4D3/LuaSnip" },
+        { "nvim-telescope/telescope.nvim" },
     },
     config = function()
         local lsp_zero = require("lsp-zero")
@@ -19,7 +20,8 @@ return {
             vim.keymap.set("n", "<Leader>c=", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Declaration" })
             vim.keymap.set("n", "<Leader>ci", "<cmd>lua vim.lsp.buf.implementation()<cr>", { desc = "Implementation" })
             vim.keymap.set("n", "<Leader>ct", "<cmd>lua vim.lsp.buf.type_definition()<cr>", { desc = "Type Definition" })
-            vim.keymap.set("n", "<Leader>cr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "References" })
+            vim.keymap.set("n", "<Leader>cr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>",
+                { desc = "References" })
             vim.keymap.set("n", "<Leader>cs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
             vim.keymap.set("n", "<Leader>cn", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
             vim.keymap.set({ "n", "x" }, "<Leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<cr>",
