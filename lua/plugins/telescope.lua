@@ -40,6 +40,10 @@ return {
                     include_current_line = true,
                     show_line = false,
                 },
+                lsp_document_symbols = {
+                    symbol_width = 50,
+                    show_line = false,
+                },
             },
             extensions = {
                 fzf = {

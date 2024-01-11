@@ -29,9 +29,11 @@ return {
                 { desc = "Incoming Calls" })
             vim.keymap.set("n", "<Leader>cO", "<cmd>lua require('telescope.builtin').lsp_outgoing_calls()<cr>",
                 { desc = "Outgoing Calls" })
-            vim.keymap.set("n", "<Leader>cs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
-            vim.keymap.set("n", "<Leader>cS", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>",
+            vim.keymap.set("n", "<Leader>cS", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
+            vim.keymap.set("n", "<Leader>cs", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>",
                 { desc = "Symbols" })
+            vim.keymap.set("n", "<Leader>cm", "<cmd>lua require('telescope.builtin').lsp_document_symbols( {symbols = { 'method', 'function' } } )<cr>",
+                { desc = "Methods" })
             vim.keymap.set("n", "<Leader>cn", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
             vim.keymap.set({ "n", "x" }, "<Leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<cr>",
                 { desc = "Format" })
