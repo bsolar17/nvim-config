@@ -32,8 +32,11 @@ return {
             vim.keymap.set("n", "<Leader>cs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
             vim.keymap.set("n", "<Leader>fs", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>",
                 { desc = "Symbols" })
-            vim.keymap.set("n", "<Leader>fm", "<cmd>lua require('telescope.builtin').lsp_document_symbols( {symbols = { 'method', 'function' } } )<cr>",
+            vim.keymap.set("n", "<Leader>fm",
+                "<cmd>lua require('telescope.builtin').lsp_document_symbols( {symbols = { 'method', 'function' } } )<cr>",
                 { desc = "Methods" })
+            vim.keymap.set("n", "<Leader>cd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>",
+                { desc = "Diagnostics" })
             vim.keymap.set("n", "<Leader>cn", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
             vim.keymap.set({ "n", "x" }, "<Leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<cr>",
                 { desc = "Format" })
