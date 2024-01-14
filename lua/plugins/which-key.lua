@@ -17,6 +17,9 @@ return {
                 f = {
                     name = "find",
                 },
+                g = {
+                    name = "go",
+                },
                 h = {
                     name = "harpoon",
                 },

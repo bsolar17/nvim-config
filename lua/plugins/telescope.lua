@@ -63,7 +63,7 @@ return {
             vim.keymap.set("n", "<leader>fm", builtin.git_status, { desc = "Git Modified" })
             vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Old Files" })
             vim.keymap.set("n", "<leader>fp", builtin.builtin, { desc = "Pickers" })
-            vim.keymap.set("n", "<leader>fr", builtin.live_grep, { desc = "Grep" })
+            vim.keymap.set("n", "<leader>fG", builtin.live_grep, { desc = "Grep" })
         end
     },
 }
