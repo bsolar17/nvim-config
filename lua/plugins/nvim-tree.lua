@@ -25,9 +25,6 @@ return {
                 width = 50,
             },
             actions = {
-                open_file = {
-                    quit_on_open = true,
-                },
                 change_dir = {
                     global = true,
                 },
