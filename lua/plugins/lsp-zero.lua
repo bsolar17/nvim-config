@@ -30,9 +30,9 @@ return {
             vim.keymap.set("n", "<Leader>gO", "<cmd>lua require('telescope.builtin').lsp_outgoing_calls()<cr>",
                 { desc = "Outgoing Calls" })
             vim.keymap.set("n", "<Leader>cs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
-            vim.keymap.set("n", "<Leader>fs", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>",
+            vim.keymap.set("n", "<Leader>gs", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>",
                 { desc = "Symbols" })
-            vim.keymap.set("n", "<Leader>fm",
+            vim.keymap.set("n", "<Leader>gm",
                 "<cmd>lua require('telescope.builtin').lsp_document_symbols( {symbols = { 'method', 'function' } } )<cr>",
                 { desc = "Methods" })
             vim.keymap.set("n", "<Leader>cd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>",
