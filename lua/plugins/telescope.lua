@@ -8,7 +8,8 @@ return {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 name = "fzf",
                 build = "make",
-            }
+            },
+            { "folke/trouble.nvim" }
         },
         opts = {
             defaults = {
@@ -55,6 +56,11 @@ return {
             },
         },
         config = function(_, opts)
+            local trouble = require("trouble.providers.telescope")
+            opts.defaults.mappings = {
+                i = { ["<c-o>"] = trouble.open_with_trouble },
+                n = { ["<c-o>"] = trouble.open_with_trouble },
+            }
             require("telescope").setup(opts)
             require("telescope").load_extension("fzf")
             local builtin = require("telescope.builtin")

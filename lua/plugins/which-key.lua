@@ -26,6 +26,9 @@ return {
                 j = {
                     name = "java",
                 },
+                t = {
+                    name = "trouble",
+                },
             }
         })
     end
