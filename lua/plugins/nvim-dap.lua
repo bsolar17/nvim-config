@@ -20,7 +20,7 @@ return {
             vim.keymap.set("v", "<Leader>df", "<cmd>lua require('dapui').float_element()<CR>",
                 { desc = "Float" })
             vim.keymap.set("n", "<Leader>d8", "<cmd>lua require('dap').repl.open()<CR>", { desc = "REPL Open" })
-            vim.keymap.set("n", "<Leader>d9", "<cmd>lua require('dap').repl.run_last()<CR>", { desc = "REPL Run Last" })
+            vim.keymap.set("n", "<Leader>d9", "<cmd>lua require('dap').run_last()<CR>", { desc = "Run Last" })
         end
     },
     {
