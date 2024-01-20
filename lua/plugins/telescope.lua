@@ -64,6 +64,7 @@ return {
             require("telescope").setup(opts)
             require("telescope").load_extension("fzf")
             local builtin = require("telescope.builtin")
+            vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Buffers" })
             vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Files" })
             vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "Git Files" })
             vim.keymap.set("n", "<leader>fm", builtin.git_status, { desc = "Git Modified" })
