@@ -68,6 +68,7 @@ return {
                             fallback()
                         end
                     end, { "i", "s", "c", }),
+                    ['<C-e>'] = cmp.mapping.abort(),
                 },
                 preselect = cmp.PreselectMode.None,
                 completion = {
