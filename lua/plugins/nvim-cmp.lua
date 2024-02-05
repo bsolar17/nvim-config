@@ -10,7 +10,9 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/vim-vsnip",
+            "zbirenbaum/copilot-cmp",
         },
+        event = "InsertEnter",
         config = function()
             local cmp = require "cmp"
             cmp.setup({
@@ -22,13 +24,14 @@ return {
                 },
                 -- Installed sources:
                 sources = {
-                    { name = "path" },                                       -- file paths
-                    { name = "nvim_lsp",               keyword_length = 3 }, -- from language server
-                    { name = "nvim_lsp_signature_help" },                    -- display function signatures with current parameter emphasized
-                    { name = "nvim_lua",               keyword_length = 2 }, -- complete neovim"s Lua runtime API such vim.lsp.*
-                    { name = "buffer",                 keyword_length = 2 }, -- source current buffer
-                    { name = "vsnip",                  keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
-                    { name = "calc" },                                       -- source for math calculation
+                    { name = "path" },
+                    { name = "nvim_lsp",               keyword_length = 3 },
+                    { name = "nvim_lsp_signature_help" },
+                    { name = "copilot" },
+                    { name = "nvim_lua",               keyword_length = 2 },
+                    { name = "buffer",                 keyword_length = 2 },
+                    { name = "vsnip",                  keyword_length = 2 },
+                    { name = "calc" },
                 },
                 mapping = {
                     ["<Tab>"] = cmp.mapping(function(fallback)
@@ -82,6 +85,7 @@ return {
                             vsnip = "⋗",
                             buffer = "Ω",
                             path = "",
+                            copilot = "",
                         }
                         item.menu = menu_icon[entry.source.name]
                         return item
@@ -95,7 +99,7 @@ return {
                     documentation = cmp.config.window.bordered(),
                 },
             })
-            cmp.setup.cmdline({"/", "?"}, {
+            cmp.setup.cmdline({ "/", "?" }, {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = "buffer" }
