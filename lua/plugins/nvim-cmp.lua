@@ -5,24 +5,23 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-nvim-lsp-signature-help",
-            "hrsh7th/cmp-vsnip",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-cmdline",
-            "hrsh7th/vim-vsnip",
+            "dcampos/cmp-snippy",
+            "dcampos/nvim-snippy",
+            "honza/vim-snippets",
             "zbirenbaum/copilot-cmp",
         },
         event = "InsertEnter",
         config = function()
             local cmp = require "cmp"
             cmp.setup({
-                -- Enable LSP snippets
                 snippet = {
                     expand = function(args)
-                        vim.fn["vsnip#anonymous"](args.body)
+                        require('snippy').expand_snippet(args.body)
                     end,
                 },
-                -- Installed sources:
                 sources = {
                     { name = "path" },
                     { name = "nvim_lsp",               keyword_length = 3 },
@@ -30,7 +29,7 @@ return {
                     { name = "copilot" },
                     { name = "nvim_lua",               keyword_length = 2 },
                     { name = "buffer",                 keyword_length = 2 },
-                    { name = "vsnip",                  keyword_length = 2 },
+                    { name = "snippy",                  keyword_length = 2 },
                     { name = "calc" },
                 },
                 mapping = {
@@ -82,7 +81,7 @@ return {
                     format = function(entry, item)
                         local menu_icon = {
                             nvim_lsp = "λ",
-                            vsnip = "⋗",
+                            snippy = "",
                             buffer = "Ω",
                             path = "",
                             copilot = "",
