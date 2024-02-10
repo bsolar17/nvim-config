@@ -8,6 +8,7 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-calc",
             "dcampos/cmp-snippy",
             "dcampos/nvim-snippy",
             "honza/vim-snippets",
@@ -84,6 +85,7 @@ return {
                             snippy = "",
                             buffer = "Ω",
                             path = "",
+                            calc = "",
                             copilot = "",
                         }
                         item.menu = menu_icon[entry.source.name]
