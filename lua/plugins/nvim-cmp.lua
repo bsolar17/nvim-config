@@ -25,12 +25,12 @@ return {
                 },
                 sources = {
                     { name = "path" },
-                    { name = "nvim_lsp",               keyword_length = 3 },
+                    { name = "nvim_lsp" },
                     { name = "nvim_lsp_signature_help" },
                     { name = "copilot" },
-                    { name = "nvim_lua",               keyword_length = 2 },
-                    { name = "buffer",                 keyword_length = 2 },
-                    { name = "snippy",                  keyword_length = 2 },
+                    { name = "nvim_lua" },
+                    { name = "buffer" },
+                    { name = "snippy" },
                     { name = "calc" },
                 },
                 mapping = {
@@ -82,6 +82,7 @@ return {
                     format = function(entry, item)
                         local menu_icon = {
                             nvim_lsp = "λ",
+                            nvim_lsp_signature_help = "λ",
                             snippy = "",
                             buffer = "Ω",
                             path = "",
