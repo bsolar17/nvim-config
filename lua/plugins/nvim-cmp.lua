@@ -14,7 +14,6 @@ return {
             "honza/vim-snippets",
             "zbirenbaum/copilot-cmp",
         },
-        event = "InsertEnter",
         config = function()
             local cmp = require "cmp"
             cmp.setup({
