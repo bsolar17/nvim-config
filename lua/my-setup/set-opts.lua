@@ -1,5 +1,7 @@
 local home = os.getenv("HOME")
 
+vim.opt.shortmess:append("I")
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
