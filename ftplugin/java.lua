@@ -5,6 +5,13 @@ vim.list_extend(bundles, vim.split(vim.fn.glob("~/Projects/jdtls/artifacts/vscod
 local config = {
     cmd = { "jdtls" },
     root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+    settings = {
+        java = {
+            maven = {
+                downloadSources = true,
+            },
+        }
+    },
     init_options = {
         bundles = bundles
     },
