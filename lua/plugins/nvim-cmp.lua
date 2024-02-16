@@ -13,6 +13,7 @@ return {
             "dcampos/nvim-snippy",
             "honza/vim-snippets",
             "zbirenbaum/copilot-cmp",
+            "windwp/nvim-autopairs",
         },
         config = function()
             local cmp = require "cmp"
@@ -114,6 +115,7 @@ return {
                     { name = "cmdline" }
                 })
             })
+            cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
         end
     },
 }
