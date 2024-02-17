@@ -24,14 +24,14 @@ return {
                     end,
                 },
                 sources = {
-                    { name = "path" },
                     { name = "nvim_lsp" },
                     { name = "nvim_lsp_signature_help" },
-                    { name = "copilot" },
-                    { name = "nvim_lua" },
+                    { name = "path" },
                     { name = "buffer" },
                     { name = "snippy" },
                     { name = "calc" },
+                    { name = "copilot" },
+                    { name = "nvim_lua" },
                 },
                 mapping = {
                     ["<Tab>"] = cmp.mapping(function(fallback)
