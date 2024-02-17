@@ -116,9 +116,10 @@ return {
                             path = "",
                             calc = "",
                             copilot = "",
-                            nvim_lua = ""
+                            nvim_lua = "",
+                            cmdline = ":",
                         }
-                        item.menu = menu_icons[entry.source.name] or "?"
+                        item.menu = menu_icons[entry.source.name] or entry.source.name
                         item.menu_hl_group = "CmpItemKind" .. item.kind
                         item.kind = (entry.source.name == "calc" and item.menu or kind_icons[item.kind] or "?") .. " " .. item.kind
                         return item
