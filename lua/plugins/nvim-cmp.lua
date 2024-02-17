@@ -116,6 +116,7 @@ return {
                             path = "",
                             calc = "",
                             copilot = "",
+                            nvim_lua = ""
                         }
                         item.menu = menu_icons[entry.source.name] or "?"
                         item.kind = (entry.source.name == "calc" and item.menu or kind_icons[item.kind] or "?") .. " " .. item.kind
