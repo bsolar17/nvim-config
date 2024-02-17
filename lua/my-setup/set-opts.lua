@@ -5,7 +5,7 @@ vim.opt.shortmess:append("I")
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.opt.laststatus = 0
+vim.opt.laststatus = 3
 vim.opt.title = true
 
 vim.opt.tabstop = 4
