@@ -13,14 +13,4 @@ return {
             enabled = true,
         },
     },
-    config = function(_, opts)
-        require("nvim-treesitter.configs").setup(opts)
-        if vim.fn.has("win32") == 1 then
-            local install = require("nvim-treesitter.install")
-            install.prefer_git = false
-            install.command_extra_args = {
-                curl = { "--proxy", "http://localhost:8888" }
-            }
-        end
-    end
 }
