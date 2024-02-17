@@ -119,6 +119,7 @@ return {
                             nvim_lua = ""
                         }
                         item.menu = menu_icons[entry.source.name] or "?"
+                        item.menu_hl_group = "CmpItemKind" .. item.kind
                         item.kind = (entry.source.name == "calc" and item.menu or kind_icons[item.kind] or "?") .. " " .. item.kind
                         return item
                     end,
