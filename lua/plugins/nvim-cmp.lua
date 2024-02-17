@@ -80,7 +80,35 @@ return {
                 formatting = {
                     fields = { "menu", "abbr", "kind" },
                     format = function(entry, item)
-                        local menu_icon = {
+                        local kind_icons = {
+                            Text = "",
+                            Method = "",
+                            Function = "",
+                            Constructor = "",
+                            Field = "",
+                            Variable = "",
+                            Class = "",
+                            Interface = "",
+                            Module = "",
+                            Property = "",
+                            Unit = "",
+                            Value = "",
+                            Enum = "",
+                            Keyword = "",
+                            Snippet = "",
+                            Color = "",
+                            File = "",
+                            Reference = "",
+                            Folder = "",
+                            EnumMember = "",
+                            Constant = "",
+                            Struct = "",
+                            Event = "",
+                            Operator = "",
+                            TypeParameter = "",
+                            Copilot = "",
+                        }
+                        local menu_icons = {
                             nvim_lsp = "λ",
                             nvim_lsp_signature_help = "λ",
                             snippy = "",
@@ -89,7 +117,8 @@ return {
                             calc = "",
                             copilot = "",
                         }
-                        item.menu = menu_icon[entry.source.name]
+                        item.menu = menu_icons[entry.source.name] or "?"
+                        item.kind = (entry.source.name == "calc" and item.menu or kind_icons[item.kind] or "?") .. " " .. item.kind
                         return item
                     end,
                 },
