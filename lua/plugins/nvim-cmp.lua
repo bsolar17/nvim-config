@@ -17,6 +17,45 @@ return {
         },
         config = function()
             local cmp = require "cmp"
+            local kind_icons = {
+                Text = "",
+                Method = "",
+                Function = "",
+                Constructor = "",
+                Field = "",
+                Variable = "",
+                Class = "",
+                Interface = "",
+                Module = "",
+                Property = "",
+                Unit = "",
+                Value = "",
+                Enum = "",
+                Keyword = "",
+                Snippet = "",
+                Color = "",
+                File = "",
+                Reference = "",
+                Folder = "",
+                EnumMember = "",
+                Constant = "",
+                Struct = "",
+                Event = "",
+                Operator = "",
+                TypeParameter = "",
+                Copilot = "",
+            }
+            local menu_icons = {
+                nvim_lsp = "λ",
+                nvim_lsp_signature_help = "λ",
+                snippy = "",
+                buffer = "Ω",
+                path = "",
+                calc = "",
+                copilot = "",
+                nvim_lua = "",
+                cmdline = ":",
+            }
             cmp.setup({
                 snippet = {
                     expand = function(args)
@@ -80,45 +119,6 @@ return {
                 formatting = {
                     fields = { "menu", "abbr", "kind" },
                     format = function(entry, item)
-                        local kind_icons = {
-                            Text = "",
-                            Method = "",
-                            Function = "",
-                            Constructor = "",
-                            Field = "",
-                            Variable = "",
-                            Class = "",
-                            Interface = "",
-                            Module = "",
-                            Property = "",
-                            Unit = "",
-                            Value = "",
-                            Enum = "",
-                            Keyword = "",
-                            Snippet = "",
-                            Color = "",
-                            File = "",
-                            Reference = "",
-                            Folder = "",
-                            EnumMember = "",
-                            Constant = "",
-                            Struct = "",
-                            Event = "",
-                            Operator = "",
-                            TypeParameter = "",
-                            Copilot = "",
-                        }
-                        local menu_icons = {
-                            nvim_lsp = "λ",
-                            nvim_lsp_signature_help = "λ",
-                            snippy = "",
-                            buffer = "Ω",
-                            path = "",
-                            calc = "",
-                            copilot = "",
-                            nvim_lua = "",
-                            cmdline = ":",
-                        }
                         item.menu = menu_icons[entry.source.name] or entry.source.name
                         item.menu_hl_group = "CmpItemKind" .. item.kind
                         item.kind = (entry.source.name == "calc" and item.menu or kind_icons[item.kind] or "?") .. " " .. item.kind
