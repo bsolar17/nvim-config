@@ -29,6 +29,9 @@ return {
                     global = true,
                 },
             },
+            filters = {
+                custom = { "^\\.git$" },
+            },
             on_attach = my_on_attach
         })
     end
