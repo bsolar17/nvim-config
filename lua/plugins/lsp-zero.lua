@@ -36,7 +36,7 @@ return {
                 { desc = "Methods" })
             vim.keymap.set("n", "<Leader>cd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>",
                 { desc = "Diagnostics" })
-            vim.keymap.set("n", "<Leader>cn", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
+            vim.keymap.set("n", "<Leader>cr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
             vim.keymap.set({ "n", "x" }, "<Leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<cr>",
                 { desc = "Format" })
             vim.keymap.set("n", "<Leader>cw", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Diagnostics Float" })
