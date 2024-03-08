@@ -73,13 +73,25 @@ return {
                     { name = "nvim_lua" },
                 },
                 mapping = {
-                    ["<Tab>"] = cmp.mapping(function(fallback)
+                    ["<C-Space>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             local entry = cmp.get_selected_entry()
                             if not entry then
                                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
                             end
                             cmp.confirm()
+                        else
+                            cmp.complete()
+                        end
+                    end, { "i", "s", "c", }),
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            local entry = cmp.get_selected_entry()
+                            if not entry then
+                                fallback()
+                            else
+                                cmp.confirm()
+                            end
                         else
                             fallback()
                         end
@@ -104,6 +116,20 @@ return {
                         end
                     end, { "i", "s", "c", }),
                     ["<S-Down>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s", "c", }),
+                    ["<S-k>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s", "c", }),
+                    ["<S-j>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
                         else
