@@ -10,8 +10,8 @@ return {
 
             api.config.mappings.default_on_attach(bufnr)
 
-            vim.keymap.set("n", "<S-Right>", "<cmd>NvimTreeResize +10<CR>", { desc = "Widen nvim-tree" })
-            vim.keymap.set("n", "<S-Left>", "<cmd>NvimTreeResize -10<CR>", { desc = "Narrow nvim-tree" })
+            vim.keymap.set("n", "<A-Right>", "<cmd>NvimTreeResize +10<CR>", { desc = "Widen nvim-tree" })
+            vim.keymap.set("n", "<A-Left>", "<cmd>NvimTreeResize -10<CR>", { desc = "Narrow nvim-tree" })
         end
 
         vim.g.loaded_netrw = 1
