@@ -122,20 +122,6 @@ return {
                             fallback()
                         end
                     end, { "i", "s", "c", }),
-                    ["<S-k>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s", "c", }),
-                    ["<S-j>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s", "c", }),
                     ['<C-e>'] = cmp.mapping.abort(),
                 },
                 preselect = cmp.PreselectMode.None,
