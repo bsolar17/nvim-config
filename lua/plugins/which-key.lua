@@ -29,6 +29,9 @@ return {
                 t = {
                     name = "trouble",
                 },
+                G = {
+                    name = "git",
+                },
             }
         })
     end

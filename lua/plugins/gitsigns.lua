@@ -10,8 +10,10 @@ return {
         attach_to_untracked = false,
     },
     config = function(_, opts)
-        require("gitsigns").setup(opts)
-        vim.keymap.set("n", "<Leader>b", "<cmd>lua require('gitsigns').blame_line({ full = true})<CR>",
-            { desc = "Git Blame" })
+        local gs = require("gitsigns")
+        gs.setup(opts)
+        vim.keymap.set("n", "<Leader>Gb", function() gs.blame_line { full = true } end, { desc = "Blame" })
+        vim.keymap.set("n", "<Leader>Gd", gs.diffthis, { desc = "Diff" })
+        vim.keymap.set("n", "<Leader>Gp", function() gs.diffthis("@^") end, { desc = "Diff HEAD^" })
     end
 }
