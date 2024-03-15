@@ -7,5 +7,8 @@ return {
         options = {
             globalstatus = true,
         },
+        sections = {
+            lualine_c = { "buffers" },
+        },
     },
 }

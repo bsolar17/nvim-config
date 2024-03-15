@@ -8,6 +8,9 @@ return {
         local wk = require("which-key")
         wk.register({
             ["<leader>"] = {
+                b = {
+                    name = "buffers",
+                },
                 c = {
                     name = "code",
                 },
