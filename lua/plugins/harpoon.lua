@@ -10,9 +10,8 @@ return {
         vim.keymap.set("n", "<Leader>hc", function() harpoon:list():clear() end, { desc = "Clear" })
         vim.keymap.set("n", "<Leader>hm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
             { desc = "Menu" })
-        vim.keymap.set("n", "<Leader>1", function() harpoon:list():select(1) end, { desc = "Harpoon 1" })
-        vim.keymap.set("n", "<Leader>2", function() harpoon:list():select(2) end, { desc = "Harpoon 2" })
-        vim.keymap.set("n", "<Leader>3", function() harpoon:list():select(3) end, { desc = "Harpoon 3" })
-        vim.keymap.set("n", "<Leader>4", function() harpoon:list():select(4) end, { desc = "Harpoon 4" })
+        for i = 1, 4 do
+            vim.keymap.set("n", "<Leader>h" .. i, function() harpoon:list():select(i) end, { desc = tostring(i) })
+        end
     end
 }
