@@ -9,6 +9,16 @@ return {
         },
         sections = {
             lualine_c = { "buffers" },
+            lualine_x = {
+                {
+                    "harpoon2",
+                    icon = "",
+                    separator = " ",
+                },
+                "encoding",
+                "fileformat",
+                "filetype"
+            },
         },
     },
     config = function(_, opts)
