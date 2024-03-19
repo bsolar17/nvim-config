@@ -30,7 +30,7 @@ return {
             end
         end
         for i = 1, 8 do
-            vim.keymap.set("n", "<leader>" .. i, function() safeBuffersJump(i) end, { desc = tostring(i) })
+            vim.keymap.set("n", "<leader>" .. i, function() safeBuffersJump(i) end, { desc = "Buffer " .. i })
         end
     end
 }
