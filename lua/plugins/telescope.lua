@@ -17,6 +17,11 @@ return {
                     truncate = 1,
                 },
                 layout_strategy = "vertical",
+                layout_config = {
+                    vertical = {
+                        preview_cutoff = 20,
+                    },
+                },
                 dynamic_preview_title = true,
             },
             pickers = {
