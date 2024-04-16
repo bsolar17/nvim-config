@@ -16,6 +16,7 @@ return {
                 path_display = {
                     truncate = 1,
                 },
+                layout_strategy = "vertical",
                 dynamic_preview_title = true,
             },
             pickers = {
