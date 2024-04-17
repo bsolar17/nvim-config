@@ -8,7 +8,6 @@ return {
             globalstatus = true,
         },
         sections = {
-            lualine_c = { "buffers" },
             lualine_x = {
                 {
                     "harpoon2",
