@@ -53,6 +53,11 @@ return {
                     symbol_width = 50,
                     show_line = false,
                 },
+                git_status = {
+                    path_display = {
+                        truncate = 3,
+                    },
+                }
             },
             extensions = {
                 fzf = {
