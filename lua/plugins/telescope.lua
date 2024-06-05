@@ -68,10 +68,10 @@ return {
             },
         },
         config = function(_, opts)
-            local trouble = require("trouble.providers.telescope")
+            local trouble = require("trouble.sources.telescope")
             opts.defaults.mappings = {
-                i = { ["<c-o>"] = trouble.open_with_trouble },
-                n = { ["<c-o>"] = trouble.open_with_trouble },
+                i = { ["<c-o>"] = trouble.open },
+                n = { ["<c-o>"] = trouble.open },
             }
             require("telescope").setup(opts)
             require("telescope").load_extension("fzf")
