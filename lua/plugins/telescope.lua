@@ -79,6 +79,12 @@ return {
             vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Buffers" })
             vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Files" })
             vim.keymap.set("n", "<leader>fg", builtin.git_files, { desc = "Git Files" })
+            vim.keymap.set("n", "<leader>fc", function()
+                    builtin.git_files({
+                        git_command = { "git", "diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD" },
+                    })
+                end,
+                { desc = "Git Commit Files" })
             vim.keymap.set("n", "<leader>fm", builtin.git_status, { desc = "Git Modified" })
             vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Old Files" })
             vim.keymap.set("n", "<leader>fp", builtin.builtin, { desc = "Pickers" })
