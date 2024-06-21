@@ -49,11 +49,5 @@ return {
             "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>",
             { buffer = buffer, desc = "Extract Method" }
         )
-        vim.keymap.set(
-            "n",
-            "<leader>jf",
-            "<cmd>lua vim.lsp.buf.formatting()<CR>",
-            { buffer = buffer, desc = "Format" }
-        )
     end
 }
