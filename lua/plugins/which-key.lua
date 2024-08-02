@@ -6,36 +6,19 @@ return {
     end,
     config = function()
         local wk = require("which-key")
-        wk.register({
-            ["<leader>"] = {
-                b = {
-                    name = "buffers",
-                },
-                c = {
-                    name = "code",
-                },
-                d = {
-                    name = "debug",
-                },
-                f = {
-                    name = "find",
-                },
-                g = {
-                    name = "go",
-                },
-                h = {
-                    name = "harpoon",
-                },
-                j = {
-                    name = "java",
-                },
-                t = {
-                    name = "trouble",
-                },
-                G = {
-                    name = "git",
-                },
+        wk.add(
+            {
+                { "<leader>C", group = "copilot" },
+                { "<leader>G", group = "git" },
+                { "<leader>b", group = "buffers" },
+                { "<leader>c", group = "code" },
+                { "<leader>d", group = "debug" },
+                { "<leader>f", group = "find" },
+                { "<leader>g", group = "go" },
+                { "<leader>h", group = "harpoon" },
+                { "<leader>j", group = "java" },
+                { "<leader>t", group = "trouble" },
             }
-        })
+        )
     end
 }
