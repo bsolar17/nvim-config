@@ -12,6 +12,7 @@ return {
             "dcampos/cmp-snippy",
             "dcampos/nvim-snippy",
             "honza/vim-snippets",
+            "zbirenbaum/copilot-cmp",
             "windwp/nvim-autopairs",
         },
         config = function()
@@ -68,6 +69,7 @@ return {
                     { name = "buffer" },
                     { name = "snippy" },
                     { name = "calc" },
+                    { name = "copilot" },
                     { name = "nvim_lua" },
                 },
                 mapping = {
