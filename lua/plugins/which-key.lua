@@ -1,11 +1,12 @@
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    init = function()
-        vim.o.timeout = true
-    end,
-    config = function()
+    opts = {
+        delay = 3000,
+    },
+    config = function(_, opts)
         local wk = require("which-key")
+        wk.setup(opts)
         wk.add(
             {
                 { "<leader>G", group = "git" },
