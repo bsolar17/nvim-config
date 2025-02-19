@@ -2,7 +2,7 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
-        delay = 3000,
+        delay = 2000,
     },
     config = function(_, opts)
         local wk = require("which-key")
