@@ -89,6 +89,7 @@ return {
             vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Old Files" })
             vim.keymap.set("n", "<leader>fp", builtin.builtin, { desc = "Pickers" })
             vim.keymap.set("n", "<leader>fG", builtin.live_grep, { desc = "Grep" })
+            vim.keymap.set("n", "<leader>fr", builtin.registers, { desc = "Registers" })
         end
     },
 }
