@@ -1,19 +1,28 @@
 return {
-    "VonHeikemen/lsp-zero.nvim",
-    branch = "v3.x",
-    dependencies = {
-        { "williamboman/mason.nvim" },
-        { "williamboman/mason-lspconfig.nvim" },
-        -- LSP Support
-        { "neovim/nvim-lspconfig" },
-        -- Autocompletion
-        { "hrsh7th/nvim-cmp" },
-        { "hrsh7th/cmp-nvim-lsp" },
-        { "nvim-telescope/telescope.nvim" },
+    {
+        "williamboman/mason.nvim",
+        opts = {},
     },
-    config = function()
-        local lsp_zero = require("lsp-zero")
-        lsp_zero.on_attach(function()
+    {
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        opts = {
+            automatic_installation = true,
+            handlers = {
+                function(server_name)
+                    require("lspconfig")[server_name].setup({})
+                end,
+            }
+        }
+    },
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            "williamboman/mason-lspconfig.nvim",
+        },
+        config = function()
             vim.keymap.set("n", "<Leader>ch", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover" })
             vim.keymap.set("n", "<Leader>gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>",
                 { desc = "Definitions" })
@@ -40,13 +49,6 @@ return {
             vim.keymap.set({ "n", "x" }, "<Leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<cr>",
                 { desc = "Format" })
             vim.keymap.set("n", "<Leader>cw", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Diagnostics Float" })
-        end)
-        require("mason").setup({})
-        require("mason-lspconfig").setup({
-            ensure_installed = {},
-            handlers = {
-                lsp_zero.default_setup,
-            },
-        })
-    end
+        end,
+    },
 }
