@@ -19,10 +19,14 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        dependencies = {
-            "williamboman/mason-lspconfig.nvim",
-        },
         config = function()
+            require("java").setup(
+                {
+                    jdk = {
+                        auto_install = false,
+                    }
+                }
+            )
             vim.keymap.set("n", "<Leader>ch", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover" })
             vim.keymap.set("n", "<Leader>gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>",
                 { desc = "Definitions" })
