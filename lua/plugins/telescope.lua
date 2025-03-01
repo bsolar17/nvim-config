@@ -12,6 +12,9 @@ return {
         },
         opts = {
             defaults = {
+                path_display = {
+                    "filename_first",
+                },
                 layout_strategy = "vertical",
                 layout_config = {
                     vertical = {
