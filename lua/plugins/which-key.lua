@@ -9,7 +9,6 @@ return {
         wk.setup(opts)
         wk.add(
             {
-                { "<leader>a",  group = "App" },
                 { "<leader>G",  group = "Git" },
                 { "<leader>b",  group = "Buffers" },
                 { "<leader>c",  group = "Code" },
@@ -17,7 +16,7 @@ return {
                 { "<leader>f",  group = "Find" },
                 { "<leader>g",  group = "Go" },
                 { "<leader>h",  group = "Harpoon" },
-                { "<leader>j",  group = "java" },
+                { "<leader>r",  group = "Run" },
                 { "<leader>t",  group = "Test" },
                 { "<leader>td", group = "Debug" },
                 { "<leader>x",  group = "Extract" },
