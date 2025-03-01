@@ -3,7 +3,10 @@ return {
     opts = {
         jdk = {
             auto_install = false,
-        }
+        },
+        notifications = {
+            dap = false,
+        },
     },
     config = function(_, opts)
         require("java").setup(opts)
