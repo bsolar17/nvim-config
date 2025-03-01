@@ -19,40 +19,53 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            "nvim-java/nvim-java",
+            "nvim-telescope/telescope.nvim",
+        },
         config = function()
-            require("java").setup(
-                {
-                    jdk = {
-                        auto_install = false,
-                    }
-                }
-            )
-            vim.keymap.set("n", "<Leader>ch", "<cmd>lua vim.lsp.buf.hover()<cr>", { desc = "Hover" })
-            vim.keymap.set("n", "<Leader>gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>",
+            local telescope_builtin = require("telescope.builtin")
+            vim.api.nvim_create_autocmd('LspAttach', {
+                desc = 'LSP attach',
+                callback = function(event)
+                    vim.opt.signcolumn = "yes"
+                end,
+            })
+            vim.api.nvim_create_autocmd('LspDetach', {
+                desc = 'LSP detach',
+                callback = function(event)
+                    vim.opt.signcolumn = "no"
+                end,
+            })
+            vim.diagnostic.config {
+                float = { border = "rounded" },
+            }
+            vim.keymap.set("n", "<Leader>ch", vim.lsp.buf.hover, { desc = "Hover" })
+            vim.keymap.set("n", "<Leader>gd", telescope_builtin.lsp_definitions,
                 { desc = "Definitions" })
-            vim.keymap.set("n", "<Leader>gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Declaration" })
-            vim.keymap.set("n", "<Leader>gi", "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>",
+            vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, { desc = "Declaration" })
+            vim.keymap.set("n", "<Leader>gi", telescope_builtin.lsp_implementations,
                 { desc = "Implementations" })
-            vim.keymap.set("n", "<Leader>gt", "<cmd>lua require('telescope.builtin').lsp_type_definitions()<cr>",
+            vim.keymap.set("n", "<Leader>gt", telescope_builtin.lsp_type_definitions,
                 { desc = "Type Definitions" })
-            vim.keymap.set("n", "<Leader>gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>",
+            vim.keymap.set("n", "<Leader>gr", telescope_builtin.lsp_references,
                 { desc = "References" })
-            vim.keymap.set("n", "<Leader>gI", "<cmd>lua require('telescope.builtin').lsp_incoming_calls()<cr>",
+            vim.keymap.set("n", "<Leader>gI", telescope_builtin.lsp_incoming_calls,
                 { desc = "Incoming Calls" })
-            vim.keymap.set("n", "<Leader>gO", "<cmd>lua require('telescope.builtin').lsp_outgoing_calls()<cr>",
+            vim.keymap.set("n", "<Leader>gO", telescope_builtin.lsp_outgoing_calls,
                 { desc = "Outgoing Calls" })
-            vim.keymap.set("n", "<Leader>cs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", { desc = "Signature Help" })
-            vim.keymap.set("n", "<Leader>gs", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>",
+            vim.keymap.set("n", "<Leader>cs", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+            vim.keymap.set("n", "<Leader>gs", telescope_builtin.lsp_document_symbols,
                 { desc = "Symbols" })
-            vim.keymap.set("n", "<Leader>gm",
-                "<cmd>lua require('telescope.builtin').lsp_document_symbols( {symbols = { 'method', 'function' } } )<cr>",
-                { desc = "Methods" })
-            vim.keymap.set("n", "<Leader>cd", "<cmd>lua require('telescope.builtin').diagnostics()<cr>",
+            -- vim.keymap.set("n", "<Leader>gm",
+            --     telescope_builtin.lsp_document_symbols( {symbols = { 'method', 'function' } } ),
+            --     { desc = "Methods" })
+            vim.keymap.set("n", "<Leader>cd", telescope_builtin.diagnostics,
                 { desc = "Diagnostics" })
-            vim.keymap.set("n", "<Leader>cr", "<cmd>lua vim.lsp.buf.rename()<cr>", { desc = "Rename" })
-            vim.keymap.set({ "n", "x" }, "<Leader>cf", "<cmd>lua vim.lsp.buf.format({async = true})<cr>",
+            vim.keymap.set("n", "<Leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+            vim.keymap.set({ "n", "x" }, "<Leader>cf", vim.lsp.buf.format,
                 { desc = "Format" })
-            vim.keymap.set("n", "<Leader>cw", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Diagnostics Float" })
+            vim.keymap.set("n", "<Leader>cw", vim.diagnostic.open_float, { desc = "Diagnostics Float" })
         end,
     },
 }
