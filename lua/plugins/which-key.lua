@@ -9,15 +9,20 @@ return {
         wk.setup(opts)
         wk.add(
             {
-                { "<leader>G", group = "git" },
-                { "<leader>b", group = "buffers" },
-                { "<leader>c", group = "code" },
-                { "<leader>d", group = "debug" },
-                { "<leader>f", group = "find" },
-                { "<leader>g", group = "go" },
-                { "<leader>h", group = "harpoon" },
-                { "<leader>j", group = "java" },
-                { "<leader>t", group = "trouble" },
+                { "<leader>a",  group = "App" },
+                { "<leader>G",  group = "Git" },
+                { "<leader>b",  group = "Buffers" },
+                { "<leader>c",  group = "Code" },
+                { "<leader>d",  group = "Debug" },
+                { "<leader>f",  group = "Find" },
+                { "<leader>g",  group = "Go" },
+                { "<leader>h",  group = "Harpoon" },
+                { "<leader>j",  group = "java" },
+                { "<leader>t",  group = "Test" },
+                { "<leader>td", group = "Debug" },
+                { "<leader>x",  group = "Extract" },
+                { "<leader>w",  group = "Workspace" },
+                { "<leader>wt", group = "Trouble" },
             }
         )
     end
