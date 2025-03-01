@@ -12,9 +12,6 @@ return {
         },
         opts = {
             defaults = {
-                path_display = {
-                    truncate = 1,
-                },
                 layout_strategy = "vertical",
                 layout_config = {
                     vertical = {
