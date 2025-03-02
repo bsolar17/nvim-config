@@ -56,6 +56,7 @@ return {
                 git_status = {
                     path_display = {
                         truncate = 3,
+                        "filename_first",
                     },
                 }
             },
