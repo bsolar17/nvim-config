@@ -13,6 +13,7 @@ return {
         opts = {
             defaults = {
                 path_display = {
+                    truncate = 1,
                     "filename_first",
                 },
                 layout_strategy = "vertical",
