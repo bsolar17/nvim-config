@@ -10,6 +10,7 @@ return {
         wk.add(
             {
                 { "<leader>G",  group = "Git" },
+                { "<leader>C",  group = "Copilot" },
                 { "<leader>b",  group = "Buffers" },
                 { "<leader>c",  group = "Code" },
                 { "<leader>d",  group = "Debug" },
