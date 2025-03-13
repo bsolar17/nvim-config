@@ -35,5 +35,9 @@ return {
         },
         build = "make tiktoken",
         opts = {},
+        config = function(_, opts)
+            require("CopilotChat").setup(opts)
+            vim.keymap.set("n", "<Leader>Cc", "<cmd>CopilotChatToggle<cr>", { desc = "Chat" })
+        end,
     },
 }
