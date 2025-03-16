@@ -60,7 +60,7 @@ return {
             -- vim.keymap.set("n", "<Leader>gm",
             --     telescope_builtin.lsp_document_symbols( {symbols = { 'method', 'function' } } ),
             --     { desc = "Methods" })
-            vim.keymap.set("n", "<Leader>cd", telescope_builtin.diagnostics,
+            vim.keymap.set("n", "<Leader>gw", telescope_builtin.diagnostics,
                 { desc = "Diagnostics" })
             vim.keymap.set("n", "<Leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
             vim.keymap.set({ "n", "x" }, "<Leader>cf", vim.lsp.buf.format,
