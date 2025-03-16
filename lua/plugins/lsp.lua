@@ -57,9 +57,6 @@ return {
             vim.keymap.set("n", "<Leader>cs", vim.lsp.buf.signature_help, { desc = "Signature Help" })
             vim.keymap.set("n", "<Leader>gs", telescope_builtin.lsp_document_symbols,
                 { desc = "Symbols" })
-            -- vim.keymap.set("n", "<Leader>gm",
-            --     telescope_builtin.lsp_document_symbols( {symbols = { 'method', 'function' } } ),
-            --     { desc = "Methods" })
             vim.keymap.set("n", "<Leader>gw", telescope_builtin.diagnostics,
                 { desc = "Diagnostics" })
             vim.keymap.set("n", "<Leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
