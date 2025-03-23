@@ -23,6 +23,9 @@ return {
                     },
                 },
                 dynamic_preview_title = true,
+                file_ignore_patterns = {
+                   ".git/COMMIT_EDITMSG",
+                },
             },
             pickers = {
                 lsp_definitions = {
@@ -58,7 +61,10 @@ return {
                         truncate = 3,
                         "filename_first",
                     },
-                }
+                },
+                oldfiles = {
+                    only_cwd = true,
+                },
             },
             extensions = {
                 fzf = {
