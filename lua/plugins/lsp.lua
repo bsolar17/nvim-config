@@ -21,10 +21,10 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             "nvim-java/nvim-java",
-            "nvim-telescope/telescope.nvim",
+            "ibhagwan/fzf-lua",
         },
         config = function()
-            local telescope_builtin = require("telescope.builtin")
+            local fzf = require("fzf-lua")
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP attach',
                 callback = function(event)
@@ -37,28 +37,39 @@ return {
                     vim.opt.signcolumn = "no"
                 end,
             })
+            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+                vim.lsp.handlers.hover, { border = "rounded" }
+            )
+            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+                vim.lsp.handlers.signature_help, { border = "rounded" }
+            )
             vim.diagnostic.config {
                 float = { border = "rounded" },
             }
+            vim.keymap.set({ "v", "n" }, "<Leader>ca", fzf.lsp_code_actions, { desc = "Actions" })
             vim.keymap.set("n", "<Leader>ch", vim.lsp.buf.hover, { desc = "Hover" })
-            vim.keymap.set("n", "<Leader>gd", telescope_builtin.lsp_definitions,
+            vim.keymap.set("n", "<Leader>gd", fzf.lsp_definitions,
                 { desc = "Definitions" })
             vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, { desc = "Declaration" })
-            vim.keymap.set("n", "<Leader>gi", telescope_builtin.lsp_implementations,
+            vim.keymap.set("n", "<Leader>gi", fzf.lsp_implementations,
                 { desc = "Implementations" })
-            vim.keymap.set("n", "<Leader>gt", telescope_builtin.lsp_type_definitions,
+            vim.keymap.set("n", "<Leader>gt", fzf.lsp_typedefs,
                 { desc = "Type Definitions" })
-            vim.keymap.set("n", "<Leader>gr", telescope_builtin.lsp_references,
+            vim.keymap.set("n", "<Leader>gr", fzf.lsp_references,
                 { desc = "References" })
-            vim.keymap.set("n", "<Leader>gI", telescope_builtin.lsp_incoming_calls,
+            vim.keymap.set("n", "<Leader>gI", fzf.lsp_incoming_calls,
                 { desc = "Incoming Calls" })
-            vim.keymap.set("n", "<Leader>gO", telescope_builtin.lsp_outgoing_calls,
+            vim.keymap.set("n", "<Leader>gO", fzf.lsp_outgoing_calls,
                 { desc = "Outgoing Calls" })
             vim.keymap.set("n", "<Leader>cs", vim.lsp.buf.signature_help, { desc = "Signature Help" })
-            vim.keymap.set("n", "<Leader>gs", telescope_builtin.lsp_document_symbols,
-                { desc = "Symbols" })
-            vim.keymap.set("n", "<Leader>gw", telescope_builtin.diagnostics,
-                { desc = "Diagnostics" })
+            vim.keymap.set("n", "<Leader>gs", fzf.lsp_document_symbols,
+                { desc = "Document Symbols" })
+            vim.keymap.set("n", "<Leader>gS", fzf.lsp_workspace_symbols,
+                { desc = "Workspace Symbols" })
+            vim.keymap.set("n", "<Leader>gw", fzf.diagnostics_document,
+                { desc = "Diagnostics Document" })
+            vim.keymap.set("n", "<Leader>gW", fzf.diagnostics_workspace,
+                { desc = "Diagnostics Workspace" })
             vim.keymap.set("n", "<Leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
             vim.keymap.set({ "n", "x" }, "<Leader>cf", vim.lsp.buf.format,
                 { desc = "Format" })
