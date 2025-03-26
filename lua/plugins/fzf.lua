@@ -17,6 +17,8 @@ return {
         fzf.register_ui_select()
         vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
         vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Files" })
+        vim.keymap.set("n", "<leader>fl", fzf.blines, { desc = "Lines" })
+        vim.keymap.set("n", "<leader>fL", fzf.lines, { desc = "Lines (All Buffers)" })
         vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Git Files" })
         vim.keymap.set("n", "<leader>fc", function()
                 fzf.git_files({
