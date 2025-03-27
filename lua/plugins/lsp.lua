@@ -37,15 +37,6 @@ return {
                     vim.opt.signcolumn = "no"
                 end,
             })
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-                vim.lsp.handlers.hover, { border = "rounded" }
-            )
-            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
-                vim.lsp.handlers.signature_help, { border = "rounded" }
-            )
-            vim.diagnostic.config {
-                float = { border = "rounded" },
-            }
             vim.keymap.set({ "v", "n" }, "<Leader>ca", fzf.lsp_code_actions, { desc = "Actions" })
             vim.keymap.set("n", "<Leader>ch", vim.lsp.buf.hover, { desc = "Hover" })
             vim.keymap.set("n", "<Leader>gd", fzf.lsp_definitions,
