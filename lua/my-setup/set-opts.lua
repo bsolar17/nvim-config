@@ -1,4 +1,3 @@
-local home = os.getenv("HOME")
 vim.opt.shortmess:append("I")
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -11,9 +10,6 @@ vim.opt.expandtab = true
 vim.opt.scrolloff = 8
 vim.opt.smartindent = true
 vim.opt.breakindent = true
-vim.opt.undodir = home .. "/.nvim/undo"
-vim.opt.directory = home .. "/.nvim/swap"
-vim.opt.backupdir = home .. "/.nvim/backup"
 vim.opt.undofile = true
 vim.opt.backupcopy = "yes"
 vim.opt.incsearch = true
