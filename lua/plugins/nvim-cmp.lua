@@ -126,7 +126,7 @@ return {
                 },
                 preselect = cmp.PreselectMode.None,
                 completion = {
-                    completeopt = "menu,menuone,noinsert,preview,noselect",
+                    completeopt = "menuone,noinsert,preview,noselect",
                 },
                 formatting = {
                     fields = { "menu", "abbr", "kind" },
