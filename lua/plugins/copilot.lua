@@ -9,7 +9,7 @@ return {
         },
         config = function(_, opts)
             local copilot = require("copilot")
-            copilot:setup()
+            copilot:setup(opts)
             vim.cmd(":Copilot disable")
             vim.keymap.set("n", "<Leader>Ce", "<cmd>Copilot enable<cr>", { desc = "Enable" })
             vim.keymap.set("n", "<Leader>Cd", "<cmd>Copilot disable<cr>", { desc = "Disable" })
