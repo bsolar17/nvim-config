@@ -1,3 +1,22 @@
+local sources_without_copilot = {
+    { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "path" },
+    { name = "buffer" },
+    { name = "snippy" },
+    { name = "calc" },
+    { name = "nvim_lua" },
+}
+local sources_with_copilot = {
+    { name = "nvim_lsp" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "path" },
+    { name = "buffer" },
+    { name = "snippy" },
+    { name = "calc" },
+    { name = "nvim_lua" },
+    { name = "copilot" }
+}
 return {
     {
         "hrsh7th/nvim-cmp",
@@ -16,7 +35,7 @@ return {
             "windwp/nvim-autopairs",
         },
         config = function()
-            local cmp = require "cmp"
+            local cmp = require("cmp")
             local kind_icons = {
                 Text = "",
                 Method = "",
@@ -62,16 +81,7 @@ return {
                         require('snippy').expand_snippet(args.body)
                     end,
                 },
-                sources = {
-                    { name = "nvim_lsp" },
-                    { name = "nvim_lsp_signature_help" },
-                    { name = "path" },
-                    { name = "buffer" },
-                    { name = "snippy" },
-                    { name = "calc" },
-                    { name = "copilot" },
-                    { name = "nvim_lua" },
-                },
+                sources = sources_without_copilot,
                 mapping = {
                     ["<C-Space>"] = cmp.mapping(function(fallback)
                         if cmp.visible() then
@@ -133,7 +143,8 @@ return {
                     format = function(entry, item)
                         item.menu = menu_icons[entry.source.name] or entry.source.name
                         item.menu_hl_group = "CmpItemKind" .. item.kind
-                        item.kind = (entry.source.name == "calc" and item.menu or kind_icons[item.kind] or "?") .. " " .. item.kind
+                        item.kind = (entry.source.name == "calc" and item.menu or kind_icons[item.kind] or "?") ..
+                            " " .. item.kind
                         return item
                     end,
                 },
@@ -160,6 +171,10 @@ return {
                 })
             })
             cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
-        end
+            vim.keymap.set("n", "<leader>Ce", function() require("cmp").setup({ sources = sources_with_copilot }) end,
+                { desc = "Enable" })
+            vim.keymap.set("n", "<leader>Cd", function() cmp.setup({ sources = sources_without_copilot }) end,
+                { desc = "Disable" })
+        end,
     },
 }
