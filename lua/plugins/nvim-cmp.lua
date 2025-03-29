@@ -75,6 +75,55 @@ return {
                 nvim_lua = "",
                 cmdline = ":",
             }
+            local confirm_selected_entry_or_top_item = cmp.mapping(
+                function(fallback)
+                    if cmp.visible() then
+                        local entry = cmp.get_selected_entry()
+                        if not entry then
+                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                        end
+                        cmp.confirm()
+                    else
+                        cmp.complete()
+                    end
+                end,
+                { "i", "s", "c", }
+            )
+            local confirm_selected_entry = cmp.mapping(
+                function(fallback)
+                    if cmp.visible() then
+                        local entry = cmp.get_selected_entry()
+                        if not entry then
+                            fallback()
+                        else
+                            cmp.confirm()
+                        end
+                    else
+                        fallback()
+                    end
+                end,
+                { "i", "s", "c", }
+            )
+            local select_prev_item = cmp.mapping(
+                function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                    else
+                        fallback()
+                    end
+                end,
+                { "i", "s", "c", }
+            )
+            local select_next_item = cmp.mapping(
+                function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                    else
+                        fallback()
+                    end
+                end,
+                { "i", "s", "c", }
+            )
             cmp.setup({
                 snippet = {
                     expand = function(args)
@@ -83,55 +132,15 @@ return {
                 },
                 sources = sources_without_copilot,
                 mapping = {
-                    ["<C-Space>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            local entry = cmp.get_selected_entry()
-                            if not entry then
-                                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                            end
-                            cmp.confirm()
-                        else
-                            cmp.complete()
-                        end
-                    end, { "i", "s", "c", }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            local entry = cmp.get_selected_entry()
-                            if not entry then
-                                fallback()
-                            else
-                                cmp.confirm()
-                            end
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s", "c", }),
-                    ["<CR>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            local entry = cmp.get_selected_entry()
-                            if not entry then
-                                fallback()
-                            else
-                                cmp.confirm()
-                            end
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s", "c", }),
-                    ["<S-Up>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s", "c", }),
-                    ["<S-Down>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s", "c", }),
+                    ["<C-Space>"] = confirm_selected_entry_or_top_item,
+                    ["<Tab>"] = confirm_selected_entry,
+                    ["<CR>"] = confirm_selected_entry,
+                    ["<C-p>"] = select_prev_item,
+                    ["<C-k>"] = select_prev_item,
+                    ["<S-Up>"] = select_prev_item,
+                    ["<C-n>"] = select_next_item,
+                    ["<C-j>"] = select_next_item,
+                    ["<S-Down>"] = select_next_item,
                     ['<C-e>'] = cmp.mapping.abort(),
                 },
                 preselect = cmp.PreselectMode.None,
