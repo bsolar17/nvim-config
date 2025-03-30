@@ -7,21 +7,6 @@ return {
             suggestion = { enabled = false },
             panel = { enabled = false },
         },
-        config = function(_, opts)
-            local copilot = require("copilot")
-            copilot:setup(opts)
-            vim.keymap.set("n", "<Leader>Cs", "<cmd>Copilot status<cr>", { desc = "Status" })
-        end,
-    },
-    {
-        "zbirenbaum/copilot-cmp",
-        dependecies = {
-            "zbirenbaum/copilot.lua",
-        },
-        event = "InsertEnter",
-        opts = {
-            fix_pairs = true,
-        },
     },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
@@ -31,10 +16,12 @@ return {
             { "nvim-lua/plenary.nvim" },
         },
         build = "make tiktoken",
-        opts = {},
+        opts = {
+            auto_insert_mode = true,
+        },
         config = function(_, opts)
             require("CopilotChat").setup(opts)
-            vim.keymap.set("n", "<Leader>Cc", "<cmd>CopilotChatToggle<cr>", { desc = "Chat" })
+            vim.keymap.set("n", "<Leader>C", "<cmd>CopilotChatToggle<cr>", { desc = "Copilot" })
         end,
     },
 }
