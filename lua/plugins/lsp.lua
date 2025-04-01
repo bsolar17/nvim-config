@@ -28,7 +28,6 @@ return {
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP attach',
                 callback = function(event)
-                    vim.opt.signcolumn = "yes"
                     vim.keymap.set({ "v", "n", buffer = true }, "<Leader>ca", fzf.lsp_code_actions, { desc = "Actions" })
                     vim.keymap.set("n", "<Leader>ch", vim.lsp.buf.hover, { desc = "Hover", buffer = true })
                     vim.keymap.set("n", "<Leader>gd", fzf.lsp_definitions,
@@ -92,12 +91,6 @@ return {
                         vim.keymap.set("n", "<Leader>xm", "<cmd>lua require('java').refactor.extract_method()<cr>",
                             { desc = "Method", buffer = true })
                     end
-                end,
-            })
-            vim.api.nvim_create_autocmd('LspDetach', {
-                desc = 'LSP detach',
-                callback = function(event)
-                    vim.opt.signcolumn = "no"
                 end,
             })
         end,
