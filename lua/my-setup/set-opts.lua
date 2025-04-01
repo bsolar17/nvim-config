@@ -16,5 +16,4 @@ vim.opt.incsearch = true
 vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.winborder = "rounded"
-vim.diagnostic.config({ virtual_text = true })
 vim.opt.signcolumn = "yes"
