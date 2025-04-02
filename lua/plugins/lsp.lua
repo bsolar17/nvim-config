@@ -47,6 +47,17 @@ return {
                         { desc = "Signature Help", buffer = true })
                     vim.keymap.set("n", "<Leader>gs", fzf.lsp_document_symbols,
                         { desc = "Document Symbols", buffer = true })
+                    vim.keymap.set("n", "<Leader>gm",
+                        function()
+                            fzf.lsp_document_symbols(
+                                {
+                                    regex_filter = function(item, _)
+                                        return item.kind == "Method" or item.kind == "Function"
+                                    end
+                                }
+                            )
+                        end,
+                        { desc = "Document Methods", buffer = true })
                     vim.keymap.set("n", "<Leader>gS", fzf.lsp_workspace_symbols,
                         { desc = "Workspace Symbols", buffer = true })
                     vim.keymap.set("n", "<Leader>gw", fzf.diagnostics_document,
