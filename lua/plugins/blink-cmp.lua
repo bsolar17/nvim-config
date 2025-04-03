@@ -7,6 +7,10 @@ return {
     opts = {
         keymap = {
             preset = "default",
+            ['<Up>'] = {},
+            ['<Down>'] = {},
+            ['<S-Up>'] = { 'select_prev', 'fallback' },
+            ['<S-Down>'] = { 'select_next', 'fallback' },
             ['<CR>'] = { 'accept', 'fallback' },
         },
         appearance = {
@@ -36,7 +40,11 @@ return {
         },
         cmdline = {
             keymap = {
-                ['<CR>'] = { 'accept', 'fallback' },
+                ['<Up>'] = {},
+                ['<Down>'] = {},
+                ['<S-Up>'] = { 'select_prev', 'fallback' },
+                ['<S-Down>'] = { 'select_next', 'fallback' },
+                ['<CR>'] = { 'accept_and_enter', 'fallback' },
             },
             completion = {
                 menu = {
