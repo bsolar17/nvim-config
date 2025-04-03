@@ -65,8 +65,6 @@ return {
                     vim.keymap.set("n", "<Leader>gW", fzf.diagnostics_workspace,
                         { desc = "Diagnostics Workspace", buffer = true })
                     vim.keymap.set("n", "<Leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = true })
-                    vim.keymap.set({ "n", "x" }, "<Leader>cf", vim.lsp.buf.format,
-                        { desc = "Format", buffer = true })
                     vim.keymap.set("n", "<Leader>cw", vim.diagnostic.open_float, { desc = "Diagnostics Float" })
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
                     if (client.name == "jdtls") then
