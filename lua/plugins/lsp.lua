@@ -12,8 +12,25 @@ return {
             automatic_installation = true,
             handlers = {
                 function(server_name)
-                    require("lspconfig")[server_name].setup({})
-                end,
+                    local config = {}
+                    if server_name == "jdtls" then
+                        local formatter_config = os.getenv("JDTLS_FORMATTER_CONFIG")
+                        if formatter_config and vim.fn.filereadable(formatter_config) == 1 then
+                            config = {
+                                settings = {
+                                    java = {
+                                        format = {
+                                            settings = {
+                                                url = formatter_config,
+                                            },
+                                        },
+                                    },
+                                },
+                            }
+                        end
+                    end
+                    require("lspconfig")[server_name].setup(config)
+                end
             }
         }
     },
