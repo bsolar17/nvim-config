@@ -7,6 +7,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         dependencies = {
             "neovim/nvim-lspconfig",
+            "saghen/blink.cmp",
         },
         opts = {
             automatic_installation = true,
@@ -29,6 +30,7 @@ return {
                             }
                         end
                     end
+                    config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
                     require("lspconfig")[server_name].setup(config)
                 end
             }
