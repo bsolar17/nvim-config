@@ -7,5 +7,8 @@ return {
         notifications = {
             dap = false,
         },
+        spring_boot_tools = {
+            enable = false,
+        },
     },
 }
