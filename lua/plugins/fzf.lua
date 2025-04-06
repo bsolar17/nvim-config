@@ -9,6 +9,7 @@ return {
         oldfiles = {
             cwd_only = true,
             include_current_session = true,
+            file_ignore_patterns = { "COMMIT_EDITMSG" },
         },
     },
     config = function(_, opts)
