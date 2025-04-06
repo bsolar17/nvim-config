@@ -9,8 +9,9 @@ return {
         vim.keymap.set("n", "<Leader>hc", function() harpoon:list():clear() end, { desc = "Clear" })
         vim.keymap.set("n", "<Leader>hm", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
             { desc = "Menu" })
-        for i = 1, 4 do
-            vim.keymap.set("n", "<Leader>" .. i, function() harpoon:list():select(i) end, { desc = tostring(i) })
+        for i = 1, 9 do
+            vim.keymap.set("n", "<Leader>" .. tostring(i), function() harpoon:list():select(i) end,
+                { desc = tostring(i) })
         end
     end
 }
