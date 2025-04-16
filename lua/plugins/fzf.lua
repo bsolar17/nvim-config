@@ -28,6 +28,7 @@ return {
             end,
             { desc = "Git Commit Files" })
         vim.keymap.set("n", "<leader>fm", fzf.git_status, { desc = "Git Modified" })
+        vim.keymap.set("n", "<leader>fM", fzf.marks, { desc = "Marks" })
         vim.keymap.set("n", "<leader>fo", fzf.oldfiles, { desc = "Old Files" })
         vim.keymap.set("n", "<leader>fp", fzf.builtin, { desc = "Pickers" })
         vim.keymap.set("n", "<leader>fG", fzf.live_grep, { desc = "Grep" })
