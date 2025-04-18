@@ -11,6 +11,9 @@ return {
             include_current_session = true,
             file_ignore_patterns = { "COMMIT_EDITMSG" },
         },
+        fzf_opts = {
+            [ "--cycle"] = true,
+        }
     },
     config = function(_, opts)
         local fzf = require("fzf-lua")
