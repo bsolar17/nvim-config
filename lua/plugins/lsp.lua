@@ -1,20 +1,20 @@
 return {
     {
         "williamboman/mason.nvim",
+        lazy = true,
         opts = {},
     },
     {
         "williamboman/mason-lspconfig.nvim",
         dependencies = {
             "neovim/nvim-lspconfig",
-            "saghen/blink.cmp",
         },
         opts = {
             automatic_installation = true,
             handlers = {
                 function(server_name)
-                    local config = {}
                     if server_name == "jdtls" then
+                        local config = {}
                         local formatter_config = os.getenv("JDTLS_FORMATTER_CONFIG")
                         if formatter_config and vim.fn.filereadable(formatter_config) == 1 then
                             config = {
@@ -29,9 +29,10 @@ return {
                                 },
                             }
                         end
+                        require("lspconfig")[server_name].setup(config)
+                    else
+                        vim.lsp.enable(server_name)
                     end
-                    config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-                    require("lspconfig")[server_name].setup(config)
                 end
             }
         }
@@ -41,8 +42,10 @@ return {
         dependencies = {
             "nvim-java/nvim-java",
             "ibhagwan/fzf-lua",
+            "saghen/blink.cmp",
         },
         config = function()
+            vim.lsp.config("*", require("blink.cmp").get_lsp_capabilities())
             local fzf = require("fzf-lua")
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = 'LSP attach',
@@ -87,36 +90,36 @@ return {
                     vim.keymap.set("n", "<Leader>cw", vim.diagnostic.open_float, { desc = "Diagnostics Float" })
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
                     if (client.name == "jdtls") then
-                        vim.keymap.set("n", "<Leader>wb", "<cmd>lua require('java').build.build_workspace()<cr>",
+                        local java = require("java")
+                        vim.keymap.set("n", "<Leader>wb", function() java.build.build_workspace() end,
                             { desc = "Build", buffer = true })
-                        vim.keymap.set("n", "<Leader>wc", "<cmd>lua require('java').build.clean_workspace()<cr>",
+                        vim.keymap.set("n", "<Leader>wc", function() java.build.clean_workspace() end,
                             { desc = "Clean", buffer = true })
-                        vim.keymap.set("n", "<Leader>ra", "<cmd>lua require('java').runner.built_in.run_app({})<cr>",
+                        vim.keymap.set("n", "<Leader>ra", function() java.runner.built_in.run_app({}) end,
                             { desc = "App", buffer = true })
-                        vim.keymap.set("n", "<Leader>rs", "<cmd>lua require('java').runner.built_in.stop_app()<cr>",
+                        vim.keymap.set("n", "<Leader>rs", function() java.runner.built_in.stop_app() end,
                             { desc = "Stop", buffer = true })
-                        vim.keymap.set("n", "<Leader>rl", "<cmd>lua require('java').runner.built_in.toggle_logs()<cr>",
+                        vim.keymap.set("n", "<Leader>rl", function() java.runner.built_in.toggle_logs() end,
                             { desc = "Logs", buffer = true })
-                        vim.keymap.set("n", "<Leader>tc", "<cmd>lua require('java').test.run_current_class()<cr>",
+                        vim.keymap.set("n", "<Leader>tc", function() java.test.run_current_class() end,
                             { desc = "Class", buffer = true })
-                        vim.keymap.set("n", "<Leader>tm", "<cmd>lua require('java').test.run_current_method()<cr>",
+                        vim.keymap.set("n", "<Leader>tm", function() java.test.run_current_method() end,
                             { desc = "Method", buffer = true })
-                        vim.keymap.set("n", "<Leader>tr", "<cmd>lua require('java').test.view_last_report()<cr>",
+                        vim.keymap.set("n", "<Leader>tr", function() java.test.view_last_report() end,
                             { desc = "Report", buffer = true })
-                        vim.keymap.set("n", "<Leader>tdc", "<cmd>lua require('java').test.debug_current_class()<cr>",
+                        vim.keymap.set("n", "<Leader>tdc", function() java.test.debug_current_class() end,
                             { desc = "Class", buffer = true })
-                        vim.keymap.set("n", "<Leader>tdm", "<cmd>lua require('java').test.debug_current_method()<cr>",
+                        vim.keymap.set("n", "<Leader>tdm", function() java.test.debug_current_method() end,
                             { desc = "Method", buffer = true })
-                        vim.keymap.set("n", "<Leader>xv", "<cmd>lua require('java').refactor.extract_variable()<cr>",
+                        vim.keymap.set("n", "<Leader>xv", function() java.refactor.extract_variable() end,
                             { desc = "Variable", buffer = true })
-                        vim.keymap.set("n", "<Leader>xa",
-                            "<cmd>lua require('java').refactor.extract_variable_all_occurrence()<cr>",
+                        vim.keymap.set("n", "<Leader>xa", function() java.refactor.extract_variable_all_occurrence() end,
                             { desc = "Variable All", buffer = true })
-                        vim.keymap.set("n", "<Leader>xc", "<cmd>lua require('java').refactor.extract_constant()<cr>",
+                        vim.keymap.set("n", "<Leader>xc", function() java.refactor.extract_constant() end,
                             { desc = "Constant", buffer = true })
-                        vim.keymap.set("n", "<Leader>xf", "<cmd>lua require('java').refactor.extract_field()<cr>",
+                        vim.keymap.set("n", "<Leader>xf", function() java.refactor.extract_field() end,
                             { desc = "Field", buffer = true })
-                        vim.keymap.set("n", "<Leader>xm", "<cmd>lua require('java').refactor.extract_method()<cr>",
+                        vim.keymap.set("n", "<Leader>xm", function() java.refactor.extract_method() end,
                             { desc = "Method", buffer = true })
                     end
                 end,
