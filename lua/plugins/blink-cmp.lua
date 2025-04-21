@@ -48,10 +48,7 @@ return {
         },
         cmdline = {
             keymap = {
-                ["<Up>"] = {},
-                ["<Down>"] = {},
-                ["<S-Up>"] = { "select_prev", "fallback" },
-                ["<S-Down>"] = { "select_next", "fallback" },
+                preset = "inherit",
                 ["<CR>"] = { "accept_and_enter", "fallback" },
             },
             completion = {
