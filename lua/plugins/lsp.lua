@@ -124,8 +124,8 @@ return {
         config = function()
             vim.lsp.config("*", require("blink.cmp").get_lsp_capabilities())
             setup_jdtls()
-            vim.api.nvim_create_autocmd('LspAttach', {
-                desc = 'LSP attach',
+            vim.api.nvim_create_autocmd("LspAttach", {
+                desc = "LSP attach",
                 callback = function(event)
                     setup_general_keymaps()
                     if (vim.lsp.get_client_by_id(event.data.client_id).name == "jdtls") then
