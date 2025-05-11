@@ -2,6 +2,9 @@ return {
     "nvim-java/nvim-java",
     lazy = true,
     opts = {
+        jdtls = {
+            version = "v1.46.1",
+        },
         jdk = {
             auto_install = false,
         },

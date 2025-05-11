@@ -95,12 +95,12 @@ end
 
 return {
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         lazy = true,
         opts = {},
     },
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         lazy = true,
         opts = {
             automatic_installation = true,
@@ -118,7 +118,7 @@ return {
         dependencies = {
             "ibhagwan/fzf-lua",
             "saghen/blink.cmp",
-            "williamboman/mason-lspconfig.nvim",
+            "mason-org/mason-lspconfig.nvim",
             "nvim-java/nvim-java",
         },
         config = function()
