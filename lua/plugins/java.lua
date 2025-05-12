@@ -5,6 +5,9 @@ return {
         jdtls = {
             version = "v1.46.1",
         },
+        java_test = {
+            version = "0.43.1",
+        },
         jdk = {
             auto_install = false,
         },
