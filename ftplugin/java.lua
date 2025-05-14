@@ -1,29 +1,43 @@
-if vim.fn.executable("jdtls") == 1 then
-    local path_to_mason_share = os.getenv("MASON") .. "/share"
+local function get_cmd(path_to_mason_share)
+    local path_to_lombok = path_to_mason_share .. "/jdtls/lombok.jar"
+    local cmd = vim.fn.filereadable(path_to_lombok) == 1
+        and { "jdtls", "--jvm-arg=-javaagent:" .. path_to_lombok }
+        or { "jdtls" }
+    return cmd
+end
+
+local function get_settings()
+    local settings = {
+        java = {
+            maven = {
+                downloadSources = true,
+            },
+            codeGeneration = {
+                addFinalForNewDeclaration = "all",
+            },
+        }
+    }
+    return settings
+end
+
+local function get_bundles(path_to_mason_share)
     local path_to_java_debug = path_to_mason_share .. "/java-debug-adapter"
     local path_to_java_test = path_to_mason_share .. "/java-test"
-    local path_to_lombok = path_to_mason_share .. "/jdtls/lombok.jar"
     local bundles = {
         vim.fn.glob(path_to_java_debug .. "/com.microsoft.java.debug.plugin.jar", true),
     }
     vim.list_extend(bundles, vim.split(vim.fn.glob(path_to_java_test .. "/*.jar", true), "\n"))
+    return bundles
+end
+
+if vim.fn.executable("jdtls") == 1 then
+    local path_to_mason_share = os.getenv("MASON") .. "/share"
     local config = {
-        cmd = vim.fn.filereadable(path_to_lombok) == 1
-            and { "jdtls", "--jvm-arg=-javaagent:" .. path_to_lombok }
-            or { "jdtls" },
+        cmd = get_cmd(path_to_mason_share),
         root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
-        settings = {
-            java = {
-                maven = {
-                    downloadSources = true,
-                },
-                codeGeneration = {
-                    addFinalForNewDeclaration = "all",
-                },
-            }
-        },
+        settings = get_settings(),
         init_options = {
-            bundles = bundles
+            bundles = get_bundles(path_to_mason_share),
         },
     }
     require("jdtls").start_or_attach(config)
