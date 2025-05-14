@@ -1,5 +1,5 @@
 if vim.fn.executable("jdtls") == 1 then
-    local path_to_mason_share = os.getenv("XDG_DATA_HOME") .. "/nvim/mason/share"
+    local path_to_mason_share = os.getenv("MASON") .. "/share"
     local path_to_java_debug = path_to_mason_share .. "/java-debug-adapter"
     local path_to_java_test = path_to_mason_share .. "/java-test"
     local path_to_lombok = path_to_mason_share .. "/jdtls/lombok.jar"
