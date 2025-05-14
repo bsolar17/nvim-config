@@ -40,6 +40,58 @@ local function setup_general_keymaps()
     vim.keymap.set("n", "<Leader>cw", vim.diagnostic.open_float, { desc = "Diagnostics Float" })
 end
 
+local function setup_java_keymaps()
+    local jdtls = require("jdtls")
+    vim.keymap.set(
+        "n",
+        "<leader>co",
+        function() jdtls.organize_imports() end,
+        { buffer = buffer, desc = "Organize Imports" }
+    )
+    vim.keymap.set(
+        "n",
+        "<leader>tc",
+        function() jdtls.test_class() end,
+        { buffer = buffer, desc = "Test Class" }
+    )
+    vim.keymap.set(
+        "n",
+        "<leader>tm",
+        function() jdtls.test_nearest_method() end,
+        { buffer = buffer, desc = "Test Nearest Method" }
+    )
+    vim.keymap.set(
+        "v",
+        "<leader>xv",
+        "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>",
+        { buffer = buffer, desc = "Extract Variable" }
+    )
+    vim.keymap.set(
+        "n",
+        "<leader>xv",
+        function() jdtls.extract_variable() end,
+        { buffer = buffer, desc = "Extract Variable" }
+    )
+    vim.keymap.set(
+        "v",
+        "<leader>xc",
+        "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>",
+        { buffer = buffer, desc = "Extract Constant" }
+    )
+    vim.keymap.set(
+        "n",
+        "<leader>xc",
+        function() jdtls.extract_constant() end,
+        { buffer = buffer, desc = "Extract Variable" }
+    )
+    vim.keymap.set(
+        "v",
+        "<leader>xm",
+        "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>",
+        { buffer = buffer, desc = "Extract Method" }
+    )
+end
+
 return {
     {
         "mason-org/mason.nvim",
@@ -53,7 +105,9 @@ return {
             automatic_installation = true,
             handlers = {
                 function(server_name)
-                    vim.lsp.enable(server_name)
+                    if server_name ~= "jdtls" then
+                        vim.lsp.enable(server_name)
+                    end
                 end
             }
         }
@@ -71,6 +125,9 @@ return {
                 desc = "LSP attach",
                 callback = function(event)
                     setup_general_keymaps()
+                    if vim.lsp.get_client_by_id(event.data.client_id).name == "jdtls" then
+                        setup_java_keymaps()
+                    end
                 end,
             })
         end,
