@@ -17,6 +17,14 @@ local function get_settings()
             },
         }
     }
+    local jdtls_formatter_config = os.getenv("JDTLS_FORMATTER_CONFIG")
+    if jdtls_formatter_config and vim.fn.filereadable(jdtls_formatter_config) == 1 then
+        settings.java.format = {
+            settings = {
+                url = jdtls_formatter_config,
+            },
+        }
+    end
     return settings
 end
 
