@@ -17,6 +17,9 @@ if vim.fn.executable("jdtls") == 1 then
                 maven = {
                     downloadSources = true,
                 },
+                codeGeneration = {
+                    addFinalForNewDeclaration = "all",
+                },
             }
         },
         init_options = {
