@@ -1,22 +1,3 @@
-local function setup_jdtls()
-    local jdtls_config = {}
-    local jdtls_formatter_config = os.getenv("JDTLS_FORMATTER_CONFIG")
-    if jdtls_formatter_config and vim.fn.filereadable(jdtls_formatter_config) == 1 then
-        jdtls_config = {
-            settings = {
-                java = {
-                    format = {
-                        settings = {
-                            url = jdtls_formatter_config,
-                        },
-                    },
-                },
-            },
-        }
-    end
-    require("lspconfig")["jdtls"].setup(jdtls_config)
-end
-
 local function setup_general_keymaps()
     local fzf = require("fzf-lua")
     vim.keymap.set({ "v", "n", buffer = true }, "<Leader>ca", fzf.lsp_code_actions, { desc = "Actions" })
@@ -59,40 +40,6 @@ local function setup_general_keymaps()
     vim.keymap.set("n", "<Leader>cw", vim.diagnostic.open_float, { desc = "Diagnostics Float" })
 end
 
-local function setup_java_keymaps()
-    local java = require("java")
-    vim.keymap.set("n", "<Leader>wb", function() java.build.build_workspace() end,
-        { desc = "Build", buffer = true })
-    vim.keymap.set("n", "<Leader>wc", function() java.build.clean_workspace() end,
-        { desc = "Clean", buffer = true })
-    vim.keymap.set("n", "<Leader>ra", function() java.runner.built_in.run_app({}) end,
-        { desc = "App", buffer = true })
-    vim.keymap.set("n", "<Leader>rs", function() java.runner.built_in.stop_app() end,
-        { desc = "Stop", buffer = true })
-    vim.keymap.set("n", "<Leader>rl", function() java.runner.built_in.toggle_logs() end,
-        { desc = "Logs", buffer = true })
-    vim.keymap.set("n", "<Leader>tc", function() java.test.run_current_class() end,
-        { desc = "Class", buffer = true })
-    vim.keymap.set("n", "<Leader>tm", function() java.test.run_current_method() end,
-        { desc = "Method", buffer = true })
-    vim.keymap.set("n", "<Leader>tr", function() java.test.view_last_report() end,
-        { desc = "Report", buffer = true })
-    vim.keymap.set("n", "<Leader>tdc", function() java.test.debug_current_class() end,
-        { desc = "Class", buffer = true })
-    vim.keymap.set("n", "<Leader>tdm", function() java.test.debug_current_method() end,
-        { desc = "Method", buffer = true })
-    vim.keymap.set("n", "<Leader>xv", function() java.refactor.extract_variable() end,
-        { desc = "Variable", buffer = true })
-    vim.keymap.set("n", "<Leader>xa", function() java.refactor.extract_variable_all_occurrence() end,
-        { desc = "Variable All", buffer = true })
-    vim.keymap.set("n", "<Leader>xc", function() java.refactor.extract_constant() end,
-        { desc = "Constant", buffer = true })
-    vim.keymap.set("n", "<Leader>xf", function() java.refactor.extract_field() end,
-        { desc = "Field", buffer = true })
-    vim.keymap.set("n", "<Leader>xm", function() java.refactor.extract_method() end,
-        { desc = "Method", buffer = true })
-end
-
 return {
     {
         "mason-org/mason.nvim",
@@ -106,9 +53,7 @@ return {
             automatic_installation = true,
             handlers = {
                 function(server_name)
-                    if server_name ~= "jdtls" then
-                        vim.lsp.enable(server_name)
-                    end
+                    vim.lsp.enable(server_name)
                 end
             }
         }
@@ -119,18 +64,13 @@ return {
             "ibhagwan/fzf-lua",
             "saghen/blink.cmp",
             "mason-org/mason-lspconfig.nvim",
-            "nvim-java/nvim-java",
         },
         config = function()
             vim.lsp.config("*", require("blink.cmp").get_lsp_capabilities())
-            setup_jdtls()
             vim.api.nvim_create_autocmd("LspAttach", {
                 desc = "LSP attach",
                 callback = function(event)
                     setup_general_keymaps()
-                    if (vim.lsp.get_client_by_id(event.data.client_id).name == "jdtls") then
-                        setup_java_keymaps()
-                    end
                 end,
             })
         end,
