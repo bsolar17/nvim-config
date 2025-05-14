@@ -1,11 +1,11 @@
 if vim.fn.executable("jdtls") == 1 then
-    local path_to_mason_packages = os.getenv("XDG_DATA_HOME") .. "/nvim/mason/packages"
-    local path_to_java_debug = path_to_mason_packages .. "/java-debug-adapter"
-    local path_to_java_test = path_to_mason_packages .. "/java-test"
+    local path_to_mason_share = os.getenv("XDG_DATA_HOME") .. "/nvim/mason/share"
+    local path_to_java_debug = path_to_mason_share .. "/java-debug-adapter"
+    local path_to_java_test = path_to_mason_share .. "/java-test"
     local bundles = {
-        vim.fn.glob(path_to_java_debug .. "/extension/server/com.microsoft.java.debug.plugin-*.jar", true),
+        vim.fn.glob(path_to_java_debug .. "/com.microsoft.java.debug.plugin.jar", true),
     }
-    vim.list_extend(bundles, vim.split(vim.fn.glob(path_to_java_test .. "/extension/server/*.jar", true), "\n"))
+    vim.list_extend(bundles, vim.split(vim.fn.glob(path_to_java_test .. "/*.jar", true), "\n"))
     local config = {
         cmd = { "jdtls" },
         root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
