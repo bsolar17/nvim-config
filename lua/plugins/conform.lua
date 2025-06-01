@@ -1,5 +1,6 @@
 return {
     "stevearc/conform.nvim",
+    cond = not vim.g.vscode,
     opts = {
         default_format_opts = {
             lsp_format = "fallback",
