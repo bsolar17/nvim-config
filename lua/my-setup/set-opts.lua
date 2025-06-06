@@ -17,3 +17,5 @@ vim.opt.termguicolors = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.winborder = "rounded"
 vim.opt.signcolumn = "yes"
+vim.opt.timeout = false
+vim.opt.ttimeout = false
