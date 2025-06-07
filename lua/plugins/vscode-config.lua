@@ -71,6 +71,12 @@ return {
             { desc = "Rename" }
         )
         vim.keymap.set(
+            { "n", "v" },
+            "<Leader>ce",
+            function() vscode.action('github.copilot.chat.explain.palette') end,
+            { desc = "Explain" }
+        )
+        vim.keymap.set(
             "n",
             "<leader>fb",
             function() vscode.action('workbench.action.showAllEditors') end,
