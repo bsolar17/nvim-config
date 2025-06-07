@@ -1,8 +1,8 @@
 -- Function to chop down elements between brackets
 local function chop_brackets()
     local line_num = vim.fn.line(".")
-    local line = vim.fn.getline(line_num)
     local col = vim.fn.col(".")
+    local total_lines = vim.fn.line("$")
 
     -- Find the bracket pair that contains the cursor
     local bracket_pairs = {
@@ -11,79 +11,112 @@ local function chop_brackets()
         { open = "[", close = "]" }
     }
 
-    local function find_bracket_range(line, col, open_char, close_char)
-        local open_pos = nil
-        local close_pos = nil
+    local function find_multiline_bracket_range(start_line, start_col, open_char, close_char)
+        local open_line, open_col = nil, nil
+        local close_line, close_col = nil, nil
         local bracket_count = 0
 
-        -- Find the opening bracket to the left of cursor
-        for i = col, 1, -1 do
-            local char = line:sub(i, i)
-            if char == close_char then
-                bracket_count = bracket_count + 1
-            elseif char == open_char then
-                if bracket_count == 0 then
-                    open_pos = i
-                    break
-                else
-                    bracket_count = bracket_count - 1
+        -- Find opening bracket (search backwards from cursor)
+        for line_idx = start_line, 1, -1 do
+            local line = vim.fn.getline(line_idx)
+            local start_search = (line_idx == start_line) and start_col or #line
+
+            for col_idx = start_search, 1, -1 do
+                local char = line:sub(col_idx, col_idx)
+                if char == close_char then
+                    bracket_count = bracket_count + 1
+                elseif char == open_char then
+                    if bracket_count == 0 then
+                        open_line, open_col = line_idx, col_idx
+                        break
+                    else
+                        bracket_count = bracket_count - 1
+                    end
                 end
             end
+
+            if open_line then break end
         end
 
-        if not open_pos then return nil end
+        if not open_line then return nil end
 
-        -- Find the closing bracket to the right
+        -- Find closing bracket (search forwards from opening bracket)
         bracket_count = 0
-        for i = open_pos + 1, #line do
-            local char = line:sub(i, i)
-            if char == open_char then
-                bracket_count = bracket_count + 1
-            elseif char == close_char then
-                if bracket_count == 0 then
-                    close_pos = i
-                    break
-                else
-                    bracket_count = bracket_count - 1
+        for line_idx = open_line, total_lines do
+            local line = vim.fn.getline(line_idx)
+            local start_search = (line_idx == open_line) and (open_col + 1) or 1
+
+            for col_idx = start_search, #line do
+                local char = line:sub(col_idx, col_idx)
+                if char == open_char then
+                    bracket_count = bracket_count + 1
+                elseif char == close_char then
+                    if bracket_count == 0 then
+                        close_line, close_col = line_idx, col_idx
+                        break
+                    else
+                        bracket_count = bracket_count - 1
+                    end
                 end
             end
+
+            if close_line then break end
         end
 
-        return open_pos, close_pos
+        return open_line, open_col, close_line, close_col
     end
 
     -- Try to find any bracket pair
-    local open_pos, close_pos, open_char, close_char
+    local open_line, open_col, close_line, close_col, open_char, close_char
     for _, pair in ipairs(bracket_pairs) do
-        open_pos, close_pos = find_bracket_range(line, col, pair.open, pair.close)
-        if open_pos and close_pos then
+        open_line, open_col, close_line, close_col = find_multiline_bracket_range(line_num, col, pair.open, pair.close)
+        if open_line and close_line then
             open_char = pair.open
             close_char = pair.close
             break
         end
     end
 
-    if not open_pos or not close_pos then
+    if not open_line or not close_line then
         print("No bracket pair found around cursor")
         return
     end
 
-    -- Extract content between brackets
-    local content = line:sub(open_pos + 1, close_pos - 1)
+    -- Extract all content between brackets (across multiple lines)
+    local content_lines = {}
+    for i = open_line, close_line do
+        local line = vim.fn.getline(i)
+        if i == open_line and i == close_line then
+            -- Both brackets on same line
+            table.insert(content_lines, line:sub(open_col + 1, close_col - 1))
+        elseif i == open_line then
+            -- First line with opening bracket
+            table.insert(content_lines, line:sub(open_col + 1))
+        elseif i == close_line then
+            -- Last line with closing bracket
+            table.insert(content_lines, line:sub(1, close_col - 1))
+        else
+            -- Middle lines
+            table.insert(content_lines, line)
+        end
+    end
 
-    -- Skip if already multiline or empty
-    local trimmed_content = content:match("^%s*(.-)%s*$")
-    if content:match("\n") or trimmed_content == "" then
+    -- Join all content and split by commas
+    local full_content = table.concat(content_lines, " ")
+    local trimmed_content = full_content:match("^%s*(.-)%s*$")
+
+    if trimmed_content == "" then
         return
     end
 
-    -- Get indentation of current line
-    local indent = line:match("^%s*")
+    -- Get indentation of the opening bracket line
+    local opening_line = vim.fn.getline(open_line)
+    local indent = opening_line:match("^%s*")
     local inner_indent = indent .. "    " -- Add 4 spaces for inner content
 
     -- Split content by commas and trim whitespace
     local elements = {}
-    for element in content:gmatch("[^,]+") do
+    for element in full_content:gmatch("[^,]+") do
         local trimmed = element:match("^%s*(.-)%s*$")
         if trimmed ~= "" then
             table.insert(elements, trimmed)
@@ -92,7 +125,7 @@ local function chop_brackets()
 
     -- If no commas found, treat the whole content as one element
     if #elements == 0 then
-        local trimmed = content:match("^%s*(.-)%s*$")
+        local trimmed = full_content:match("^%s*(.-)%s*$")
         if trimmed ~= "" then
             elements = { trimmed }
         end
@@ -102,7 +135,7 @@ local function chop_brackets()
     local new_lines = {}
 
     -- Opening line: everything before opening bracket + opening bracket
-    local before_bracket = line:sub(1, open_pos - 1)
+    local before_bracket = opening_line:sub(1, open_col - 1)
     table.insert(new_lines, before_bracket .. open_char)
 
     -- Elements (each on its own line)
@@ -112,18 +145,28 @@ local function chop_brackets()
     end
 
     -- Closing line: closing bracket + everything after
-    local after_bracket = line:sub(close_pos + 1)
+    local closing_line = vim.fn.getline(close_line)
+    local after_bracket = closing_line:sub(close_col + 1)
     table.insert(new_lines, indent .. close_char .. after_bracket)
 
-    -- Replace the current line with new lines
-    vim.fn.setline(line_num, new_lines[1])
-    for i = 2, #new_lines do
-        vim.fn.append(line_num + i - 2, new_lines[i])
+    -- Delete the old lines and insert new ones
+    if open_line == close_line then
+        -- Single line case
+        vim.fn.setline(open_line, new_lines[1])
+        for i = 2, #new_lines do
+            vim.fn.append(open_line + i - 2, new_lines[i])
+        end
+    else
+        -- Multi-line case: delete old lines and insert new ones
+        vim.fn.deletebufline("", open_line, close_line)
+        for i = 1, #new_lines do
+            vim.fn.append(open_line + i - 2, new_lines[i])
+        end
     end
 
     -- Position cursor on the first element
     if #elements > 0 then
-        vim.fn.cursor(line_num + 1, #inner_indent + 1)
+        vim.fn.cursor(open_line + 1, #inner_indent + 1)
     end
 end
 
