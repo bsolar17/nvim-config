@@ -1,5 +1,5 @@
 -- Function to chop down elements between brackets
-local function chop_brackets()
+local function chop_down()
     local line_num = vim.fn.line(".")
     local col = vim.fn.col(".")
     local total_lines = vim.fn.line("$")
@@ -210,6 +210,6 @@ end
 vim.keymap.set(
     "n",
     "<Leader>cc",
-    chop_brackets,
+    chop_down,
     { desc = "Chop Down" }
 )
