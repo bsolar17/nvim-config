@@ -131,23 +131,55 @@ local function chop_brackets()
         end
     end
 
+    -- Check if already fully chopped down (each element on its own line)
+    local is_fully_chopped = false
+    if open_line ~= close_line and close_line - open_line >= #elements then
+        is_fully_chopped = true
+        -- Verify each element is on its own line with proper indentation
+        for i = 1, #elements do
+            local element_line_num = open_line + i
+            if element_line_num < close_line then
+                local element_line = vim.fn.getline(element_line_num)
+                local expected_element = elements[i]
+                local expected_comma = (i < #elements) and "," or ""
+                local expected_line = inner_indent .. expected_element .. expected_comma
+                if element_line ~= expected_line then
+                    is_fully_chopped = false
+                    break
+                end
+            else
+                is_fully_chopped = false
+                break
+            end
+        end
+    end
+
     -- Build new lines
     local new_lines = {}
 
-    -- Opening line: everything before opening bracket + opening bracket
-    local before_bracket = opening_line:sub(1, open_col - 1)
-    table.insert(new_lines, before_bracket .. open_char)
+    if is_fully_chopped then
+        -- Toggle back to single line
+        local before_bracket = opening_line:sub(1, open_col - 1)
+        local closing_line = vim.fn.getline(close_line)
+        local after_bracket = closing_line:sub(close_col + 1)
+        local elements_str = table.concat(elements, ", ")
+        table.insert(new_lines, before_bracket .. open_char .. elements_str .. close_char .. after_bracket)
+    else
+        -- Chop down to multiple lines
+        local before_bracket = opening_line:sub(1, open_col - 1)
+        table.insert(new_lines, before_bracket .. open_char)
 
-    -- Elements (each on its own line)
-    for i, element in ipairs(elements) do
-        local comma = (i < #elements) and "," or ""
-        table.insert(new_lines, inner_indent .. element .. comma)
+        -- Elements (each on its own line)
+        for i, element in ipairs(elements) do
+            local comma = (i < #elements) and "," or ""
+            table.insert(new_lines, inner_indent .. element .. comma)
+        end
+
+        -- Closing line: closing bracket + everything after
+        local closing_line = vim.fn.getline(close_line)
+        local after_bracket = closing_line:sub(close_col + 1)
+        table.insert(new_lines, indent .. close_char .. after_bracket)
     end
-
-    -- Closing line: closing bracket + everything after
-    local closing_line = vim.fn.getline(close_line)
-    local after_bracket = closing_line:sub(close_col + 1)
-    table.insert(new_lines, indent .. close_char .. after_bracket)
 
     -- Delete the old lines and insert new ones
     if open_line == close_line then
@@ -164,8 +196,12 @@ local function chop_brackets()
         end
     end
 
-    -- Position cursor on the first element
-    if #elements > 0 then
+    -- Position cursor appropriately
+    if is_fully_chopped then
+        -- When toggling back to single line, position cursor at the end of the content
+        vim.fn.cursor(open_line, #new_lines[1])
+    elseif #elements > 0 then
+        -- When chopping down, position cursor on the first element
         vim.fn.cursor(open_line + 1, #inner_indent + 1)
     end
 end
@@ -175,5 +211,5 @@ vim.keymap.set(
     "n",
     "<Leader>cc",
     chop_brackets,
-    { desc = "Chop brackets" }
+    { desc = "Chop Down" }
 )
