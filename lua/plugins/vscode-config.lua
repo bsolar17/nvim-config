@@ -60,6 +60,12 @@ return {
         )
         vim.keymap.set(
             "n",
+            "<Leader>gs",
+            function() vscode.action('workbench.action.gotoSymbol') end,
+            { desc = "Document Symbols" }
+        )
+        vim.keymap.set(
+            "n",
             "<Leader>cr",
             function() vscode.action('editor.action.rename') end,
             { desc = "Rename" }
