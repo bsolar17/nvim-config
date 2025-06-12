@@ -7,143 +7,143 @@ return {
         vim.keymap.set(
             { "n", "v" },
             "<leader>t",
-            function() vscode.action('workbench.action.terminal.toggleTerminal') end,
+            function() vscode.action("workbench.action.terminal.toggleTerminal") end,
             { desc = "Terminal" }
         )
         vim.keymap.set(
             { "n", "v" },
             "<Leader>ca",
-            function() vscode.action('editor.action.codeAction') end,
+            function() vscode.action("editor.action.codeAction") end,
             { desc = "Actions" }
         )
         vim.keymap.set(
             "n",
             "<Leader>ch",
-            function() vscode.action('editor.action.showHover') end,
+            function() vscode.action("editor.action.showHover") end,
             { desc = "Hover" }
         )
         vim.keymap.set(
             "n",
             "<leader>cf",
-            function() vscode.action('editor.action.formatDocument') end,
+            function() vscode.action("editor.action.formatDocument") end,
             { desc = "Format" }
         )
         vim.keymap.set(
             "n",
             "<Leader>gd",
-            function() vscode.action('editor.action.revealDefinition') end,
+            function() vscode.action("editor.action.revealDefinition") end,
             { desc = "Definitions" }
         )
         vim.keymap.set(
             "n",
             "<Leader>gD",
-            function() vscode.action('editor.action.goToDeclaration') end,
+            function() vscode.action("editor.action.goToDeclaration") end,
             { desc = "Declaration" }
         )
         vim.keymap.set(
             "n",
             "<Leader>gi",
-            function() vscode.action('editor.action.goToImplementation') end,
+            function() vscode.action("editor.action.goToImplementation") end,
             { desc = "Implementations" }
         )
         vim.keymap.set(
             "n",
             "<Leader>gt",
-            function() vscode.action('editor.action.goToTypeDefinition') end,
+            function() vscode.action("editor.action.goToTypeDefinition") end,
             { desc = "Type Definitions" }
         )
         vim.keymap.set(
             "n",
             "<Leader>gr",
-            function() vscode.action('editor.action.goToReferences') end,
+            function() vscode.action("editor.action.goToReferences") end,
             { desc = "References" }
         )
         vim.keymap.set(
             "n",
             "<Leader>gs",
-            function() vscode.action('workbench.action.gotoSymbol') end,
+            function() vscode.action("workbench.action.gotoSymbol") end,
             { desc = "Document Symbols" }
         )
         vim.keymap.set(
             "n",
             "<Leader>cr",
-            function() vscode.action('editor.action.rename') end,
+            function() vscode.action("editor.action.rename") end,
             { desc = "Rename" }
         )
         vim.keymap.set(
             { "n", "v" },
             "<Leader>ce",
-            function() vscode.action('github.copilot.chat.explain.palette') end,
+            function() vscode.action("github.copilot.chat.explain.palette") end,
             { desc = "Explain" }
         )
         vim.keymap.set(
             "n",
             "<Leader>co",
-            function() vscode.action('editor.action.organizeImports') end,
+            function() vscode.action("editor.action.organizeImports") end,
             { desc = "Organize Imports" }
         )
         vim.keymap.set(
             "n",
             "<leader>fb",
-            function() vscode.action('workbench.action.showAllEditors') end,
+            function() vscode.action("workbench.action.showAllEditors") end,
             { desc = "Buffers" }
         )
         vim.keymap.set(
             "n",
             "<leader>ff",
-            function() vscode.action('workbench.action.quickOpen') end,
+            function() vscode.action("workbench.action.quickOpen") end,
             { desc = "Files" }
         )
         vim.keymap.set(
             "n", "<leader>fl",
-            function() vscode.action('workbench.action.gotoLine') end,
+            function() vscode.action("workbench.action.gotoLine") end,
             { desc = "Lines" }
         )
         vim.keymap.set(
             "n",
             "<leader>fL",
-            function() vscode.action('workbench.action.gotoLine') end,
+            function() vscode.action("workbench.action.gotoLine") end,
             { desc = "Lines (All Buffers)" })
         vim.keymap.set(
             "n",
             "<leader>fc",
-            function() vscode.action('git.openChange') end,
+            function() vscode.action("git.openChange") end,
             { desc = "Git Commit Files" }
         ) -- Closest: open changes
         vim.keymap.set(
             "n",
             "<leader>fm",
-            function() vscode.action('git.openFile') end,
+            function() vscode.action("git.openFile") end,
             { desc = "Git Modified" }
         ) -- Closest: open file in git
         vim.keymap.set(
             "n",
             "<leader>fo",
-            function() vscode.action('workbench.action.openRecent') end,
+            function() vscode.action("workbench.action.openRecent") end,
             { desc = "Old Files" }
         )
         vim.keymap.set(
             "n",
             "<leader>fp",
-            function() vscode.action('workbench.action.showCommands') end,
+            function() vscode.action("workbench.action.showCommands") end,
             { desc = "Pickers" }
         )
         vim.keymap.set(
             "n",
             "<leader>fG",
-            function() vscode.action('workbench.action.findInFiles') end,
+            function() vscode.action("workbench.action.findInFiles") end,
             { desc = "Grep" }
         )
         vim.keymap.set(
             "n",
             "<leader>rc",
-            function() vscode.action('testing.runCurrentFile') end,
+            function() vscode.action("testing.runCurrentFile") end,
             { desc = "Class" }
         )
         vim.keymap.set(
             "n",
             "<leader>rf",
-            function() vscode.action('testing.runFailed') end,
+            function() vscode.action("testing.runFailed") end,
             { desc = "Rerun Failed Tests" }
         )
     end,
