@@ -78,6 +78,12 @@ return {
         )
         vim.keymap.set(
             "n",
+            "<Leader>co",
+            function() vscode.action('editor.action.organizeImports') end,
+            { desc = "Organize Imports" }
+        )
+        vim.keymap.set(
+            "n",
             "<leader>fb",
             function() vscode.action('workbench.action.showAllEditors') end,
             { desc = "Buffers" }
