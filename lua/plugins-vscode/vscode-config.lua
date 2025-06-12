@@ -1,6 +1,5 @@
 return {
     "vscode-config",
-    cond = vim.g.vscode ~= nil,
     dir = vim.fn.stdpath("config"),
     config = function()
         local vscode = require("vscode")

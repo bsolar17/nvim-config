@@ -1,7 +1,6 @@
 return {
     {
         "zbirenbaum/copilot.lua",
-        cond = not vim.g.vscode,
         lazy = true,
         event = { "InsertEnter", "CmdlineEnter" },
         opts = {
@@ -11,7 +10,6 @@ return {
     },
     {
         "CopilotC-Nvim/CopilotChat.nvim",
-        cond = not vim.g.vscode,
         branch = "main",
         dependencies = {
             { "zbirenbaum/copilot.lua" },

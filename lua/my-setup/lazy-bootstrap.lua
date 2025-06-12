@@ -20,4 +20,18 @@ local opts = {
     }
 }
 
-require("lazy").setup("plugins", opts)
+if vim.g.vscode then
+    require("lazy").setup(
+        {
+            { import = "plugins-all" },
+            { import = "plugins-vscode" },
+        },
+        opts)
+else
+    require("lazy").setup(
+        {
+            { import = "plugins-all" },
+            { import = "plugins-nvim" },
+        },
+        opts)
+end

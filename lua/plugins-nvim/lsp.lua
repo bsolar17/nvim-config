@@ -95,13 +95,11 @@ end
 return {
     {
         "mason-org/mason.nvim",
-        cond = not vim.g.vscode,
         lazy = true,
         opts = {},
     },
     {
         "mason-org/mason-lspconfig.nvim",
-        cond = not vim.g.vscode,
         lazy = true,
         opts = {
             automatic_installation = true,
@@ -116,7 +114,6 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        cond = not vim.g.vscode,
         dependencies = {
             "ibhagwan/fzf-lua",
             "saghen/blink.cmp",
