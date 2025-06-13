@@ -4,14 +4,29 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     config = function()
-        vim.keymap.set("n", "<leader>e", vim.cmd.NvimTreeToggle, { desc = "File Explorer" })
+        vim.keymap.set(
+            "n",
+            "<leader>e",
+            vim.cmd.NvimTreeToggle,
+            { desc = "File Explorer" }
+        )
         local function my_on_attach(bufnr)
             local api = require("nvim-tree.api")
 
             api.config.mappings.default_on_attach(bufnr)
 
-            vim.keymap.set("n", "<A-Right>", "<cmd>NvimTreeResize +10<CR>", { desc = "Widen nvim-tree" })
-            vim.keymap.set("n", "<A-Left>", "<cmd>NvimTreeResize -10<CR>", { desc = "Narrow nvim-tree" })
+            vim.keymap.set(
+                "n",
+                "<A-Right>",
+                "<cmd>NvimTreeResize +10<CR>",
+                { desc = "Widen nvim-tree" }
+            )
+            vim.keymap.set(
+                "n",
+                "<A-Left>",
+                "<cmd>NvimTreeResize -10<CR>",
+                { desc = "Narrow nvim-tree" }
+            )
         end
 
         vim.g.loaded_netrw = 1
