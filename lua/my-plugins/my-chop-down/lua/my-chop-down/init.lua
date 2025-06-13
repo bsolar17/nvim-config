@@ -116,16 +116,44 @@ function M.chop_down()
     local indent = opening_line:match("^%s*")
     local inner_indent = indent .. "    " -- Add 4 spaces for inner content
 
-    -- Split content by commas and trim whitespace
+    -- Split content by commas while respecting nested brackets
     local elements = {}
-    for element in full_content:gmatch("[^,]+") do
-        local trimmed = element:match("^%s*(.-)%s*$")
+    local current_element = ""
+    local bracket_depth = 0
+    local i = 1
+
+    while i <= #full_content do
+        local char = full_content:sub(i, i)
+
+        if char == "(" or char == "{" or char == "[" then
+            bracket_depth = bracket_depth + 1
+            current_element = current_element .. char
+        elseif char == ")" or char == "}" or char == "]" then
+            bracket_depth = bracket_depth - 1
+            current_element = current_element .. char
+        elseif char == "," and bracket_depth == 0 then
+            -- Only split on commas at the top level
+            local trimmed = current_element:match("^%s*(.-)%s*$")
+            if trimmed ~= "" then
+                table.insert(elements, trimmed)
+            end
+            current_element = ""
+        else
+            current_element = current_element .. char
+        end
+
+        i = i + 1
+    end
+
+    -- Don't forget the last element
+    if current_element ~= "" then
+        local trimmed = current_element:match("^%s*(.-)%s*$")
         if trimmed ~= "" then
             table.insert(elements, trimmed)
         end
     end
 
-    -- If no commas found, treat the whole content as one element
+    -- If no elements found, treat the whole content as one element
     if #elements == 0 then
         local trimmed = full_content:match("^%s*(.-)%s*$")
         if trimmed ~= "" then
