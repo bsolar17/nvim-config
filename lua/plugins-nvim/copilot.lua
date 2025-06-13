@@ -17,7 +17,6 @@ return {
         },
         build = "make tiktoken",
         opts = {
-            auto_insert_mode = true,
             model = "claude-sonnet-4",
         },
         config = function(_, opts)
