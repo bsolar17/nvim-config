@@ -84,26 +84,21 @@ function M.chop_down()
         return
     end
 
-    -- Extract all content between brackets (across multiple lines)
+    -- Extract content between brackets
     local content_lines = {}
-    for i = open_line, close_line do
-        local line = vim.fn.getline(i)
-        if i == open_line and i == close_line then
-            -- Both brackets on same line
+    for line_idx = open_line, close_line do
+        local line = vim.fn.getline(line_idx)
+        if line_idx == open_line and line_idx == close_line then
             table.insert(content_lines, line:sub(open_col + 1, close_col - 1))
-        elseif i == open_line then
-            -- First line with opening bracket
+        elseif line_idx == open_line then
             table.insert(content_lines, line:sub(open_col + 1))
-        elseif i == close_line then
-            -- Last line with closing bracket
+        elseif line_idx == close_line then
             table.insert(content_lines, line:sub(1, close_col - 1))
         else
-            -- Middle lines
             table.insert(content_lines, line)
         end
     end
 
-    -- Join all content and split by commas
     local full_content = table.concat(content_lines, " ")
     local trimmed_content = full_content:match("^%s*(.-)%s*$")
 
@@ -111,19 +106,18 @@ function M.chop_down()
         return
     end
 
-    -- Get indentation of the opening bracket line
+    -- Get indentation
     local opening_line = vim.fn.getline(open_line)
     local indent = opening_line:match("^%s*")
-    local inner_indent = indent .. "    " -- Add 4 spaces for inner content
+    local inner_indent = indent .. "    "
 
     -- Split content by commas while respecting nested brackets
     local elements = {}
     local current_element = ""
     local bracket_depth = 0
-    local i = 1
 
-    while i <= #full_content do
-        local char = full_content:sub(i, i)
+    for char_idx = 1, #full_content do
+        local char = full_content:sub(char_idx, char_idx)
 
         if char == "(" or char == "{" or char == "[" then
             bracket_depth = bracket_depth + 1
@@ -132,7 +126,6 @@ function M.chop_down()
             bracket_depth = bracket_depth - 1
             current_element = current_element .. char
         elseif char == "," and bracket_depth == 0 then
-            -- Only split on commas at the top level
             local trimmed = current_element:match("^%s*(.-)%s*$")
             if trimmed ~= "" then
                 table.insert(elements, trimmed)
@@ -141,11 +134,9 @@ function M.chop_down()
         else
             current_element = current_element .. char
         end
-
-        i = i + 1
     end
 
-    -- Don't forget the last element
+    -- Add last element
     if current_element ~= "" then
         local trimmed = current_element:match("^%s*(.-)%s*$")
         if trimmed ~= "" then
@@ -153,7 +144,7 @@ function M.chop_down()
         end
     end
 
-    -- If no elements found, treat the whole content as one element
+    -- If no elements found, treat whole content as one element
     if #elements == 0 then
         local trimmed = full_content:match("^%s*(.-)%s*$")
         if trimmed ~= "" then
@@ -161,18 +152,16 @@ function M.chop_down()
         end
     end
 
-    -- Check if already fully chopped down (each element on its own line)
+    -- Check if already fully chopped down
     local is_fully_chopped = false
     if open_line ~= close_line and close_line - open_line >= #elements then
         is_fully_chopped = true
-        -- Verify each element is on its own line with proper indentation
-        for i = 1, #elements do
-            local element_line_num = open_line + i
+        for elem_idx = 1, #elements do
+            local element_line_num = open_line + elem_idx
             if element_line_num < close_line then
                 local element_line = vim.fn.getline(element_line_num)
-                local expected_element = elements[i]
-                local expected_comma = (i < #elements) and "," or ""
-                local expected_line = inner_indent .. expected_element .. expected_comma
+                local expected_comma = (elem_idx < #elements) and "," or ""
+                local expected_line = inner_indent .. elements[elem_idx] .. expected_comma
                 if element_line ~= expected_line then
                     is_fully_chopped = false
                     break
@@ -199,39 +188,33 @@ function M.chop_down()
         local before_bracket = opening_line:sub(1, open_col - 1)
         table.insert(new_lines, before_bracket .. open_char)
 
-        -- Elements (each on its own line)
-        for i, element in ipairs(elements) do
-            local comma = (i < #elements) and "," or ""
+        for elem_idx, element in ipairs(elements) do
+            local comma = (elem_idx < #elements) and "," or ""
             table.insert(new_lines, inner_indent .. element .. comma)
         end
 
-        -- Closing line: closing bracket + everything after
         local closing_line = vim.fn.getline(close_line)
         local after_bracket = closing_line:sub(close_col + 1)
         table.insert(new_lines, indent .. close_char .. after_bracket)
     end
 
-    -- Delete the old lines and insert new ones
+    -- Replace lines
     if open_line == close_line then
-        -- Single line case
         vim.fn.setline(open_line, new_lines[1])
-        for i = 2, #new_lines do
-            vim.fn.append(open_line + i - 2, new_lines[i])
+        for new_idx = 2, #new_lines do
+            vim.fn.append(open_line + new_idx - 2, new_lines[new_idx])
         end
     else
-        -- Multi-line case: delete old lines and insert new ones
         vim.fn.deletebufline("", open_line, close_line)
-        for i = 1, #new_lines do
-            vim.fn.append(open_line + i - 2, new_lines[i])
+        for new_idx = 1, #new_lines do
+            vim.fn.append(open_line + new_idx - 2, new_lines[new_idx])
         end
     end
 
-    -- Position cursor appropriately
+    -- Position cursor
     if is_fully_chopped then
-        -- When toggling back to single line, position cursor at the end of the content
         vim.fn.cursor(open_line, #new_lines[1])
     elseif #elements > 0 then
-        -- When chopping down, position cursor on the first element
         vim.fn.cursor(open_line + 1, #inner_indent + 1)
     end
 end
