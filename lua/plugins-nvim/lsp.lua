@@ -83,7 +83,7 @@ local function setup_general_keymaps()
     vim.keymap.set(
         "n",
         "<Leader>gS",
-        fzf.lsp_workspace_symbols,
+        fzf.lsp_live_workspace_symbols,
         { desc = "Workspace Symbols", buffer = true }
     )
     vim.keymap.set(
