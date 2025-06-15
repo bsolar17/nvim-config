@@ -175,14 +175,12 @@ return {
         lazy = true,
         opts = {
             automatic_installation = true,
-            handlers = {
-                function(server_name)
-                    if server_name ~= "jdtls" then
-                        vim.lsp.enable(server_name)
-                    end
-                end
-            }
-        }
+            automatic_enable = {
+                exclude = {
+                    "jdtls",
+                },
+            },
+        },
     },
     {
         "neovim/nvim-lspconfig",
