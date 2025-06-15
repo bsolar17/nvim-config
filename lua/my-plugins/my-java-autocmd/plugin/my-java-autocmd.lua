@@ -35,6 +35,7 @@ local function get_bundles(path_to_mason_share)
         vim.fn.glob(path_to_java_debug .. "/com.microsoft.java.debug.plugin.jar", true),
     }
     vim.list_extend(bundles, vim.split(vim.fn.glob(path_to_java_test .. "/*.jar", true), "\n"))
+    vim.list_extend(bundles, require("spring_boot").java_extensions())
     return bundles
 end
 
