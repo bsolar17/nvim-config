@@ -17,6 +17,11 @@ return {
         fzf_opts = {
             ["--cycle"] = true,
         },
+        winopts = {
+            preview = {
+                wrap = true,
+            },
+        },
     },
     config = function(_, opts)
         local fzf = require("fzf-lua")
