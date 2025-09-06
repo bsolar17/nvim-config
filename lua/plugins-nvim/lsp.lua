@@ -186,11 +186,9 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             "ibhagwan/fzf-lua",
-            "saghen/blink.cmp",
             "mason-org/mason-lspconfig.nvim",
         },
         config = function()
-            vim.lsp.config("*", require("blink.cmp").get_lsp_capabilities())
             vim.api.nvim_create_autocmd("LspAttach", {
                 desc = "LSP attach",
                 callback = function(event)
