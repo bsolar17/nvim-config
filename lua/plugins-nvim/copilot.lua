@@ -23,6 +23,14 @@ return {
                 chat = {
                     adapter = "copilot",
                     model = "claude-sonnet-4",
+                    tools = {
+                        opts = {
+                            default_tools = {
+                                "full_stack_dev",
+                                "neovim",
+                            },
+                        },
+                    },
                 },
                 inline = {
                     adapter = "copilot",
