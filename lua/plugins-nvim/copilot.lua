@@ -1,47 +1,51 @@
 return {
-    {
-        "zbirenbaum/copilot.lua",
-        lazy = true,
-        event = { "InsertEnter", "CmdlineEnter" },
-        opts = {
-            suggestion = { enabled = false },
-            panel = { enabled = false },
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
+    opts = {
+        strategies = {
+            chat = {
+                adapter = "copilot",
+                model = "claude-sonnet-4",
+            },
+            inline = {
+                adapter = "copilot",
+                model = "claude-sonnet-4",
+            },
+            cmd = {
+                adapter = "copilot",
+                model = "claude-sonnet-4",
+            }
+        },
+        display = {
+            chat = {
+                intro_message = "",
+            },
         },
     },
-    {
-        "CopilotC-Nvim/CopilotChat.nvim",
-        branch = "main",
-        dependencies = {
-            { "zbirenbaum/copilot.lua" },
-            { "nvim-lua/plenary.nvim" },
-        },
-        build = "make tiktoken",
-        opts = {
-            model = "claude-sonnet-4",
-        },
-        config = function(_, opts)
-            require("CopilotChat").setup(opts)
-            vim.keymap.set(
-                "n",
-                "<Leader>C",
-                "<cmd>CopilotChatToggle<cr>",
-                { desc = "Copilot" }
-            )
-            vim.keymap.set(
-                "v",
-                "<Leader>ce",
-                "<cmd>CopilotChatExplain<cr>",
-                { desc = "Explain" }
-            )
-            vim.keymap.set(
-                "n",
-                "<Leader>ce",
-                function()
-                    vim.cmd("normal! V")
-                    vim.cmd("CopilotChatExplain")
-                end,
-                { desc = "Explain" }
-            )
-        end,
-    },
+    config = function(_, opts)
+        require("codecompanion").setup(opts)
+        vim.keymap.set(
+            "n",
+            "<Leader>C",
+            "<cmd>CodeCompanionChat Toggle<cr>",
+            { desc = "Copilot" }
+        )
+        vim.keymap.set(
+            "v",
+            "<Leader>ce",
+            "<cmd>CodeCompanion /explain<cr>",
+            { desc = "Explain" }
+        )
+        vim.keymap.set(
+            "n",
+            "<Leader>ce",
+            function()
+                vim.cmd("normal! V")
+                vim.cmd("CodeCompanion /explain")
+            end,
+            { desc = "Explain" }
+        )
+    end,
 }
