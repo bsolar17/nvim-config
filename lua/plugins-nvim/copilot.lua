@@ -61,9 +61,9 @@ return {
             require("codecompanion").setup(opts)
             vim.keymap.set(
                 "n",
-                "<Leader>C",
+                "<Leader>cc",
                 "<cmd>CodeCompanionChat Toggle<cr>",
-                { desc = "Copilot" }
+                { desc = "Chat" }
             )
             vim.keymap.set(
                 "v",
