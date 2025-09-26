@@ -102,6 +102,12 @@ return {
         )
         vim.keymap.set(
             "n",
+            "<leader>fq",
+            fzf.quickfix,
+            { desc = "Quickfix" }
+        )
+        vim.keymap.set(
+            "n",
             "<leader>fG",
             fzf.live_grep,
             { desc = "Grep" }
