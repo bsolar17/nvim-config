@@ -3,6 +3,29 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
     },
+    keys = {
+        {
+            mode = "n",
+            "<Leader>cc",
+            "<cmd>CodeCompanionChat Toggle<cr>",
+            desc = "Chat",
+        },
+        {
+            mode = "v",
+            "<Leader>ce",
+            "<cmd>CodeCompanion /explain<cr>",
+            desc = "Explain",
+        },
+        {
+            mode = "n",
+            "<Leader>ce",
+            function()
+                vim.cmd("normal! V")
+                vim.cmd("CodeCompanion /explain")
+            end,
+            desc = "Explain",
+        },
+    },
     opts = {
         strategies = {
             chat = {
@@ -32,28 +55,4 @@ return {
             },
         },
     },
-    config = function(_, opts)
-        require("codecompanion").setup(opts)
-        vim.keymap.set(
-            "n",
-            "<Leader>cc",
-            "<cmd>CodeCompanionChat Toggle<cr>",
-            { desc = "Chat" }
-        )
-        vim.keymap.set(
-            "v",
-            "<Leader>ce",
-            "<cmd>CodeCompanion /explain<cr>",
-            { desc = "Explain" }
-        )
-        vim.keymap.set(
-            "n",
-            "<Leader>ce",
-            function()
-                vim.cmd("normal! V")
-                vim.cmd("CodeCompanion /explain")
-            end,
-            { desc = "Explain" }
-        )
-    end,
 }
