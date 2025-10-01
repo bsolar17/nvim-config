@@ -35,7 +35,6 @@ return {
                     opts = {
                         default_tools = {
                             "full_stack_dev",
-                            "neovim",
                         },
                     },
                 },
