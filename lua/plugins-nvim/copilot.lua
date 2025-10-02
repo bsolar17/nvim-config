@@ -1,9 +1,25 @@
+local function wait_for_mcphub()
+    local max_wait_ms = 10000
+    local interval_ms = 100
+    local waited_ms = 0
+    local mcphub = require("mcphub")
+    while waited_ms < max_wait_ms do
+        if mcphub.get_state():is_connected() then
+            return
+        end
+        vim.wait(interval_ms)
+        waited_ms = waited_ms + interval_ms
+    end
+    vim.notify("Timed out waiting for MCPHub", vim.log.levels.WARN)
+end
+
 return {
     {
         "ravitemer/mcphub.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
+        lazy = true,
         build = "bundled_build.lua",
         opts = {
             use_bundled_binary = true,
@@ -15,24 +31,31 @@ return {
             "nvim-lua/plenary.nvim",
             "ravitemer/mcphub.nvim",
         },
-        lazy = false,
+        lazy = true,
         keys = {
             {
                 mode = "n",
                 "<Leader>cc",
-                "<cmd>CodeCompanionChat Toggle<cr>",
+                function()
+                    wait_for_mcphub()
+                    vim.cmd("CodeCompanionChat Toggle")
+                end,
                 desc = "Chat",
             },
             {
                 mode = "v",
                 "<Leader>ce",
-                "<cmd>CodeCompanion /explain<cr>",
+                function()
+                    wait_for_mcphub()
+                    vim.cmd("CodeCompanion /explain")
+                end,
                 desc = "Explain",
             },
             {
                 mode = "n",
                 "<Leader>ce",
                 function()
+                    wait_for_mcphub()
                     vim.cmd("normal! V")
                     vim.cmd("CodeCompanion /explain")
                 end,
