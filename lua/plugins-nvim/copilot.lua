@@ -5,11 +5,9 @@ return {
             "nvim-lua/plenary.nvim",
         },
         build = "bundled_build.lua",
-        config = function()
-            require("mcphub").setup({
-                use_bundled_binary = true,
-            })
-        end,
+        opts = {
+            use_bundled_binary = true,
+        }
     },
     {
         "olimorris/codecompanion.nvim",
