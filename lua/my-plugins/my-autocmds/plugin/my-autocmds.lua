@@ -11,12 +11,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "xml",
-    callback = function()
-        vim.api.nvim_command("filetype indent off")
-    end,
-})
-vim.api.nvim_create_autocmd("FileType", {
   pattern = "sql",
   callback = function()
     vim.bo.omnifunc = ""
