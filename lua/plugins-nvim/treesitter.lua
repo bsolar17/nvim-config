@@ -12,8 +12,17 @@ return {
             indent = {
                 enable = true,
             },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "<A-Up>",
+                    node_incremental = "<A-Up>",
+                    scope_incremental = "<A-Left>",
+                    node_decremental = "<A-Down>",
+                },
+            },
         },
-        config = function (_, opts)
+        config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
         end
     },
