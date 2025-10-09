@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 local opts = {
     checker = {
         enabled = true,
-        frequency = 86400, -- 24h
+        frequency = 604800, -- 7 days
     },
 }
 
