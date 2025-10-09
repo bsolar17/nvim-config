@@ -13,11 +13,9 @@ vim.opt.rtp:prepend(lazypath)
 
 local opts = {
     checker = {
-        enabled = false,
-        notify = true,
-        frequency = 86400,
-        check_pinned = true,
-    }
+        enabled = true,
+        frequency = 86400, -- 24h
+    },
 }
 
 if vim.g.vscode then
