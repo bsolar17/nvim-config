@@ -12,7 +12,7 @@ return {
                 { "<leader>G",  group = "Git" },
                 { "<leader>b",  group = "Buffers" },
                 { "<leader>c",  group = "Code" },
-                { "<leader>d",  group = "Debug" },
+                { "<leader>d",  group = "Diff" },
                 { "<leader>f",  group = "Find" },
                 { "<leader>g",  group = "Go" },
                 { "<leader>h",  group = "Harpoon" },
