@@ -8,17 +8,13 @@ return {
         {
             mode = "n",
             "<Leader>cc",
-            function()
-                vim.cmd("CodeCompanionChat Toggle")
-            end,
+            "<cmd>CodeCompanionChat Toggle<cr>",
             desc = "Chat",
         },
         {
             mode = "v",
             "<Leader>ce",
-            function()
-                vim.cmd("CodeCompanion /explain")
-            end,
+            "<cmd>CodeCompanion /explain<cr>",
             desc = "Explain",
         },
         {

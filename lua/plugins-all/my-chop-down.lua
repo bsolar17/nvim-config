@@ -7,7 +7,9 @@ return {
         vim.keymap.set(
             "n",
             "<Leader>cd",
-            function() chop_down.chop_down() end,
+            function()
+                chop_down.chop_down()
+            end,
             { desc = "Chop Down" }
         )
     end,

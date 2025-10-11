@@ -5,7 +5,7 @@ return {
         vim.keymap.set(
             "n",
             "<leader>u",
-            vim.cmd.UndotreeToggle,
+            "<cmd>UndotreeToggle<cr>",
             { desc = "Undotree" }
         )
     end

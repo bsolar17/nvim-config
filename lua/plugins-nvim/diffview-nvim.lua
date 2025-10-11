@@ -20,9 +20,7 @@ return {
         vim.keymap.set(
             "n",
             "<Leader>dh",
-            function()
-                vim.cmd.DiffviewFileHistory()
-            end,
+            "<cmd>DiffviewFileHistory<cr>",
             { desc = "History" }
         )
     end
