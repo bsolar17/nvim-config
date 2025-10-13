@@ -20,12 +20,6 @@ return {
         )
         vim.keymap.set(
             "n",
-            "<Leader>td",
-            function() require("trouble").toggle("document_diagnostics") end,
-            { desc = "Document Diagnostics" }
-        )
-        vim.keymap.set(
-            "n",
             "<Leader>tq",
             function() require("trouble").toggle("quickfix") end,
             { desc = "Quickfix" }
