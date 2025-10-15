@@ -1,53 +1,3 @@
-local function get_jdtls_cmd(path_to_mason_share)
-    local path_to_lombok = path_to_mason_share .. "/jdtls/lombok.jar"
-    local cmd = vim.fn.filereadable(path_to_lombok) == 1
-        and { "jdtls", "--jvm-arg=-javaagent:" .. path_to_lombok }
-        or { "jdtls" }
-    return cmd
-end
-
-local function get_jdtls_settings(path_to_mason_share)
-    local path_to_java_debug = path_to_mason_share .. "/java-debug-adapter"
-    local path_to_java_test = path_to_mason_share .. "/java-test"
-    local bundles = {
-        vim.fn.glob(path_to_java_debug .. "/com.microsoft.java.debug.plugin.jar", true),
-    }
-    local java_test_bundles = vim.split(vim.fn.glob(path_to_java_test .. "/*.jar", 1), "\n")
-    local excluded = {
-        "com.microsoft.java.test.runner-jar-with-dependencies.jar",
-        "jacocoagent.jar",
-    }
-    for _, java_test_jar in ipairs(java_test_bundles) do
-        local fname = vim.fn.fnamemodify(java_test_jar, ":t")
-        if not vim.tbl_contains(excluded, fname) then
-            table.insert(bundles, java_test_jar)
-        end
-    end
-    vim.list_extend(bundles, require("spring_boot").java_extensions())
-    local settings = {
-        java = {
-            maven = {
-                downloadSources = true,
-            },
-            codeGeneration = {
-                addFinalForNewDeclaration = "all",
-            },
-            initializationOptions = {
-                bundles = bundles,
-            }
-        }
-    }
-    local jdtls_formatter_config = os.getenv("JDTLS_FORMATTER_CONFIG")
-    if jdtls_formatter_config and vim.fn.filereadable(jdtls_formatter_config) == 1 then
-        settings.java.format = {
-            settings = {
-                url = jdtls_formatter_config,
-            },
-        }
-    end
-    return settings
-end
-
 local function setup_general_keymaps()
     local fzf = require("fzf-lua")
     vim.keymap.set(
@@ -225,6 +175,11 @@ return {
         lazy = true,
         opts = {
             automatic_installation = true,
+            automatic_enable = {
+                exclude = {
+                    "jdtls",
+                },
+            },
         },
     },
     {
@@ -232,16 +187,8 @@ return {
         dependencies = {
             "ibhagwan/fzf-lua",
             "mason-org/mason-lspconfig.nvim",
-            "mfussenegger/nvim-jdtls",
         },
         config = function()
-            if vim.fn.executable("jdtls") == 1 then
-                local path_to_mason_share = os.getenv("MASON") .. "/share"
-                vim.lsp.config("jdtls", {
-                    cmd = get_jdtls_cmd(path_to_mason_share),
-                    settings = get_jdtls_settings(path_to_mason_share),
-                })
-            end
             vim.api.nvim_create_autocmd("LspAttach", {
                 desc = "LSP attach",
                 callback = function(event)
