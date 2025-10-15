@@ -12,7 +12,17 @@ local function get_jdtls_settings(path_to_mason_share)
     local bundles = {
         vim.fn.glob(path_to_java_debug .. "/com.microsoft.java.debug.plugin.jar", true),
     }
-    vim.list_extend(bundles, vim.split(vim.fn.glob(path_to_java_test .. "/*.jar", true), "\n"))
+    local java_test_bundles = vim.split(vim.fn.glob(path_to_java_test .. "/*.jar", 1), "\n")
+    local excluded = {
+        "com.microsoft.java.test.runner-jar-with-dependencies.jar",
+        "jacocoagent.jar",
+    }
+    for _, java_test_jar in ipairs(java_test_bundles) do
+        local fname = vim.fn.fnamemodify(java_test_jar, ":t")
+        if not vim.tbl_contains(excluded, fname) then
+            table.insert(bundles, java_test_jar)
+        end
+    end
     vim.list_extend(bundles, require("spring_boot").java_extensions())
     local settings = {
         java = {
