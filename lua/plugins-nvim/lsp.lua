@@ -32,7 +32,7 @@ local function get_jdtls_settings(path_to_mason_share)
             codeGeneration = {
                 addFinalForNewDeclaration = "all",
             },
-            initializatioOptions = {
+            initializationOptions = {
                 bundles = bundles,
             }
         }
