@@ -2,7 +2,6 @@ return {
     "ibhagwan/fzf-lua",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
-        "rcarriga/nvim-notify",
     },
     opts = {
         "hide",
@@ -120,14 +119,6 @@ return {
             "<leader>fr",
             fzf.registers,
             { desc = "Registers" }
-        )
-        vim.keymap.set(
-            "n",
-            "<leader>fn",
-            function()
-                require("notify.integrations").pick()
-            end,
-            { desc = "Notifications" }
         )
     end
 }
