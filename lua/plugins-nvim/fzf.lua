@@ -21,6 +21,7 @@ return {
         },
         winopts = {
             preview = {
+                layout = "vertical",
                 wrap = true,
             },
         },
