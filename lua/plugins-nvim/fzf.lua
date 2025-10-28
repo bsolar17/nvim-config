@@ -8,6 +8,11 @@ return {
         defaults = {
             formatter = "path.filename_first",
         },
+        git = {
+            diff = {
+                formatter = "path.dirname_first",
+            },
+        },
         oldfiles = {
             cwd_only = true,
             include_current_session = true,
@@ -59,6 +64,18 @@ return {
             "<leader>fg",
             fzf.git_files,
             { desc = "Git Files" }
+        )
+        vim.keymap.set(
+            "n",
+            "<leader>fh",
+            function()
+                fzf.git_diff(
+                    {
+                        ref = "origin/HEAD",
+                    }
+                )
+            end,
+            { desc = "Git Diff HEAD" }
         )
         vim.keymap.set(
             "n",
