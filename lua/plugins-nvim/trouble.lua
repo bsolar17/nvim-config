@@ -15,7 +15,7 @@ return {
         vim.keymap.set(
             "n",
             "<Leader>tw",
-            function() require("trouble").toggle("workspace_diagnostics") end,
+            function() require("trouble").toggle("diagnostics") end,
             { desc = "Workspace Diagnostics" }
         )
         vim.keymap.set(
