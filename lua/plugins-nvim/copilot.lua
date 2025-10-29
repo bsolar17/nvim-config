@@ -52,6 +52,16 @@ return {
                             },
                         },
                     },
+                    slash_commands = {
+                        ["buffer"] = {
+                            keymaps = {
+                                modes = {
+                                    i = "<C-b>",
+                                    n = "<C-b>",
+                                },
+                            },
+                        },
+                    },
                 },
                 inline = {
                     adapter = "copilot",
