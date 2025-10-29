@@ -138,5 +138,17 @@ return {
             fzf.registers,
             { desc = "Registers" }
         )
+        vim.keymap.set(
+            "n",
+            "<leader>fw",
+            fzf.diagnostics_document,
+            { desc = "Diagnostics" }
+        )
+        vim.keymap.set(
+            "n",
+            "<leader>fW",
+            fzf.diagnostics_workspace,
+            { desc = "Diagnostics Workspace" }
+        )
     end
 }
