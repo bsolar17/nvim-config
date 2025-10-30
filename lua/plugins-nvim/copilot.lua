@@ -15,6 +15,7 @@ return {
         "olimorris/codecompanion.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "ravitemer/codecompanion-history.nvim",
         },
         lazy = true,
         keys = {
@@ -75,6 +76,11 @@ return {
             display = {
                 chat = {
                     intro_message = "",
+                },
+            },
+            extensions = {
+                history = {
+                    enabled = true,
                 },
             },
         },
