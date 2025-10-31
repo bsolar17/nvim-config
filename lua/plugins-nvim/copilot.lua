@@ -78,6 +78,13 @@ return {
                     intro_message = "",
                 },
             },
+            memory = {
+                opts = {
+                    chat = {
+                        enabled = true,
+                    },
+                },
+            },
             extensions = {
                 history = {
                     enabled = true,
