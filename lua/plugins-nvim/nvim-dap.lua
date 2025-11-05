@@ -14,7 +14,7 @@ return {
             local dapui = require("dapui")
             dapui.setup(opts)
             vim.keymap.set("n", "<Leader>tdu", function()
-                dapui.toggle()
+                dapui.toggle({ reset = true })
             end, { desc = "DAP-UI" })
             vim.keymap.set("n", "<Leader>td5", function()
                 dap.toggle_breakpoint()
