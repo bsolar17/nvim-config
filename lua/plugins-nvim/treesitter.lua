@@ -33,9 +33,9 @@ return {
                         ["as"] = "@local.scope",
                     },
                     selection_modes = {
-                        ['@parameter.outer'] = 'v',
-                        ['@function.outer'] = 'V',
-                        ['@class.outer'] = '<c-v>',
+                        ["@parameter.outer"] = "v",
+                        ["@function.outer"] = "V",
+                        ["@class.outer"] = "<c-v>",
                     },
                     include_surrounding_whitespace = true,
                 },
@@ -81,7 +81,7 @@ return {
         },
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
-        end
+        end,
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",

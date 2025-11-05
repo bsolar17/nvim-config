@@ -3,11 +3,11 @@ return {
     main = "ibl",
     opts = {
         indent = {
-            char = "▏"
+            char = "▏",
         },
         scope = {
             char = "▎",
             highlight = "Whitespace",
         },
-    }
+    },
 }

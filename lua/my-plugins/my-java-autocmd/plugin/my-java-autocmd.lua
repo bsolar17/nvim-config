@@ -1,9 +1,16 @@
 local function get_cmd(path_to_mason_share)
     local path_to_lombok = path_to_mason_share .. "/jdtls/lombok.jar"
-    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-    local workspace_dir = os.getenv("XDG_CACHE_HOME") .. "/jdtls/workspace/" .. project_name
+    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+    local workspace_dir = os.getenv("XDG_CACHE_HOME")
+        .. "/jdtls/workspace/"
+        .. project_name
     local cmd = vim.fn.filereadable(path_to_lombok) == 1
-        and { "jdtls", "--jvm-arg=-javaagent:" .. path_to_lombok, "-data", workspace_dir }
+            and {
+                "jdtls",
+                "--jvm-arg=-javaagent:" .. path_to_lombok,
+                "-data",
+                workspace_dir,
+            }
         or { "jdtls", "-data", workspace_dir }
     return cmd
 end
@@ -17,10 +24,13 @@ local function get_settings()
             codeGeneration = {
                 addFinalForNewDeclaration = "all",
             },
-        }
+        },
     }
     local jdtls_formatter_config = os.getenv("JDTLS_FORMATTER_CONFIG")
-    if jdtls_formatter_config and vim.fn.filereadable(jdtls_formatter_config) == 1 then
+    if
+        jdtls_formatter_config
+        and vim.fn.filereadable(jdtls_formatter_config) == 1
+    then
         settings.java.format = {
             settings = {
                 url = jdtls_formatter_config,
@@ -34,9 +44,13 @@ local function get_bundles(path_to_mason_share)
     local path_to_java_debug = path_to_mason_share .. "/java-debug-adapter"
     local path_to_java_test = path_to_mason_share .. "/java-test"
     local bundles = {
-        vim.fn.glob(path_to_java_debug .. "/com.microsoft.java.debug.plugin-*.jar", 1)
+        vim.fn.glob(
+            path_to_java_debug .. "/com.microsoft.java.debug.plugin-*.jar",
+            1
+        ),
     }
-    local java_test_bundles = vim.split(vim.fn.glob(path_to_java_test .. "/*.jar", 1), "\n")
+    local java_test_bundles =
+        vim.split(vim.fn.glob(path_to_java_test .. "/*.jar", 1), "\n")
     local excluded = {
         "com.microsoft.java.test.runner-jar-with-dependencies.jar",
         "jacocoagent.jar",
@@ -59,7 +73,7 @@ vim.api.nvim_create_autocmd("FileType", {
             local config = {
                 name = "jdtls",
                 cmd = get_cmd(path_to_mason_share),
-                root_dir = vim.fs.root(0, { 'gradlew', '.git', 'mvnw' }),
+                root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" }),
                 settings = get_settings(),
                 init_options = {
                     bundles = get_bundles(path_to_mason_share),

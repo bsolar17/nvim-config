@@ -16,7 +16,7 @@ return {
                 },
                 "encoding",
                 "fileformat",
-                "filetype"
+                "filetype",
             },
         },
     },

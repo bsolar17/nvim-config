@@ -12,7 +12,7 @@ return {
         ft = {
             "java",
             "yaml",
-            "jproperties"
+            "jproperties",
         },
         dependencies = {
             "mfussenegger/nvim-jdtls",

@@ -26,4 +26,12 @@ coupled.
 - Use 80 characters textwidth.
 - Use `"` to quote strings, except to avoid escaping.
 - Use `local` variables.
+- Ensure code is properly formatted after editing.
 
+## Commands
+
+### Code Formatting
+
+```sh
+stylua .
+```

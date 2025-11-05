@@ -10,10 +10,15 @@ function M.chop_down()
     local bracket_pairs = {
         { open = "(", close = ")" },
         { open = "{", close = "}" },
-        { open = "[", close = "]" }
+        { open = "[", close = "]" },
     }
 
-    local function find_multiline_bracket_range(start_line, start_col, open_char, close_char)
+    local function find_multiline_bracket_range(
+        start_line,
+        start_col,
+        open_char,
+        close_char
+    )
         local open_line, open_col = nil, nil
         local close_line, close_col = nil, nil
         local bracket_count = 0
@@ -37,10 +42,14 @@ function M.chop_down()
                 end
             end
 
-            if open_line then break end
+            if open_line then
+                break
+            end
         end
 
-        if not open_line then return nil end
+        if not open_line then
+            return nil
+        end
 
         -- Find closing bracket (search forwards from opening bracket)
         bracket_count = 0
@@ -62,7 +71,9 @@ function M.chop_down()
                 end
             end
 
-            if close_line then break end
+            if close_line then
+                break
+            end
         end
 
         return open_line, open_col, close_line, close_col
@@ -71,7 +82,8 @@ function M.chop_down()
     -- Try to find any bracket pair
     local open_line, open_col, close_line, close_col, open_char, close_char
     for _, pair in ipairs(bracket_pairs) do
-        open_line, open_col, close_line, close_col = find_multiline_bracket_range(line_num, col, pair.open, pair.close)
+        open_line, open_col, close_line, close_col =
+            find_multiline_bracket_range(line_num, col, pair.open, pair.close)
         if open_line and close_line then
             open_char = pair.open
             close_char = pair.close
@@ -161,7 +173,9 @@ function M.chop_down()
             if element_line_num < close_line then
                 local element_line = vim.fn.getline(element_line_num)
                 local expected_comma = (elem_idx < #elements) and "," or ""
-                local expected_line = inner_indent .. elements[elem_idx] .. expected_comma
+                local expected_line = inner_indent
+                    .. elements[elem_idx]
+                    .. expected_comma
                 if element_line ~= expected_line then
                     is_fully_chopped = false
                     break
@@ -182,7 +196,14 @@ function M.chop_down()
         local closing_line = vim.fn.getline(close_line)
         local after_bracket = closing_line:sub(close_col + 1)
         local elements_str = table.concat(elements, ", ")
-        table.insert(new_lines, before_bracket .. open_char .. elements_str .. close_char .. after_bracket)
+        table.insert(
+            new_lines,
+            before_bracket
+                .. open_char
+                .. elements_str
+                .. close_char
+                .. after_bracket
+        )
     else
         -- Chop down to multiple lines
         local before_bracket = opening_line:sub(1, open_col - 1)
@@ -219,7 +240,6 @@ function M.chop_down()
     end
 end
 
-function M.setup()
-end
+function M.setup() end
 
 return M

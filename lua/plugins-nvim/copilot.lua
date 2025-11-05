@@ -4,10 +4,10 @@ return {
         lazy = true,
         opts = {
             suggestion = {
-                enabled = false
+                enabled = false,
             },
             panel = {
-                enabled = false
+                enabled = false,
             },
         },
     },

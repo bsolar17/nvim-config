@@ -11,8 +11,8 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "sql",
-  callback = function()
-    vim.bo.omnifunc = ""
-  end,
+    pattern = "sql",
+    callback = function()
+        vim.bo.omnifunc = ""
+    end,
 })

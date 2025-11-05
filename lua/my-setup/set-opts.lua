@@ -19,10 +19,8 @@ vim.opt.winborder = "rounded"
 vim.opt.signcolumn = "yes"
 vim.opt.timeout = false
 vim.opt.splitright = true
-vim.filetype.add(
-    {
-        extension = {
-            avsc = "json",
-        },
-    }
-)
+vim.filetype.add({
+    extension = {
+        avsc = "json",
+    },
+})
