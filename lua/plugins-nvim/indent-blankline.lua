@@ -5,9 +5,10 @@ return {
         indent = {
             char = "▏",
         },
+
         scope = {
-            char = "▎",
-            highlight = "Whitespace",
+            char = "▏",
+            highlight = "NonText",
         },
     },
 }
