@@ -4,7 +4,6 @@ return {
         "nvim-mini/mini.nvim",
     },
     opts = {
-        "hide",
         defaults = {
             formatter = "path.filename_first",
         },
