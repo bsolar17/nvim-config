@@ -4,6 +4,11 @@ return {
     config = function()
         require("mini.comment").setup()
         require("mini.pairs").setup()
+        require("mini.splitjoin").setup({
+            mappings = {
+                toggle = "<leader>cS",
+            },
+        })
         require("mini.icons").setup()
         MiniIcons.mock_nvim_web_devicons()
     end,
