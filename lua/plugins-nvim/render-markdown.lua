@@ -1,10 +1,36 @@
 return {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown", "codecompanion" },
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-mini/mini.nvim",
+    },
+    ft = {
+        "markdown",
+        "codecompanion",
+    },
     opts = {
         completions = {
-            lsp = {
+            blink = {
                 enabled = true,
+            },
+        },
+        heading = {
+            icons = {
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+                " ",
+            },
+            position = "inline",
+            backgrounds = {},
+        },
+        overrides = {
+            filetype = {
+                codecompanion = {
+                    render_modes = { "n", "c", "t" },
+                },
             },
         },
     },
