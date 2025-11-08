@@ -1,8 +1,8 @@
 return {
-    "echasnovski/mini.nvim",
+    "nvim-mini/mini.nvim",
     version = false,
-    opts = {},
-    config = function(_, opts)
-        require("mini.icons").setup(opts)
+    config = function()
+        require("mini.icons").setup({})
+        MiniIcons.mock_nvim_web_devicons()
     end,
 }
