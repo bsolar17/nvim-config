@@ -26,6 +26,8 @@ coupled.
 - Use 80 characters textwidth.
 - Use `"` to quote strings, except to avoid escaping.
 - Use `local` variables.
+- Use `<Cmd>`, `<CR>` and `<Leader>` as keymap pseudokeys. Avoid other
+capitalizations.
 - Ensure code is properly formatted after editing.
 
 ## Commands

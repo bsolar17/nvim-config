@@ -17,7 +17,7 @@ return {
         vim.keymap.set(
             "n",
             "<Leader>Gs",
-            "<cmd>Gitsigns<cr>",
+            "<Cmd>Gitsigns<CR>",
             { desc = "Gitsigns" }
         )
     end,

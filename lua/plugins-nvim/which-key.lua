@@ -8,19 +8,19 @@ return {
         local wk = require("which-key")
         wk.setup(opts)
         wk.add({
-            { "<leader>G", group = "Git" },
-            { "<leader>b", group = "Buffers" },
-            { "<leader>c", group = "Code" },
-            { "<leader>d", group = "Diff" },
-            { "<leader>f", group = "Find" },
-            { "<leader>g", group = "Go" },
-            { "<leader>h", group = "Harpoon" },
-            { "<leader>r", group = "Run" },
-            { "<leader>t", group = "Test" },
-            { "<leader>td", group = "Debug" },
-            { "<leader>x", group = "Extract" },
-            { "<leader>w", group = "Workspace" },
-            { "<leader>wt", group = "Trouble" },
+            { "<Leader>G", group = "Git" },
+            { "<Leader>b", group = "Buffers" },
+            { "<Leader>c", group = "Code" },
+            { "<Leader>d", group = "Diff" },
+            { "<Leader>f", group = "Find" },
+            { "<Leader>g", group = "Go" },
+            { "<Leader>h", group = "Harpoon" },
+            { "<Leader>r", group = "Run" },
+            { "<Leader>t", group = "Test" },
+            { "<Leader>td", group = "Debug" },
+            { "<Leader>x", group = "Extract" },
+            { "<Leader>w", group = "Workspace" },
+            { "<Leader>wt", group = "Trouble" },
         })
     end,
 }

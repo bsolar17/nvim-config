@@ -6,7 +6,7 @@ return {
         require("mini.pairs").setup()
         require("mini.splitjoin").setup({
             mappings = {
-                toggle = "<leader>cS",
+                toggle = "<Leader>cS",
             },
         })
         require("mini.surround").setup()

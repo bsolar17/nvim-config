@@ -107,36 +107,36 @@ end
 
 local function setup_java_keymaps()
     local jdtls = require("jdtls")
-    vim.keymap.set("n", "<leader>co", function()
+    vim.keymap.set("n", "<Leader>co", function()
         jdtls.organize_imports()
     end, { buffer = buffer, desc = "Organize Imports" })
-    vim.keymap.set("n", "<leader>tc", function()
+    vim.keymap.set("n", "<Leader>tc", function()
         jdtls.test_class()
     end, { buffer = buffer, desc = "Test Class" })
-    vim.keymap.set("n", "<leader>tm", function()
+    vim.keymap.set("n", "<Leader>tm", function()
         jdtls.test_nearest_method()
     end, { buffer = buffer, desc = "Test Nearest Method" })
     vim.keymap.set(
         "v",
-        "<leader>xv",
+        "<Leader>xv",
         "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>",
         { buffer = buffer, desc = "Extract Variable" }
     )
-    vim.keymap.set("n", "<leader>xv", function()
+    vim.keymap.set("n", "<Leader>xv", function()
         jdtls.extract_variable()
     end, { buffer = buffer, desc = "Extract Variable" })
     vim.keymap.set(
         "v",
-        "<leader>xc",
+        "<Leader>xc",
         "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>",
         { buffer = buffer, desc = "Extract Constant" }
     )
-    vim.keymap.set("n", "<leader>xc", function()
+    vim.keymap.set("n", "<Leader>xc", function()
         jdtls.extract_constant()
     end, { buffer = buffer, desc = "Extract Variable" })
     vim.keymap.set(
         "v",
-        "<leader>xm",
+        "<Leader>xm",
         "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>",
         { buffer = buffer, desc = "Extract Method" }
     )

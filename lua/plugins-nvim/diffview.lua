@@ -15,19 +15,19 @@ return {
         vim.keymap.set(
             "n",
             "<Leader>df",
-            "<cmd>DiffviewFileHistory<cr>",
+            "<Cmd>DiffviewFileHistory<CR>",
             { desc = "File History" }
         )
         vim.keymap.set(
             "n",
             "<Leader>do",
-            "<cmd>DiffviewOpen origin/HEAD<cr>",
+            "<Cmd>DiffviewOpen origin/HEAD<CR>",
             { desc = "origin/HEAD" }
         )
         vim.keymap.set(
             "n",
             "<Leader>d1",
-            "<cmd>DiffviewOpen HEAD^1<cr>",
+            "<Cmd>DiffviewOpen HEAD^1<CR>",
             { desc = "HEAD^1" }
         )
     end,

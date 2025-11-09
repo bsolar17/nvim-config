@@ -4,8 +4,8 @@ return {
         vim.g.undotree_SetFocusWhenToggle = true
         vim.keymap.set(
             "n",
-            "<leader>u",
-            "<cmd>UndotreeToggle<cr>",
+            "<Leader>u",
+            "<Cmd>UndotreeToggle<CR>",
             { desc = "Undotree" }
         )
     end,

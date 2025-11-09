@@ -6,7 +6,7 @@ return {
     config = function()
         vim.keymap.set(
             "n",
-            "<leader>e",
+            "<Leader>e",
             vim.cmd.NvimTreeToggle,
             { desc = "File Explorer" }
         )
@@ -18,13 +18,13 @@ return {
             vim.keymap.set(
                 "n",
                 "<A-Right>",
-                "<cmd>NvimTreeResize +10<CR>",
+                "<Cmd>NvimTreeResize +10<CR>",
                 { desc = "Widen nvim-tree" }
             )
             vim.keymap.set(
                 "n",
                 "<A-Left>",
-                "<cmd>NvimTreeResize -10<CR>",
+                "<Cmd>NvimTreeResize -10<CR>",
                 { desc = "Narrow nvim-tree" }
             )
         end

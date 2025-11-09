@@ -22,13 +22,13 @@ return {
             {
                 mode = "n",
                 "<Leader>cc",
-                "<cmd>CodeCompanionChat Toggle<cr>",
+                "<Cmd>CodeCompanionChat Toggle<CR>",
                 desc = "Chat",
             },
             {
                 mode = "v",
                 "<Leader>ce",
-                "<cmd>CodeCompanion /explain<cr>",
+                "<Cmd>CodeCompanion /explain<CR>",
                 desc = "Explain",
             },
             {

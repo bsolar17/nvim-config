@@ -34,22 +34,22 @@ return {
         local fzf = require("fzf-lua")
         fzf.setup(opts)
         fzf.register_ui_select()
-        vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
-        vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Files" })
-        vim.keymap.set("n", "<leader>fl", fzf.blines, { desc = "Lines" })
+        vim.keymap.set("n", "<Leader>fb", fzf.buffers, { desc = "Buffers" })
+        vim.keymap.set("n", "<Leader>ff", fzf.files, { desc = "Files" })
+        vim.keymap.set("n", "<Leader>fl", fzf.blines, { desc = "Lines" })
         vim.keymap.set(
             "n",
-            "<leader>fL",
+            "<Leader>fL",
             fzf.lines,
             { desc = "Lines (All Buffers)" }
         )
-        vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Git Files" })
-        vim.keymap.set("n", "<leader>fh", function()
+        vim.keymap.set("n", "<Leader>fg", fzf.git_files, { desc = "Git Files" })
+        vim.keymap.set("n", "<Leader>fh", function()
             fzf.git_diff({
                 ref = "origin/HEAD",
             })
         end, { desc = "Git Diff HEAD" })
-        vim.keymap.set("n", "<leader>fc", function()
+        vim.keymap.set("n", "<Leader>fc", function()
             fzf.git_files({
                 git_command = {
                     "git",
@@ -63,25 +63,25 @@ return {
         end, { desc = "Git Commit Files" })
         vim.keymap.set(
             "n",
-            "<leader>fm",
+            "<Leader>fm",
             fzf.git_status,
             { desc = "Git Modified" }
         )
-        vim.keymap.set("n", "<leader>fM", fzf.marks, { desc = "Marks" })
-        vim.keymap.set("n", "<leader>fo", fzf.oldfiles, { desc = "Old Files" })
-        vim.keymap.set("n", "<leader>fp", fzf.builtin, { desc = "Pickers" })
-        vim.keymap.set("n", "<leader>fq", fzf.quickfix, { desc = "Quickfix" })
-        vim.keymap.set("n", "<leader>fG", fzf.live_grep, { desc = "Grep" })
-        vim.keymap.set("n", "<leader>fr", fzf.registers, { desc = "Registers" })
+        vim.keymap.set("n", "<Leader>fM", fzf.marks, { desc = "Marks" })
+        vim.keymap.set("n", "<Leader>fo", fzf.oldfiles, { desc = "Old Files" })
+        vim.keymap.set("n", "<Leader>fp", fzf.builtin, { desc = "Pickers" })
+        vim.keymap.set("n", "<Leader>fq", fzf.quickfix, { desc = "Quickfix" })
+        vim.keymap.set("n", "<Leader>fG", fzf.live_grep, { desc = "Grep" })
+        vim.keymap.set("n", "<Leader>fr", fzf.registers, { desc = "Registers" })
         vim.keymap.set(
             "n",
-            "<leader>fw",
+            "<Leader>fw",
             fzf.diagnostics_document,
             { desc = "Diagnostics" }
         )
         vim.keymap.set(
             "n",
-            "<leader>fW",
+            "<Leader>fW",
             fzf.diagnostics_workspace,
             { desc = "Diagnostics Workspace" }
         )
