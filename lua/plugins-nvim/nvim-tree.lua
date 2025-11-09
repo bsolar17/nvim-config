@@ -3,13 +3,14 @@ return {
     dependencies = {
         "nvim-mini/mini.nvim",
     },
-    config = function()
-        vim.keymap.set(
-            "n",
+    keys = {
+        {
             "<Leader>e",
-            vim.cmd.NvimTreeToggle,
-            { desc = "File Explorer" }
-        )
+            "<Cmd>NvimTreeToggle<CR>",
+            desc = "File Explorer",
+        },
+    },
+    config = function()
         local function my_on_attach(bufnr)
             local api = require("nvim-tree.api")
 
