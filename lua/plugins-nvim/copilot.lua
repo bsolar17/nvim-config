@@ -44,8 +44,10 @@ return {
         opts = {
             strategies = {
                 chat = {
-                    adapter = "copilot",
-                    model = "claude-sonnet-4.5",
+                    adapter = {
+                        name = "copilot",
+                        model = "claude-sonnet-4.5",
+                    },
                     tools = {
                         opts = {
                             default_tools = {
@@ -65,12 +67,16 @@ return {
                     },
                 },
                 inline = {
-                    adapter = "copilot",
-                    model = "claude-sonnet-4.5",
+                    adapter = {
+                        name = "copilot",
+                        model = "claude-sonnet-4.5",
+                    },
                 },
                 cmd = {
-                    adapter = "copilot",
-                    model = "claude-sonnet-4.5",
+                    adapter = {
+                        name = "copilot",
+                        model = "claude-sonnet-4.5",
+                    },
                 },
             },
             display = {
