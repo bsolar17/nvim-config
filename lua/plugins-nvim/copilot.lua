@@ -87,7 +87,7 @@ return {
             memory = {
                 opts = {
                     chat = {
-                        enabled = true,
+                        enabled = false,
                     },
                 },
             },
