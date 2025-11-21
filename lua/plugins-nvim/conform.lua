@@ -14,12 +14,19 @@ return {
     config = function(_, opts)
         local conform = require("conform")
         conform.setup(opts)
-        vim.keymap.set(
-            { "n", "x", "v" },
-            "<Leader>cf",
-            conform.format,
-            { desc = "Format" }
-        )
+        vim.keymap.set({ "n", "v" }, "<Leader>cf", function()
+            local formatters = conform.list_formatters()
+            if #formatters > 0 then
+                conform.format()
+            else
+                local mode = vim.api.nvim_get_mode().mode
+                if mode == "n" then
+                    vim.cmd("normal! gg=G``")
+                else
+                    vim.cmd("normal! =")
+                end
+            end
+        end, { desc = "Format" })
         vim.keymap.set("n", "<Leader>cp", function()
             if
                 opts
