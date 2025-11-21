@@ -94,6 +94,16 @@ return {
             extensions = {
                 history = {
                     enabled = true,
+                    opts = {
+                        title_generation_opts = {
+                            model = "gpt-4.1",
+                            summary = {
+                                generation_opts = {
+                                    model = "gpt-4.1",
+                                },
+                            },
+                        },
+                    },
                 },
             },
         },
