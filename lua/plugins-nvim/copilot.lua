@@ -76,8 +76,7 @@ return {
                         ["buffer"] = {
                             keymaps = {
                                 modes = {
-                                    i = "<C-b>",
-                                    n = "<C-b>",
+                                    n = "gb",
                                 },
                             },
                         },
@@ -118,6 +117,8 @@ return {
                                 generation_opts = {
                                     model = "gpt-4.1",
                                 },
+                                create_summary_keymap = "gSc",
+                                browse_summaries_keymap = "gSb",
                             },
                         },
                     },
