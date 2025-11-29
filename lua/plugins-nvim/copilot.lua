@@ -25,6 +25,7 @@ return {
                 "<Cmd>CodeCompanionChat Toggle<CR>",
                 desc = "Chat",
             },
+
             {
                 mode = "v",
                 "<Leader>ce",
@@ -44,9 +45,25 @@ return {
         opts = {
             strategies = {
                 chat = {
-                    adapter = {
-                        name = "copilot",
-                        model = "claude-opus-4.5",
+                    adapter = "copilot",
+                    keymaps = {
+                        toggle_model = {
+                            modes = { n = "gm" },
+                            description = "Toggle Model",
+                            callback = function(chat)
+                                local models = { "gpt-4.1", "claude-opus-4.5" }
+                                local current =
+                                    chat.adapter.schema.model.default
+                                local next_model
+                                if current == models[1] then
+                                    next_model = models[2]
+                                else
+                                    next_model = models[1]
+                                end
+                                chat:apply_model(next_model)
+                                vim.notify("Switched to " .. next_model)
+                            end,
+                        },
                     },
                     tools = {
                         opts = {
@@ -69,11 +86,13 @@ return {
                 inline = {
                     adapter = {
                         name = "copilot",
+                        model = "gpt-4.1",
                     },
                 },
                 cmd = {
                     adapter = {
                         name = "copilot",
+                        model = "gpt-4.1",
                     },
                 },
             },
