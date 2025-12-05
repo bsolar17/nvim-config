@@ -12,10 +12,22 @@ return {
         },
     },
     {
+        "ravitemer/mcphub.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        lazy = true,
+        build = "bundled_build.lua",
+        opts = {
+            use_bundled_binary = true,
+        },
+    },
+    {
         "olimorris/codecompanion.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "ravitemer/codecompanion-history.nvim",
+            "ravitemer/mcphub.nvim",
         },
         lazy = true,
         keys = {
@@ -122,6 +134,14 @@ return {
                                 browse_summaries_keymap = "gSb",
                             },
                         },
+                    },
+                },
+                mcphub = {
+                    callback = "mcphub.extensions.codecompanion",
+                    opts = {
+                        make_vars = true,
+                        make_slash_commands = true,
+                        show_result_in_chat = true,
                     },
                 },
             },
