@@ -20,6 +20,9 @@ return {
         build = "bundled_build.lua",
         opts = {
             use_bundled_binary = true,
+            on_ready = function(hub)
+                vim.notify("MCPHub ready")
+            end,
         },
     },
     {
@@ -86,22 +89,29 @@ return {
                             modes = { n = "gH" },
                             description = "Load MCPHub",
                             callback = function()
-                                vim.cmd("Lazy load mcphub.nvim")
-                                require("codecompanion").register_extension(
-                                    "mcphub",
-                                    {
-                                        setup = function()
-                                            require(
-                                                "mcphub.extensions.codecompanion"
-                                            ).setup({
-                                                make_vars = true,
-                                                make_slash_commands = true,
-                                                show_result_in_chat = true,
-                                            })
-                                        end,
-                                    }
-                                )
-                                vim.notify("MCPHub extension loaded")
+                                if
+                                    require("lazy.core.config").plugins["mcphub.nvim"]._.loaded
+                                then
+                                    vim.notify("MCPHub already loaded")
+                                else
+                                    require("lazy").load({
+                                        plugins = { "mcphub.nvim" },
+                                    })
+                                    require("codecompanion").register_extension(
+                                        "mcphub",
+                                        {
+                                            setup = function()
+                                                require(
+                                                    "mcphub.extensions.codecompanion"
+                                                ).setup({
+                                                    make_vars = true,
+                                                    make_slash_commands = true,
+                                                    show_result_in_chat = true,
+                                                })
+                                            end,
+                                        }
+                                    )
+                                end
                             end,
                         },
                     },
