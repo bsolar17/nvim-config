@@ -27,7 +27,6 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "ravitemer/codecompanion-history.nvim",
-            "ravitemer/mcphub.nvim",
         },
         lazy = true,
         keys = {
@@ -75,6 +74,28 @@ return {
                                 end
                                 chat:apply_model(next_model)
                                 vim.notify("Switched to " .. next_model)
+                            end,
+                        },
+                        load_mcphub = {
+                            modes = { n = "gH" },
+                            description = "Load MCPHub",
+                            callback = function()
+                                vim.cmd("Lazy load mcphub.nvim")
+                                require("codecompanion").register_extension(
+                                    "mcphub",
+                                    {
+                                        setup = function()
+                                            require(
+                                                "mcphub.extensions.codecompanion"
+                                            ).setup({
+                                                make_vars = true,
+                                                make_slash_commands = true,
+                                                show_result_in_chat = true,
+                                            })
+                                        end,
+                                    }
+                                )
+                                vim.notify("MCPHub extension loaded")
                             end,
                         },
                     },
@@ -134,14 +155,6 @@ return {
                                 browse_summaries_keymap = "gSb",
                             },
                         },
-                    },
-                },
-                mcphub = {
-                    callback = "mcphub.extensions.codecompanion",
-                    opts = {
-                        make_vars = true,
-                        make_slash_commands = true,
-                        show_result_in_chat = true,
                     },
                 },
             },
