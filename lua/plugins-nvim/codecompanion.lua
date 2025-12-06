@@ -63,14 +63,20 @@ return {
                             modes = { n = "gm" },
                             description = "Toggle Model",
                             callback = function(chat)
-                                local models = { "gpt-4.1", "claude-opus-4.5" }
-                                local current =
+                                local preferred_models = {
+                                    "gpt-4.1",
+                                    "claude-sonnet-4.5",
+                                    "claude-opus-4.5",
+                                }
+                                local current_model =
                                     chat.adapter.schema.model.default
-                                local next_model
-                                if current == models[1] then
-                                    next_model = models[2]
-                                else
-                                    next_model = models[1]
+                                local next_model = preferred_models[1]
+                                for i, m in ipairs(preferred_models) do
+                                    if m == current_model then
+                                        next_model =
+                                            preferred_models[i % #preferred_models + 1]
+                                        break
+                                    end
                                 end
                                 chat:apply_model(next_model)
                                 vim.notify("Switched to " .. next_model)
