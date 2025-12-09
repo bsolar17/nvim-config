@@ -17,9 +17,8 @@ return {
             "nvim-lua/plenary.nvim",
         },
         lazy = true,
-        build = "bundled_build.lua",
+        build = "npm install -g mcp-hub@latest",
         opts = {
-            use_bundled_binary = true,
             on_ready = function(hub)
                 vim.notify("MCPHub ready")
             end,
