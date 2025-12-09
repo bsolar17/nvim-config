@@ -57,6 +57,9 @@ return {
                     score_offset = 10,
                     async = true,
                 },
+                lsp = {
+                    fallbacks = {},
+                },
             },
         },
         snippets = {
