@@ -56,7 +56,6 @@ return {
             },
         },
         opts = {
-            ignore_warnings = true,
             strategies = {
                 chat = {
                     adapter = "copilot",
@@ -147,13 +146,6 @@ return {
             display = {
                 chat = {
                     intro_message = "",
-                },
-            },
-            memory = {
-                opts = {
-                    chat = {
-                        enabled = false,
-                    },
                 },
             },
             extensions = {
