@@ -1,3 +1,4 @@
+local main_model = "gpt-5-mini"
 return {
     {
         "zbirenbaum/copilot.lua",
@@ -59,14 +60,17 @@ return {
         opts = {
             strategies = {
                 chat = {
-                    adapter = "copilot",
+                    adapter = {
+                        name = "copilot",
+                        model = main_model,
+                    },
                     keymaps = {
                         toggle_model = {
                             modes = { n = "gm" },
                             description = "Toggle Model",
                             callback = function(chat)
                                 local preferred_models = {
-                                    "gpt-4.1",
+                                    main_model,
                                     "claude-sonnet-4.5",
                                     "claude-opus-4.5",
                                 }
@@ -134,13 +138,13 @@ return {
                 inline = {
                     adapter = {
                         name = "copilot",
-                        model = "gpt-4.1",
+                        main_model,
                     },
                 },
                 cmd = {
                     adapter = {
                         name = "copilot",
-                        model = "gpt-4.1",
+                        main_model,
                     },
                 },
             },
@@ -154,10 +158,10 @@ return {
                     enabled = true,
                     opts = {
                         title_generation_opts = {
-                            model = "gpt-4.1",
+                            main_model,
                             summary = {
                                 generation_opts = {
-                                    model = "gpt-4.1",
+                                    main_model,
                                 },
                                 create_summary_keymap = "gSc",
                                 browse_summaries_keymap = "gSb",
