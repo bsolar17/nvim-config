@@ -1,4 +1,4 @@
-local main_model = "gpt-5-mini"
+local main_model = "gpt-4.1"
 return {
     {
         "zbirenbaum/copilot.lua",
