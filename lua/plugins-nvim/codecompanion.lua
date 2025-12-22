@@ -65,29 +65,6 @@ return {
                         model = main_model,
                     },
                     keymaps = {
-                        toggle_model = {
-                            modes = { n = "gm" },
-                            description = "Toggle Model",
-                            callback = function(chat)
-                                local preferred_models = {
-                                    main_model,
-                                    "claude-sonnet-4.5",
-                                    "claude-opus-4.5",
-                                }
-                                local current_model =
-                                    chat.adapter.schema.model.default
-                                local next_model = preferred_models[1]
-                                for i, m in ipairs(preferred_models) do
-                                    if m == current_model then
-                                        next_model =
-                                            preferred_models[i % #preferred_models + 1]
-                                        break
-                                    end
-                                end
-                                chat:apply_model(next_model)
-                                vim.notify("Switched to " .. next_model)
-                            end,
-                        },
                         load_mcphub = {
                             modes = { n = "gH" },
                             description = "Load MCPHub",
