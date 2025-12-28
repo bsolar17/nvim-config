@@ -14,7 +14,7 @@ vim.opt.undofile = true
 vim.opt.backupcopy = "yes"
 vim.opt.incsearch = true
 vim.opt.termguicolors = true
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
 vim.opt.winborder = "rounded"
 vim.opt.signcolumn = "yes"
 vim.opt.timeout = false
