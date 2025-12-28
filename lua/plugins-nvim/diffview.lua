@@ -15,7 +15,7 @@ return {
         vim.keymap.set(
             "n",
             "<Leader>df",
-            "<Cmd>DiffviewFileHistory<CR>",
+            "<Cmd>DiffviewFileHistory %<CR>",
             { desc = "File History" }
         )
         vim.keymap.set(
