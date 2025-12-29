@@ -7,5 +7,14 @@ return {
                 winblend = 0,
             },
         },
+        progress = {
+            ignore = {
+                function(msg)
+                    return msg.lsp_client.name == "jdtls"
+                            and string.find(msg.title, "Publish Diagnostics")
+                        or string.find(msg.title, "Validate documents")
+                end,
+            },
+        },
     },
 }
