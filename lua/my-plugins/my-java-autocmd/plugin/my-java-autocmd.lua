@@ -28,6 +28,18 @@ local function get_settings()
     }
     local jdtls_formatter_config = os.getenv("JDTLS_FORMATTER_CONFIG")
     if
+        not jdtls_formatter_config
+        or vim.fn.filereadable(jdtls_formatter_config) ~= 1
+    then
+        local root_dir = vim.fs.root(0, { "gradlew", ".git", "mvnw" })
+        if root_dir then
+            local formatter_path = root_dir .. "/.eclipse-java-formatter.xml"
+            if vim.fn.filereadable(formatter_path) == 1 then
+                jdtls_formatter_config = formatter_path
+            end
+        end
+    end
+    if
         jdtls_formatter_config
         and vim.fn.filereadable(jdtls_formatter_config) == 1
     then

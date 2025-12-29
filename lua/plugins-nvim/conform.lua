@@ -15,10 +15,8 @@ return {
         local conform = require("conform")
         conform.setup(opts)
         vim.keymap.set({ "n", "v" }, "<Leader>cf", function()
-            local formatters = conform.list_formatters()
-            if #formatters > 0 then
-                conform.format()
-            else
+            local ok = conform.format({ async = true })
+            if ok == false then
                 local mode = vim.api.nvim_get_mode().mode
                 if mode == "n" then
                     vim.cmd("normal! gg=G``")
