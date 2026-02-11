@@ -1,3 +1,4 @@
+local main_adapter = "opencode"
 local main_model = "gpt-4.1"
 return {
     {
@@ -58,10 +59,10 @@ return {
             },
         },
         opts = {
-            strategies = {
+            interactions = {
                 chat = {
                     adapter = {
-                        name = "copilot",
+                        name = main_adapter,
                         model = main_model,
                     },
                     keymaps = {
@@ -115,13 +116,19 @@ return {
                 inline = {
                     adapter = {
                         name = "copilot",
-                        main_model,
+                        model = main_model,
                     },
                 },
                 cmd = {
                     adapter = {
                         name = "copilot",
-                        main_model,
+                        model = main_model,
+                    },
+                },
+                background = {
+                    adapter = {
+                        name = "copilot",
+                        model = main_model,
                     },
                 },
             },
@@ -135,10 +142,12 @@ return {
                     enabled = true,
                     opts = {
                         title_generation_opts = {
-                            main_model,
+                            adapter = "copilot",
+                            model = main_model,
                             summary = {
                                 generation_opts = {
-                                    main_model,
+                                    adapter = "copilot",
+                                    model = main_model,
                                 },
                                 create_summary_keymap = "gSc",
                                 browse_summaries_keymap = "gSb",
