@@ -30,5 +30,11 @@ return {
             "<Cmd>DiffviewOpen HEAD^1<CR>",
             { desc = "HEAD^1" }
         )
+        vim.keymap.set(
+            "n",
+            "<Leader>dl",
+            "<Cmd>DiffviewFileHistory<CR>",
+            { desc = "Log" }
+        )
     end,
 }
