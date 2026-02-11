@@ -1,4 +1,5 @@
-local main_adapter = "opencode"
+local main_adapter = vim.fn.executable("opencode") == 1 and "opencode"
+    or "copilot"
 local main_model = "gpt-4.1"
 return {
     {
