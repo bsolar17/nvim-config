@@ -33,6 +33,7 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
             "ravitemer/codecompanion-history.nvim",
+            "lalitmee/codecompanion-spinners.nvim",
         },
         lazy = true,
         keys = {
@@ -154,6 +155,11 @@ return {
                                 browse_summaries_keymap = "gSb",
                             },
                         },
+                    },
+                },
+                spinner = {
+                    opts = {
+                        style = "fidget",
                     },
                 },
             },
