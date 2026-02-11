@@ -100,9 +100,11 @@ return {
                     },
                     tools = {
                         opts = {
-                            default_tools = {
-                                "full_stack_dev",
-                            },
+                            default_tools = main_adapter ~= "opencode"
+                                    and {
+                                        "full_stack_dev",
+                                    }
+                                or {},
                         },
                     },
                     slash_commands = {
