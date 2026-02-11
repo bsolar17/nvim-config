@@ -16,3 +16,10 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.bo.omnifunc = ""
     end,
 })
+vim.api.nvim_create_autocmd({ "FocusGained", "WinEnter" }, {
+    callback = function()
+        if vim.fn.getcmdwintype() == "" then
+            vim.cmd("checktime")
+        end
+    end,
+})
