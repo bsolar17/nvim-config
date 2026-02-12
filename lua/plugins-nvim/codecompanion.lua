@@ -1,5 +1,4 @@
-local main_adapter = vim.fn.executable("opencode") == 1 and "opencode"
-    or "copilot"
+local main_adapter = "copilot"
 local main_model = "gpt-4.1"
 return {
     {
@@ -100,11 +99,9 @@ return {
                     },
                     tools = {
                         opts = {
-                            default_tools = main_adapter ~= "opencode"
-                                    and {
-                                        "full_stack_dev",
-                                    }
-                                or {},
+                            default_tools = {
+                                "full_stack_dev",
+                            },
                         },
                     },
                     slash_commands = {
