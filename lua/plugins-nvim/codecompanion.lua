@@ -100,7 +100,7 @@ return {
                     tools = {
                         opts = {
                             default_tools = {
-                                "full_stack_dev",
+                                "agent",
                             },
                         },
                     },
