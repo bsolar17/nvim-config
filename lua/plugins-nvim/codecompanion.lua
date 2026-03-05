@@ -1,4 +1,4 @@
-local main_adapter = "opencode"
+local main_adapter = "copilot"
 local main_model = "gpt-4.1"
 return {
     {
