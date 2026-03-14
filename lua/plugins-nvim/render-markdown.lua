@@ -26,6 +26,9 @@ return {
             position = "inline",
             backgrounds = {},
         },
+        code = {
+            border = "thin",
+        },
         overrides = {
             filetype = {
                 codecompanion = {
