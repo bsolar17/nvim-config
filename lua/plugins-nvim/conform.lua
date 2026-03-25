@@ -6,9 +6,13 @@ return {
         },
         formatters_by_ft = {
             lua = { "stylua" },
+            markdown = { "prettier" },
         },
         formatters = {
             stylua = {},
+            prettier = {
+                prepend_args = { "--prose-wrap", "always" },
+            },
         },
     },
     config = function(_, opts)
