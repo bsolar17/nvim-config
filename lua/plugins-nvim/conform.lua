@@ -18,6 +18,7 @@ return {
     config = function(_, opts)
         local conform = require("conform")
         conform.setup(opts)
+        vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         vim.keymap.set({ "n", "v" }, "<Leader>cf", function()
             local ok = conform.format({ async = true })
             if ok == false then
