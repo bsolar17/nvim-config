@@ -1,6 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "master",
         build = ":TSUpdate",
         opts = {
             sync_install = false,
@@ -80,11 +81,12 @@ return {
             },
         },
         config = function(_, opts)
-            require("nvim-treesitter.config").setup(opts)
+            require("nvim-treesitter.configs").setup(opts)
         end,
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "master",
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
