@@ -16,6 +16,9 @@ local opts = {
         enabled = true,
         frequency = 604800, -- 7 days
     },
+    rocks = {
+        enabled = false,
+    },
 }
 
 if vim.g.vscode then
