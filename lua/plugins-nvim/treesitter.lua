@@ -26,6 +26,25 @@ return {
         },
         config = function(_, opts)
             require("nvim-treesitter-textobjects").setup(opts)
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = { "*" },
+                callback = function(ev)
+                    local lang = vim.treesitter.language.get_lang(ev.match)
+                    if
+                        lang
+                        and vim.tbl_contains(
+                            require("nvim-treesitter").get_installed(),
+                            lang
+                        )
+                    then
+                        vim.treesitter.start()
+                        if vim.treesitter.query.get(lang, "indents") then
+                            vim.bo.indentexpr =
+                                "v:lua.require'nvim-treesitter'.indentexpr()"
+                        end
+                    end
+                end,
+            })
             vim.keymap.set({ "x", "o" }, "am", function()
                 require("nvim-treesitter-textobjects.select").select_textobject(
                     "@function.outer",
