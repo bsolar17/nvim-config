@@ -4,10 +4,52 @@ return {
         branch = "main",
         lazy = false,
         build = ":TSUpdate",
+        init = function()
+            vim.g.loaded_nvim_treesitter = 1
+        end,
+        config = function()
+            require("nvim-treesitter").setup()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = { "*" },
+                callback = function(ev)
+                    local lang = vim.treesitter.language.get_lang(ev.match)
+                    if
+                        lang
+                        and vim.tbl_contains(
+                            vim.tbl_map(
+                                function(p)
+                                    return vim.fn.fnamemodify(p, ":t:r")
+                                end,
+                                vim.api.nvim_get_runtime_file("parser/*", true)
+                            ),
+                            lang
+                        )
+                    then
+                        vim.treesitter.start()
+                        if vim.treesitter.query.get(lang, "indents") then
+                            vim.bo.indentexpr =
+                                "v:lua.require'nvim-treesitter'.indentexpr()"
+                        end
+                    end
+                end,
+            })
+        end,
+    },
+    {
+        "lewis6991/ts-install.nvim",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
+        opts = {
+            auto_install = true,
+        },
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         branch = "main",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
         init = function()
             vim.g.no_plugin_maps = true
         end,
@@ -26,25 +68,6 @@ return {
         },
         config = function(_, opts)
             require("nvim-treesitter-textobjects").setup(opts)
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "*" },
-                callback = function(ev)
-                    local lang = vim.treesitter.language.get_lang(ev.match)
-                    if
-                        lang
-                        and vim.tbl_contains(
-                            require("nvim-treesitter").get_installed(),
-                            lang
-                        )
-                    then
-                        vim.treesitter.start()
-                        if vim.treesitter.query.get(lang, "indents") then
-                            vim.bo.indentexpr =
-                                "v:lua.require'nvim-treesitter'.indentexpr()"
-                        end
-                    end
-                end,
-            })
             vim.keymap.set({ "x", "o" }, "am", function()
                 require("nvim-treesitter-textobjects.select").select_textobject(
                     "@function.outer",
