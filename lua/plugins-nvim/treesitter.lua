@@ -42,6 +42,7 @@ return {
         },
         opts = {
             auto_install = true,
+            ensure_install = { "diff" },
             install_dir = vim.fn.stdpath("data") .. "/site",
         },
     },
