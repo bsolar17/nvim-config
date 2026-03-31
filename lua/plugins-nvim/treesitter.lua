@@ -142,7 +142,6 @@ return {
                     "folds"
                 )
             end, { desc = "@fold" })
-
             vim.keymap.set({ "n", "x", "o" }, "]M", function()
                 require("nvim-treesitter-textobjects.move").goto_next_end(
                     "@function.outer",
