@@ -6,7 +6,6 @@ return {
     opts = {
         defaults = {
             formatter = "path.filename_first",
-            hidden = true,
         },
         git = {
             diff = {
