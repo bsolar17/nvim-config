@@ -7,11 +7,10 @@ return {
             vim.g.loaded_nvim_treesitter = 1
         end,
         config = function()
-            require("nvim-treesitter").setup()
             vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "*" },
                 callback = function(ev)
                     local lang = vim.treesitter.language.get_lang(ev.match)
+                    local buf = ev.buf
                     if
                         lang
                         and vim.tbl_contains(
@@ -24,10 +23,10 @@ return {
                             lang
                         )
                     then
-                        vim.treesitter.start()
-                        vim.bo.syntax = "ON"
+                        vim.treesitter.start(buf)
+                        vim.bo[buf].syntax = "ON"
                         if vim.treesitter.query.get(lang, "indents") then
-                            vim.bo.indentexpr =
+                            vim.bo[buf].indentexpr =
                                 "v:lua.require'nvim-treesitter'.indentexpr()"
                         end
                     end
@@ -117,9 +116,33 @@ return {
                     "@function.outer",
                     "textobjects"
                 )
-            end, { desc = "@function.outer" })
+            end, { desc = "@function.outer next start" })
+            vim.keymap.set({ "n", "x", "o" }, "[m", function()
+                require("nvim-treesitter-textobjects.move").goto_previous_start(
+                    "@function.outer",
+                    "textobjects"
+                )
+            end, { desc = "@function.outer previous start" })
+            vim.keymap.set({ "n", "x", "o" }, "]M", function()
+                require("nvim-treesitter-textobjects.move").goto_next_end(
+                    "@function.outer",
+                    "textobjects"
+                )
+            end, { desc = "@function.outer next end" })
+            vim.keymap.set({ "n", "x", "o" }, "[M", function()
+                require("nvim-treesitter-textobjects.move").goto_previous_end(
+                    "@function.outer",
+                    "textobjects"
+                )
+            end, { desc = "@function.outer previous end" })
             vim.keymap.set({ "n", "x", "o" }, "]]", function()
                 require("nvim-treesitter-textobjects.move").goto_next_start(
+                    "@class.outer",
+                    "textobjects"
+                )
+            end, { desc = "@class.outer next start" })
+            vim.keymap.set({ "n", "x", "o" }, "[[", function()
+                require("nvim-treesitter-textobjects.move").goto_previous_start(
                     "@class.outer",
                     "textobjects"
                 )
@@ -129,49 +152,31 @@ return {
                     { "@loop.inner", "@loop.outer" },
                     "textobjects"
                 )
-            end, { desc = "@loop" })
+            end, { desc = "@loop next start" })
             vim.keymap.set({ "n", "x", "o" }, "]s", function()
                 require("nvim-treesitter-textobjects.move").goto_next_start(
                     "@local.scope",
                     "locals"
                 )
-            end, { desc = "@local.scope" })
+            end, { desc = "@local.scope next start" })
+            vim.keymap.set({ "n", "x", "o" }, "[s", function()
+                require("nvim-treesitter-textobjects.move").goto_previous_end(
+                    "@local.scope",
+                    "locals"
+                )
+            end, { desc = "@local.scope previous end" })
             vim.keymap.set({ "n", "x", "o" }, "]z", function()
                 require("nvim-treesitter-textobjects.move").goto_next_start(
                     "@fold",
                     "folds"
                 )
-            end, { desc = "@fold" })
-            vim.keymap.set({ "n", "x", "o" }, "]M", function()
-                require("nvim-treesitter-textobjects.move").goto_next_end(
-                    "@function.outer",
-                    "textobjects"
-                )
-            end, { desc = "@function.outer" })
+            end, { desc = "@fold next start" })
             vim.keymap.set({ "n", "x", "o" }, "][", function()
                 require("nvim-treesitter-textobjects.move").goto_next_end(
                     "@class.outer",
                     "textobjects"
                 )
-            end, { desc = "@class.outer" })
-            vim.keymap.set({ "n", "x", "o" }, "[m", function()
-                require("nvim-treesitter-textobjects.move").goto_previous_start(
-                    "@function.outer",
-                    "textobjects"
-                )
-            end, { desc = "@function.outer" })
-            vim.keymap.set({ "n", "x", "o" }, "[[", function()
-                require("nvim-treesitter-textobjects.move").goto_previous_start(
-                    "@class.outer",
-                    "textobjects"
-                )
-            end, { desc = "@class.outer" })
-            vim.keymap.set({ "n", "x", "o" }, "[M", function()
-                require("nvim-treesitter-textobjects.move").goto_previous_end(
-                    "@function.outer",
-                    "textobjects"
-                )
-            end, { desc = "@function.outer" })
+            end, { desc = "@class.outer next end" })
             vim.keymap.set({ "n", "x", "o" }, "[]", function()
                 require("nvim-treesitter-textobjects.move").goto_previous_end(
                     "@class.outer",
@@ -183,13 +188,13 @@ return {
                     "@conditional.outer",
                     "textobjects"
                 )
-            end, { desc = "@conditional.outer" })
+            end, { desc = "@conditional.outer next" })
             vim.keymap.set({ "n", "x", "o" }, "[d", function()
                 require("nvim-treesitter-textobjects.move").goto_previous(
                     "@conditional.outer",
                     "textobjects"
                 )
-            end, { desc = "@conditional.outer" })
+            end, { desc = "@conditional.outer previous" })
         end,
     },
 }
