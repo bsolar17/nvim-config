@@ -1,49 +1,55 @@
+local function is_parser_installed(lang)
+    local installed = require("nvim-treesitter").get_installed()
+    return vim.tbl_contains(installed, lang)
+end
+
+local function is_parser_available(lang)
+    local available = require("nvim-treesitter").get_available()
+    return vim.tbl_contains(available, lang)
+end
+
+local function start_treesitter(buf, lang)
+    if not vim.treesitter.language.add(lang) then
+        vim.notify(
+            "Cannot load treesitter parser for language " .. lang,
+            vim.log.levels.WARN
+        )
+        return
+    end
+    vim.treesitter.start(buf)
+    vim.bo[buf].syntax = "ON"
+    if vim.treesitter.query.get(lang, "indents") then
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+end
+
 return {
     {
         "nvim-treesitter/nvim-treesitter",
         branch = "main",
+        build = ":TSUpdate",
         lazy = false,
-        init = function()
-            vim.g.loaded_nvim_treesitter = 1
-        end,
         config = function()
+            require("nvim-treesitter").install({ "yaml", "diff" })
             vim.api.nvim_create_autocmd("FileType", {
                 callback = function(ev)
                     local lang = vim.treesitter.language.get_lang(ev.match)
+                    if not lang then
+                        return
+                    end
                     local buf = ev.buf
-                    if
-                        lang
-                        and vim.tbl_contains(
-                            vim.tbl_map(
-                                function(p)
-                                    return vim.fn.fnamemodify(p, ":t:r")
-                                end,
-                                vim.api.nvim_get_runtime_file("parser/*", true)
-                            ),
-                            lang
-                        )
-                    then
-                        vim.treesitter.start(buf)
-                        vim.bo[buf].syntax = "ON"
-                        if vim.treesitter.query.get(lang, "indents") then
-                            vim.bo[buf].indentexpr =
-                                "v:lua.require'nvim-treesitter'.indentexpr()"
-                        end
+                    if is_parser_installed(lang) then
+                        start_treesitter(buf, lang)
+                    elseif is_parser_available(lang) then
+                        require("nvim-treesitter")
+                            .install(lang)
+                            :await(function()
+                                start_treesitter(buf, lang)
+                            end)
                     end
                 end,
             })
         end,
-    },
-    {
-        "lewis6991/ts-install.nvim",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-        },
-        opts = {
-            auto_install = true,
-            ensure_install = { "diff" },
-            install_dir = vim.fn.stdpath("data") .. "/site",
-        },
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
