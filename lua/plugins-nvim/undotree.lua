@@ -1,12 +1,13 @@
 return {
-    "mbbill/undotree",
-    config = function()
-        vim.g.undotree_SetFocusWhenToggle = true
-        vim.keymap.set(
-            "n",
-            "<Leader>u",
-            "<Cmd>UndotreeToggle<CR>",
-            { desc = "Undotree" }
-        )
-    end,
+    "jiaoshijie/undotree",
+    opts = {},
+    keys = {
+        {
+            "<leader>u",
+            function()
+                require("undotree").toggle()
+            end,
+            { desc = "Undotree" },
+        },
+    },
 }
