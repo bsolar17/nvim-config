@@ -142,6 +142,32 @@ local function setup_java_keymaps()
     )
 end
 
+local function setup_codelens(buf)
+    vim.lsp.codelens.enable()
+    vim.keymap.set("n", "<leader>cla", function()
+        vim.lsp.codelens.run()
+    end, {
+        buffer = buf,
+        desc = "Actions",
+    })
+    vim.keymap.set("n", "<leader>clr", function()
+        vim.lsp.codelens.enable(true)
+    end, {
+        buffer = buf,
+        desc = "Refresh",
+    })
+    vim.keymap.set("n", "<leader>clt", function()
+        if vim.lsp.codelens.is_enabled() then
+            vim.lsp.codelens.enable(false)
+        else
+            vim.lsp.codelens.enable()
+        end
+    end, {
+        buffer = buf,
+        desc = "Toggle",
+    })
+end
+
 return {
     {
         "mason-org/mason.nvim",
@@ -171,11 +197,16 @@ return {
                 desc = "LSP attach",
                 callback = function(event)
                     setup_general_keymaps()
-                    if
-                        vim.lsp.get_client_by_id(event.data.client_id).name
-                        == "jdtls"
-                    then
+                    local client =
+                        vim.lsp.get_client_by_id(event.data.client_id)
+                    if not client then
+                        return
+                    end
+                    if client.name == "jdtls" then
                         setup_java_keymaps()
+                    end
+                    if client:supports_method("textDocument/codeLens") then
+                        setup_codelens(event.buf)
                     end
                 end,
             })

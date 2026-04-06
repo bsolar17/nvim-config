@@ -11,6 +11,7 @@ return {
             { "<Leader>G", group = "Git" },
             { "<Leader>b", group = "Buffers" },
             { "<Leader>c", group = "Code" },
+            { "<Leader>cl", group = "CodeLens" },
             { "<Leader>d", group = "Diff" },
             { "<Leader>f", group = "Find" },
             { "<Leader>g", group = "Go" },
