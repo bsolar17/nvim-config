@@ -14,6 +14,11 @@ return {
             prettier = {
                 prepend_args = { "--prose-wrap", "always" },
             },
+            sql_formatter = {
+                prepend_args = function(self, ctx)
+                    return { "-l", os.getenv("SQL_FORMATTER_DIALECT") or "sql" }
+                end,
+            },
         },
     },
     config = function(_, opts)
