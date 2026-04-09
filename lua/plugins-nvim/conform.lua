@@ -7,6 +7,7 @@ return {
         formatters_by_ft = {
             lua = { "stylua" },
             markdown = { "prettier" },
+            sql = { "sql_formatter" },
         },
         formatters = {
             stylua = {},
