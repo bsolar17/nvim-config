@@ -1,18 +1,4 @@
-local main_adapter = "copilot"
-local main_model = "gpt-4.1"
 return {
-    {
-        "zbirenbaum/copilot.lua",
-        lazy = true,
-        opts = {
-            suggestion = {
-                enabled = false,
-            },
-            panel = {
-                enabled = false,
-            },
-        },
-    },
     {
         "ravitemer/mcphub.nvim",
         dependencies = {
@@ -42,7 +28,6 @@ return {
                 "<Cmd>CodeCompanionChat Toggle<CR>",
                 desc = "Chat",
             },
-
             {
                 mode = "v",
                 "<Leader>ce",
@@ -62,10 +47,6 @@ return {
         opts = {
             interactions = {
                 chat = {
-                    adapter = {
-                        name = main_adapter,
-                        model = main_model,
-                    },
                     keymaps = {
                         load_mcphub = {
                             modes = { n = "gH" },
@@ -114,24 +95,6 @@ return {
                         },
                     },
                 },
-                inline = {
-                    adapter = {
-                        name = "copilot",
-                        model = main_model,
-                    },
-                },
-                cmd = {
-                    adapter = {
-                        name = "copilot",
-                        model = main_model,
-                    },
-                },
-                background = {
-                    adapter = {
-                        name = "copilot",
-                        model = main_model,
-                    },
-                },
             },
             display = {
                 chat = {
@@ -145,11 +108,9 @@ return {
                     opts = {
                         title_generation_opts = {
                             adapter = "copilot",
-                            model = main_model,
                             summary = {
                                 generation_opts = {
                                     adapter = "copilot",
-                                    model = main_model,
                                 },
                                 create_summary_keymap = "gSc",
                                 browse_summaries_keymap = "gSb",
