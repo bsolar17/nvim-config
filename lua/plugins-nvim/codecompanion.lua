@@ -109,16 +109,7 @@ return {
                 history = {
                     enabled = true,
                     opts = {
-                        title_generation_opts = {
-                            adapter = "copilot",
-                            summary = {
-                                generation_opts = {
-                                    adapter = "copilot",
-                                },
-                                create_summary_keymap = "gSc",
-                                browse_summaries_keymap = "gSb",
-                            },
-                        },
+                        auto_generate_title = false,
                     },
                 },
                 spinner = {
