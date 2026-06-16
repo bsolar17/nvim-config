@@ -47,6 +47,9 @@ return {
         opts = {
             interactions = {
                 chat = {
+                    adapter = vim.fn.executable("claude-agent-acp") == 1
+                            and "claude_code"
+                        or "copilot",
                     keymaps = {
                         load_mcphub = {
                             modes = { n = "gH" },
