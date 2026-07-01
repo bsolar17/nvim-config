@@ -49,6 +49,7 @@ return {
                 chat = {
                     adapter = vim.fn.executable("claude-agent-acp") == 1
                             and "claude_code"
+                        or vim.fn.executable("opencode") == 1 and "opencode"
                         or "copilot",
                     keymaps = {
                         load_mcphub = {
