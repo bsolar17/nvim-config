@@ -1,18 +1,5 @@
 return {
     {
-        "ravitemer/mcphub.nvim",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        lazy = true,
-        build = "npm install -g mcp-hub@latest",
-        opts = {
-            on_ready = function(hub)
-                vim.notify("MCPHub ready")
-            end,
-        },
-    },
-    {
         "olimorris/codecompanion.nvim",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -47,41 +34,7 @@ return {
         opts = {
             interactions = {
                 chat = {
-                    adapter = vim.fn.executable("claude-agent-acp") == 1
-                            and "claude_code"
-                        or vim.fn.executable("opencode") == 1 and "opencode"
-                        or "copilot",
-                    keymaps = {
-                        load_mcphub = {
-                            modes = { n = "gH" },
-                            description = "Load MCPHub",
-                            callback = function()
-                                if
-                                    require("lazy.core.config").plugins["mcphub.nvim"]._.loaded
-                                then
-                                    vim.notify("MCPHub already loaded")
-                                else
-                                    require("lazy").load({
-                                        plugins = { "mcphub.nvim" },
-                                    })
-                                    require("codecompanion").register_extension(
-                                        "mcphub",
-                                        {
-                                            setup = function()
-                                                require(
-                                                    "mcphub.extensions.codecompanion"
-                                                ).setup({
-                                                    make_vars = true,
-                                                    make_slash_commands = true,
-                                                    show_result_in_chat = true,
-                                                })
-                                            end,
-                                        }
-                                    )
-                                end
-                            end,
-                        },
-                    },
+                    adapter = "claude_code",
                     tools = {
                         opts = {
                             default_tools = {
