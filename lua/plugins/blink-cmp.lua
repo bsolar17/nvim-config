@@ -43,20 +43,7 @@ return {
                 "buffer",
                 "omni",
             },
-            per_filetype = {
-                codecompanion = {
-                    inherit_defaults = true,
-                    "codecompanion",
-                },
-            },
             providers = {
-                codecompanion = {
-                    name = "CodeCompanion",
-                    module = "codecompanion.providers.completion.blink",
-                    enabled = true,
-                    score_offset = 10,
-                    async = true,
-                },
                 lsp = {
                     fallbacks = {},
                 },

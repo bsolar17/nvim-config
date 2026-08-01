@@ -6,7 +6,6 @@ return {
     },
     ft = {
         "markdown",
-        "codecompanion",
     },
     opts = {
         completions = {
@@ -28,13 +27,6 @@ return {
         },
         code = {
             border = "thin",
-        },
-        overrides = {
-            filetype = {
-                codecompanion = {
-                    render_modes = { "n", "c", "t" },
-                },
-            },
         },
         win_options = {
             conceallevel = {
