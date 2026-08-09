@@ -107,8 +107,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
     end,
 })
 
--- Load order matters: dependencies (mini.nvim, plenary, LuaSnip, mason*,
--- treesitter, nvim-dap) must be configured before plugins that use them.
 require("plugins.mini")
 require("plugins.catppuccin")
 require("plugins.blink-cmp")
@@ -138,3 +136,4 @@ require("plugins.refactoring")
 require("plugins.undotree")
 require("plugins.nvim-fundo")
 require("plugins.nvim-lastplace")
+require("plugins.snacks")
