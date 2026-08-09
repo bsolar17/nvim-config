@@ -1,55 +1,46 @@
-return {
-    "nvim-tree/nvim-tree.lua",
-    dependencies = {
-        "nvim-mini/mini.nvim",
+local function my_on_attach(bufnr)
+    local api = require("nvim-tree.api")
+
+    api.config.mappings.default_on_attach(bufnr)
+
+    vim.keymap.set(
+        "n",
+        "<A-Right>",
+        "<Cmd>NvimTreeResize +10<CR>",
+        { desc = "Widen nvim-tree" }
+    )
+    vim.keymap.set(
+        "n",
+        "<A-Left>",
+        "<Cmd>NvimTreeResize -10<CR>",
+        { desc = "Narrow nvim-tree" }
+    )
+end
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+require("nvim-tree").setup({
+    update_focused_file = {
+        enable = true,
     },
-    lazy = false,
-    keys = {
-        {
-            "<Leader>e",
-            "<Cmd>NvimTreeToggle<CR>",
-            desc = "File Explorer",
+    view = {
+        width = 50,
+    },
+    actions = {
+        change_dir = {
+            global = true,
         },
     },
-    config = function()
-        local function my_on_attach(bufnr)
-            local api = require("nvim-tree.api")
+    filters = {
+        custom = { "^\\.git$" },
+    },
+    on_attach = my_on_attach,
+})
 
-            api.config.mappings.default_on_attach(bufnr)
-
-            vim.keymap.set(
-                "n",
-                "<A-Right>",
-                "<Cmd>NvimTreeResize +10<CR>",
-                { desc = "Widen nvim-tree" }
-            )
-            vim.keymap.set(
-                "n",
-                "<A-Left>",
-                "<Cmd>NvimTreeResize -10<CR>",
-                { desc = "Narrow nvim-tree" }
-            )
-        end
-
-        vim.g.loaded_netrw = 1
-        vim.g.loaded_netrwPlugin = 1
-
-        require("nvim-tree").setup({
-            update_focused_file = {
-                enable = true,
-            },
-            view = {
-                width = 50,
-            },
-            actions = {
-                change_dir = {
-                    global = true,
-                },
-            },
-            filters = {
-                custom = { "^\\.git$" },
-            },
-            on_attach = my_on_attach,
-        })
-    end,
-}
+vim.keymap.set(
+    "n",
+    "<Leader>e",
+    "<Cmd>NvimTreeToggle<CR>",
+    { desc = "File Explorer" }
+)

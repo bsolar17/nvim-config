@@ -1,23 +1,17 @@
-return {
-    "nvim-lualine/lualine.nvim",
-    dependencies = {
-        "nvim-mini/mini.nvim",
+require("lualine").setup({
+    options = {
+        globalstatus = true,
     },
-    opts = {
-        options = {
-            globalstatus = true,
-        },
-        sections = {
-            lualine_x = {
-                {
-                    "harpoon2",
-                    icon = "",
-                    separator = " ",
-                },
-                "encoding",
-                "fileformat",
-                "filetype",
+    sections = {
+        lualine_x = {
+            {
+                "harpoon2",
+                icon = "",
+                separator = " ",
             },
+            "encoding",
+            "fileformat",
+            "filetype",
         },
     },
-}
+})

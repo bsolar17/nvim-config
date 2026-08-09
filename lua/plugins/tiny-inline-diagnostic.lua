@@ -1,8 +1,3 @@
-return {
-    "rachartier/tiny-inline-diagnostic.nvim",
-    event = "VeryLazy",
-    priority = 1000,
-    opts = {
-        transparent_bg = true,
-    },
-}
+require("tiny-inline-diagnostic").setup({
+    transparent_bg = true,
+})

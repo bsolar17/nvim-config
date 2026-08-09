@@ -1,9 +1,2 @@
-return {
-    "letieu/harpoon-lualine",
-    dependencies = {
-        {
-            "ThePrimeagen/harpoon",
-            branch = "harpoon2",
-        },
-    },
-}
+-- harpoon-lualine has no setup function; it registers the "harpoon2"
+-- lualine component as a side effect of being on the runtime path.

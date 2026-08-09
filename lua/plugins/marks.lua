@@ -1,5 +1,1 @@
-return {
-    "chentoast/marks.nvim",
-    event = "VeryLazy",
-    opts = {},
-}
+require("marks").setup({})

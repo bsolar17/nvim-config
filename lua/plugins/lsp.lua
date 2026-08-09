@@ -168,48 +168,29 @@ local function setup_codelens(buf)
     })
 end
 
-return {
-    {
-        "mason-org/mason.nvim",
-        lazy = false,
-        opts = {},
-    },
-    {
-        "mason-org/mason-lspconfig.nvim",
-        lazy = false,
-        opts = {
-            automatic_installation = true,
-            automatic_enable = {
-                exclude = {
-                    "jdtls",
-                },
-            },
+require("mason").setup({})
+require("mason-lspconfig").setup({
+    automatic_installation = true,
+    automatic_enable = {
+        exclude = {
+            "jdtls",
         },
     },
-    {
-        "neovim/nvim-lspconfig",
-        dependencies = {
-            "ibhagwan/fzf-lua",
-            "mason-org/mason-lspconfig.nvim",
-        },
-        config = function()
-            vim.api.nvim_create_autocmd("LspAttach", {
-                desc = "LSP attach",
-                callback = function(event)
-                    setup_general_keymaps()
-                    local client =
-                        vim.lsp.get_client_by_id(event.data.client_id)
-                    if not client then
-                        return
-                    end
-                    if client.name == "jdtls" then
-                        setup_java_keymaps()
-                    end
-                    if client:supports_method("textDocument/codeLens") then
-                        setup_codelens(event.buf)
-                    end
-                end,
-            })
-        end,
-    },
-}
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    desc = "LSP attach",
+    callback = function(event)
+        setup_general_keymaps()
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        if not client then
+            return
+        end
+        if client.name == "jdtls" then
+            setup_java_keymaps()
+        end
+        if client:supports_method("textDocument/codeLens") then
+            setup_codelens(event.buf)
+        end
+    end,
+})

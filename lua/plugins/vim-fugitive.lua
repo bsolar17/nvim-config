@@ -1,3 +1,2 @@
-return {
-    "tpope/vim-fugitive",
-}
+-- vim-fugitive is a classic vimscript plugin with no Lua setup step;
+-- it self-registers its commands once on the runtime path.
