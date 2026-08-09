@@ -1,14 +1,14 @@
 return {
     {
         "mfussenegger/nvim-jdtls",
-        lazy = true,
+        lazy = false,
         dependencies = {
             "mfussenegger/nvim-dap",
         },
     },
     {
         "JavaHello/spring-boot.nvim",
-        lazy = true,
+        lazy = false,
         ft = {
             "java",
             "yaml",

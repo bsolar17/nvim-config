@@ -1,5 +1,6 @@
 return {
     "jiaoshijie/undotree",
+    lazy = false,
     opts = {},
     keys = {
         {

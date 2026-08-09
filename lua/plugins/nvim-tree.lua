@@ -3,6 +3,7 @@ return {
     dependencies = {
         "nvim-mini/mini.nvim",
     },
+    lazy = false,
     keys = {
         {
             "<Leader>e",

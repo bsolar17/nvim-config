@@ -1,6 +1,7 @@
 return {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
+    lazy = false,
     config = true,
     -- `cmd` lets lazy.nvim create command stubs that load the plugin on first use,
     -- so `:ClaudeCode` and friends work on a fresh start. Without it, a keys-only

@@ -171,12 +171,12 @@ end
 return {
     {
         "mason-org/mason.nvim",
-        lazy = true,
+        lazy = false,
         opts = {},
     },
     {
         "mason-org/mason-lspconfig.nvim",
-        lazy = true,
+        lazy = false,
         opts = {
             automatic_installation = true,
             automatic_enable = {
