@@ -1,16 +1,29 @@
 return {
     "dlyongemallo/diffview-plus.nvim",
     version = "*",
-    opts = {
-        view = {
-            default = {
-                layout = "diff1_inline",
+    opts = function()
+        local actions = require("diffview.actions")
+        return {
+            view = {
+                default = {
+                    layout = "diff1_inline",
+                },
+                cycle_layouts = {
+                    default = { "diff1_inline", "diff2_horizontal" },
+                },
             },
-            cycle_layouts = {
-                default = { "diff1_inline", "diff2_horizontal" },
+            keymaps = {
+                file_history_panel = {
+                    {
+                        "n",
+                        "P",
+                        actions.open_in_diffview,
+                        { desc = "Diff commit against its parent" },
+                    },
+                },
             },
-        },
-    },
+        }
+    end,
     config = function(_, opts)
         require("diffview").setup(opts)
         vim.keymap.set("n", "<Leader>dv", function()
