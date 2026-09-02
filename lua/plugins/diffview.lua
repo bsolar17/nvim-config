@@ -1,6 +1,16 @@
 return {
-    "sindrets/diffview.nvim",
-    opts = {},
+    "dlyongemallo/diffview-plus.nvim",
+    version = "*",
+    opts = {
+        view = {
+            default = {
+                layout = "diff1_inline",
+            },
+            cycle_layouts = {
+                default = { "diff1_inline", "diff2_horizontal" },
+            },
+        },
+    },
     config = function(_, opts)
         require("diffview").setup(opts)
         vim.keymap.set("n", "<Leader>dv", function()
