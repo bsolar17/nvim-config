@@ -15,9 +15,44 @@ local function get_cmd(path_to_mason_share)
     return cmd
 end
 
+local function get_java_major_versions(java_installs_dir)
+    local major_versions = {}
+    if vim.fn.isdirectory(java_installs_dir) == 1 then
+        for _, entry in ipairs(vim.fn.readdir(java_installs_dir)) do
+            if entry:match("^%d+$") then
+                table.insert(major_versions, entry)
+            end
+        end
+    end
+    return major_versions
+end
+
+local function to_execution_environment_name(major_version)
+    if tonumber(major_version) <= 8 then
+        return "JavaSE-1." .. major_version
+    end
+    return "JavaSE-" .. major_version
+end
+
+local function get_runtimes()
+    local java_installs_dir = os.getenv("XDG_DATA_HOME")
+        .. "/mise/installs/java"
+    local runtimes = {}
+    for _, major_version in ipairs(get_java_major_versions(java_installs_dir)) do
+        table.insert(runtimes, {
+            name = to_execution_environment_name(major_version),
+            path = java_installs_dir .. "/" .. major_version,
+        })
+    end
+    return runtimes
+end
+
 local function get_settings()
     local settings = {
         java = {
+            configuration = {
+                runtimes = get_runtimes(),
+            },
             maven = {
                 downloadSources = true,
             },
