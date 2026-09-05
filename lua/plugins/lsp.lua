@@ -1,5 +1,6 @@
 local function setup_general_keymaps()
     local fzf = require("fzf-lua")
+    local call_tree = require("my-lib.call-tree")
     vim.keymap.set(
         { "v", "n", buffer = true },
         "<Leader>ca",
@@ -53,6 +54,32 @@ local function setup_general_keymaps()
         "<Leader>gO",
         fzf.lsp_outgoing_calls,
         { desc = "Outgoing Calls", buffer = true }
+    )
+    vim.keymap.set(
+        "n",
+        "<Leader>cCi",
+        call_tree.incoming,
+        { desc = "Incoming Calls", buffer = true }
+    )
+    vim.keymap.set(
+        "n",
+        "<Leader>cCo",
+        call_tree.outgoing,
+        { desc = "Outgoing Calls", buffer = true }
+    )
+    vim.keymap.set("n", "<Leader>cCI", call_tree.incoming_levels, {
+        desc = "Incoming Calls (" .. call_tree.levels .. " Levels)",
+        buffer = true,
+    })
+    vim.keymap.set("n", "<Leader>cCO", call_tree.outgoing_levels, {
+        desc = "Outgoing Calls (" .. call_tree.levels .. " Levels)",
+        buffer = true,
+    })
+    vim.keymap.set(
+        "n",
+        "<Leader>cCt",
+        call_tree.toggle_panel,
+        { desc = "Toggle Panel", buffer = true }
     )
     vim.keymap.set(
         "n",
