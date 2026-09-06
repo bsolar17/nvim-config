@@ -4,8 +4,13 @@ Minimal, modular, and plugin-oriented Neovim configuration.
 
 - **Entry point:** `init.lua` → `lua/my-setup/`
 - **Plugin manager:** [lazy.nvim](https://github.com/folke/lazy.nvim)
-- **Modular settings:** in `lua/my-setup/`
-- Supports both native Neovim and VSCode plugin use
+
+## Layout
+
+- `lua/my-setup/` — basic initial setup, required at startup
+- `lua/plugins/` — lazy.nvim plugin specs
+- `lua/my-lib/` — helper modules, required on demand
+- `lua/my-plugins/` — local plugins, loaded by lazy via `dir =`
 
 ## External Tools
 
