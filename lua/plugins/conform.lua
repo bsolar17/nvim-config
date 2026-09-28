@@ -6,14 +6,12 @@ return {
         },
         formatters_by_ft = {
             lua = { "stylua" },
-            markdown = { "prettier" },
+            markdown = { "dprint" },
             sql = { "sql_formatter" },
         },
         formatters = {
+            dprint = {},
             stylua = {},
-            prettier = {
-                prepend_args = { "--prose-wrap", "always" },
-            },
             sql_formatter = {
                 prepend_args = function(self, ctx)
                     return { "-l", os.getenv("SQL_FORMATTER_DIALECT") or "sql" }
