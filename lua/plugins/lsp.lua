@@ -2,10 +2,10 @@ local function setup_general_keymaps()
     local fzf = require("fzf-lua")
     local call_tree = require("my-lib.call-tree")
     vim.keymap.set(
-        { "v", "n", buffer = true },
+        { "v", "n" },
         "<Leader>ca",
         fzf.lsp_code_actions,
-        { desc = "Actions" }
+        { desc = "Actions", buffer = true }
     )
     vim.keymap.set(
         "n",
