@@ -160,7 +160,7 @@ local function setup_java_keymaps(buf)
     )
     vim.keymap.set("n", "<Leader>xc", function()
         jdtls.extract_constant()
-    end, { buffer = buf, desc = "Extract Variable" })
+    end, { buffer = buf, desc = "Extract Constant" })
     vim.keymap.set(
         "v",
         "<Leader>xm",
