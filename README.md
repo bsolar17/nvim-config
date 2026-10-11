@@ -26,3 +26,5 @@ Some external tools are required or recommended:
 - **jdtls** — for Java language support (Mason install)
 - **java-test** — for Java testing (Mason install)
 - **java-debug-adapter** — for Java debug (Mason install)
+- **JUnit Platform Console Standalone** — for running Java tests with neotest
+  (`:NeotestJava setup`)
