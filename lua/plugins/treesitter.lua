@@ -80,9 +80,7 @@ return {
                     "@function.outer",
                     "textobjects"
                 )
-            end, { desc = "@function.outer" }, {
-                desc = "@function.outer",
-            })
+            end, { desc = "@function.outer" })
             vim.keymap.set({ "x", "o" }, "im", function()
                 require("nvim-treesitter-textobjects.select").select_textobject(
                     "@function.inner",
