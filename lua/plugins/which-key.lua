@@ -22,8 +22,6 @@ return {
             { "<Leader>t", group = "Test" },
             { "<Leader>td", group = "Debug" },
             { "<Leader>x", group = "Extract" },
-            { "<Leader>w", group = "Workspace" },
-            { "<Leader>wt", group = "Trouble" },
         })
     end,
 }
