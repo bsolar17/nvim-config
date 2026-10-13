@@ -61,7 +61,8 @@ local function reference_line_range(filepath)
         .. "-"
         .. sorted_end
     )
-    return yank_and_notify(filepath_with_range)
+    yank_and_notify(filepath_with_range)
+    vim.cmd("normal! \27")
 end
 
 vim.keymap.set("n", "<Leader>rl", function()
