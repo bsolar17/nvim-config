@@ -69,6 +69,9 @@ return {
                 default = {
                     layout = "diff1_inline",
                 },
+                merge_tool = {
+                    layout = "diff3_mixed",
+                },
                 cycle_layouts = {
                     default = { "diff1_inline", "diff2_horizontal" },
                 },
