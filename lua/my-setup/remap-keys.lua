@@ -12,9 +12,14 @@ vim.keymap.set("n", "<Leader>bt", function()
     end
 end, { desc = "Tab Split/Close Toggle" })
 
-local function copy_and_notify(text)
-    vim.fn.setreg("+", text)
-    vim.notify(("Copied: " .. text))
+local function yank_and_notify(text)
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, { text })
+    vim.api.nvim_buf_call(buf, function()
+        vim.cmd("normal! 0y$")
+    end)
+    vim.api.nvim_buf_delete(buf, { force = true })
+    vim.notify(("Yanked: " .. text))
     return text
 end
 local function relative_filepath()
@@ -28,7 +33,7 @@ local function home_filepath()
 end
 local function reference_line(filepath)
     local line_number = vim.fn.line(".")
-    return copy_and_notify(filepath .. ":" .. line_number)
+    return yank_and_notify(filepath .. ":" .. line_number)
 end
 local function reference_word(filepath)
     local word = vim.fn.expand("<cword>")
@@ -42,7 +47,7 @@ local function reference_word(filepath)
         .. line_number
         .. ")"
     )
-    return copy_and_notify(word_with_filepath)
+    return yank_and_notify(word_with_filepath)
 end
 local function reference_line_range(filepath)
     local start_line = vim.fn.getpos("v")[2]
@@ -56,7 +61,7 @@ local function reference_line_range(filepath)
         .. "-"
         .. sorted_end
     )
-    return copy_and_notify(filepath_with_range)
+    return yank_and_notify(filepath_with_range)
 end
 
 vim.keymap.set("n", "<Leader>rl", function()
@@ -69,13 +74,13 @@ vim.keymap.set("n", "<Leader>rhl", function()
     return reference_line(home_filepath())
 end, { desc = "Reference Line (Home)" })
 vim.keymap.set("n", "<Leader>rf", function()
-    return copy_and_notify(relative_filepath())
+    return yank_and_notify(relative_filepath())
 end, { desc = "Reference File" })
 vim.keymap.set("n", "<Leader>raf", function()
-    return copy_and_notify(absolute_filepath())
+    return yank_and_notify(absolute_filepath())
 end, { desc = "Reference File (Absolute)" })
 vim.keymap.set("n", "<Leader>rhf", function()
-    return copy_and_notify(home_filepath())
+    return yank_and_notify(home_filepath())
 end, { desc = "Reference File (Home)" })
 vim.keymap.set("n", "<Leader>rw", function()
     return reference_word(relative_filepath())
