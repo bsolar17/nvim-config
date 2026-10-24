@@ -70,7 +70,7 @@ return {
                     layout = "diff1_inline",
                 },
                 merge_tool = {
-                    layout = "diff3_mixed",
+                    layout = "diff4_mixed",
                 },
                 cycle_layouts = {
                     default = { "diff1_inline", "diff2_horizontal" },
