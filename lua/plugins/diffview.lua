@@ -60,6 +60,64 @@ local function back_to_log()
     vim.cmd(table.concat(cmd, " "))
 end
 
+---Default conflict keymaps under `<Leader>c`, which clash with the Code group.
+---Spelled exactly as in the defaults: overrides are matched by literal lhs.
+local default_conflict_lhs = {
+    "<leader>co",
+    "<leader>ct",
+    "<leader>cb",
+    "<leader>ca",
+    "<leader>cO",
+    "<leader>cT",
+    "<leader>cB",
+    "<leader>cA",
+    "<leader>cso",
+    "<leader>cst",
+    "<leader>csb",
+}
+
+---Conflict keymaps moved under `<Leader>dc`.
+---@param whole_file_only boolean Only the whole-file variants (file panel).
+local function conflict_keymaps(whole_file_only)
+    local actions = require("diffview.actions")
+    local keymaps = {}
+    for _, lhs in ipairs(default_conflict_lhs) do
+        table.insert(keymaps, { "n", lhs, false })
+    end
+    local versions = {
+        { "o", "ours", "OURS" },
+        { "t", "theirs", "THEIRS" },
+        { "b", "base", "BASE" },
+        { "a", "all", "all the versions" },
+    }
+    for _, v in ipairs(versions) do
+        local key, version, label = v[1], v[2], v[3]
+        if not whole_file_only then
+            table.insert(keymaps, {
+                "n",
+                "<Leader>dc" .. key,
+                actions.conflict_choose(version),
+                { desc = "Choose " .. label .. " (conflict)" },
+            })
+        end
+        table.insert(keymaps, {
+            "n",
+            "<Leader>dc" .. key:upper(),
+            actions.conflict_choose_all(version),
+            { desc = "Choose " .. label .. " (whole file)" },
+        })
+        if not whole_file_only and version ~= "all" then
+            table.insert(keymaps, {
+                "n",
+                "<Leader>dcs" .. key,
+                actions.conflict_choose_side(version),
+                { desc = "Replace with entire " .. label .. " side" },
+            })
+        end
+    end
+    return keymaps
+end
+
 return {
     "dlyongemallo/diffview-plus.nvim",
     version = "*",
@@ -77,14 +135,17 @@ return {
                 },
             },
             keymaps = {
-                file_panel = {
+                diff1 = conflict_keymaps(false),
+                diff3 = conflict_keymaps(false),
+                diff4 = conflict_keymaps(false),
+                file_panel = vim.list_extend({
                     {
                         "n",
                         "P",
                         back_to_log,
                         { desc = "Go back to the log view" },
                     },
-                },
+                }, conflict_keymaps(true)),
                 file_history_panel = {
                     {
                         "n",

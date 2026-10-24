@@ -14,6 +14,8 @@ return {
             { "<Leader>cC", group = "Call Tree" },
             { "<Leader>cl", group = "CodeLens" },
             { "<Leader>d", group = "Diff" },
+            { "<Leader>dc", group = "Conflict" },
+            { "<Leader>dcs", group = "Entire Side" },
             { "<Leader>f", group = "Find" },
             { "<Leader>g", group = "Go" },
             { "<Leader>h", group = "Harpoon" },
