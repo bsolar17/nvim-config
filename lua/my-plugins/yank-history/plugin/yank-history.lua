@@ -32,11 +32,16 @@ local function clipboard_register()
         return "*"
     end
 end
+local function read_clipboard_silently(reg)
+    return vim._with({ silent = true }, function()
+        return vim.fn.getreg(reg)
+    end)
+end
 local clipboard_on_focus_lost
 vim.api.nvim_create_autocmd("FocusLost", {
     callback = function()
         local reg = clipboard_register()
-        clipboard_on_focus_lost = reg and vim.fn.getreg(reg)
+        clipboard_on_focus_lost = reg and read_clipboard_silently(reg)
     end,
 })
 -- On VimEnter there is no snapshot yet, so a copy made before starting is
@@ -47,7 +52,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained" }, {
         if not reg then
             return
         end
-        local clipboard = vim.fn.getreg(reg)
+        local clipboard = read_clipboard_silently(reg)
         if clipboard ~= "" and clipboard ~= clipboard_on_focus_lost then
             vim.fn.setreg("0", clipboard)
             local info = vim.fn.getreginfo("0")
